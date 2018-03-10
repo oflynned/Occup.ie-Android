@@ -1,24 +1,13 @@
-package com.syzible.tearma.TermResultDisplay.ResultsView;
+package com.syzible.rentapp.FindProperty;
 
-import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.syzible.tearma.Common.Objects.Definition;
-import com.syzible.tearma.Common.Objects.Mutations;
-import com.syzible.tearma.MainActivity;
-import com.syzible.tearma.R;
-import com.syzible.tearma.TermDetailsDisplay.TermNounDetailsFragment;
-import com.syzible.tearma.TermDetailsDisplay.TermOtherDetailsFragment;
-import com.syzible.tearma.TermDetailsDisplay.TermVerbDetailsFragment;
+import com.syzible.rentapp.Common.Objects.Property;
+import com.syzible.rentapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,107 +15,49 @@ import java.util.List;
 /**
  * Created by ed on 30/10/2016
  */
-public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.ViewHolder> {
-    private List<Definition> definitions = new ArrayList<>();
+public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
+    private List<Property> properties = new ArrayList<>();
 
-    public DefinitionAdapter(List<Definition> definitions) {
-        this.definitions = definitions;
+    public PropertyAdapter(List<Property> properties) {
+        this.properties = properties;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.definition_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.property_tile, parent, false);
         return new ViewHolder(view);
     }
 
-    private void formatCard(final ViewHolder holder, final Definition definition) {
-        holder.term.setText(definition.getMutations().getMutation(Mutations.POS.root));
-        holder.searchTerm.setText(definition.getDetails().getSearchTerm());
-        holder.favourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                definition.changeFavourite();
-                YoYo.with(Techniques.RubberBand).duration(700).playOn(holder.favourite);
-
-                holder.favourite.setImageResource(definition.isFavourite() ?
-                        R.drawable.ic_star_black_24dp : R.drawable.ic_star_border_black_24dp);
-            }
-        });
-        holder.favourite.setVisibility(View.GONE);
-
-        if (!definition.getDetails().getSignpost().equals("-1"))
-            holder.signpost.setText(definition.getDetails().getSignpost());
-        else
-            holder.signpost.setVisibility(View.GONE);
-
-        if (definition.getDomains().getDomains().size() > 0) {
-            StringBuilder domainResults = new StringBuilder();
-            for (int i = 0; i < definition.getDomains().getDomains().size(); i++) {
-                domainResults.append(definition.getDomains().getDomains().get(i).getEnDomain());
-
-                if (!(i == definition.getDomains().getDomains().size() - 1))
-                    domainResults.append("\n");
-            }
-
-            holder.domains.setText(domainResults.toString().toLowerCase());
-        } else {
-            holder.domains.setVisibility(View.GONE);
-        }
+    private void formatCard(final ViewHolder holder, Property property) {
+        holder.propertyType.setText(property.getType());
+        holder.bedroomCount.setText(property.getBedrooms() + " bedrooms");
+        holder.bathroomCount.setText(property.getBathrooms() + " bathrooms");
+        holder.address.setText(property.getAddress().getFullAddress());
+        holder.rent.setText("€550.00 pm");
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final Definition definition = definitions.get(position);
-        formatCard(holder, definition);
-
-        YoYo.with(position % 2 == 0 ? Techniques.BounceInLeft : Techniques.BounceInRight)
-                .duration(700)
-                .playOn(holder.itemView);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = ((AppCompatActivity) holder.itemView.getContext()).getFragmentManager();
-                String type = definition.getDetails().getSearchType();
-
-                switch (type) {
-                    case "verb":
-                        TermVerbDetailsFragment termVerbDetailsFragment = new TermVerbDetailsFragment();
-                        termVerbDetailsFragment.setDefinition(definition);
-                        MainActivity.setFragmentBackstack(manager, termVerbDetailsFragment);
-                        break;
-                    case "noun":
-                        TermNounDetailsFragment termNounDetailsFragment = new TermNounDetailsFragment();
-                        termNounDetailsFragment.setDefinition(definition);
-                        MainActivity.setFragmentBackstack(manager, termNounDetailsFragment);
-                        break;
-                    default:
-                        TermOtherDetailsFragment termOtherDetailsFragment = new TermOtherDetailsFragment();
-                        termOtherDetailsFragment.setDefinition(definition);
-                        MainActivity.setFragmentBackstack(manager, termOtherDetailsFragment);
-                        break;
-                }
-            }
-        });
+        Property property = properties.get(position);
+        formatCard(holder, property);
     }
 
     @Override
     public int getItemCount() {
-        return definitions.size();
+        return properties.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView term, searchTerm, signpost, domains;
-        ImageView favourite;
+        TextView propertyType, bedroomCount, bathroomCount, address, rent;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            term = itemView.findViewById(R.id.term);
-            searchTerm = itemView.findViewById(R.id.searchTerm);
-            signpost = itemView.findViewById(R.id.signpost);
-            domains = itemView.findViewById(R.id.domains);
-            favourite = itemView.findViewById(R.id.favourite_marker);
+            propertyType = itemView.findViewById(R.id.property_tile_type);
+            bedroomCount = itemView.findViewById(R.id.property_tile_bedroom_count);
+            bathroomCount = itemView.findViewById(R.id.property_tile_bathroom_count);
+            address = itemView.findViewById(R.id.property_tile_address);
+            rent = itemView.findViewById(R.id.property_tile_rent);
         }
     }
 }
