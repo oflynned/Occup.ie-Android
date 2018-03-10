@@ -1,4 +1,8 @@
 package com.syzible.rentapp.FindProperty;
 
-public class FindPropertyPresenter {
+import com.syzible.rentapp.Common.Mvp;
+
+public interface FindPropertyPresenter extends Mvp.IPresenter<FindPropertyView> {
+
+    void getProperties();
 }
