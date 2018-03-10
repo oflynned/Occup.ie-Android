@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/burgundy_500</color>
     <color name="colorPrimaryDark">@color/burgundy_700</color>
-    <color name="colorAccent">@color/teal_500</color>
+    <color name="colorAccent">@color/green_500</color>
 
     <color name="burgundy_50">#f0e0e6</color>
     <color name="burgundy_100">#dab3c2</color>
@@ -15,5 +15,14 @@
     <color name="burgundy_800">#67001f</color>
     <color name="burgundy_900">#540013</color>
 
-    <color name="teal_500">#009688</color>
+    <color name="green_50">#e1f4ef</color>
+    <color name="green_100">#b4e5d6</color>
+    <color name="green_200">#82d3bb</color>
+    <color name="green_300">#4fc1a0</color>
+    <color name="green_400">#2ab48b</color>
+    <color name="green_500">#04a777</color>
+    <color name="green_600">#039f6f</color>
+    <color name="green_700">#039664</color>
+    <color name="green_800">#028c5a</color>
+    <color name="green_900">#017c47</color>
 </resources>

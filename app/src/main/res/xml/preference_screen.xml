@@ -6,6 +6,10 @@
         <Preference android:title="Log Out" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Push Notifications">
+        <SwitchPreference android:title="Currently searching" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Policies">
         <Preference android:title="Terms of Service" />
         <Preference android:title="Privacy Policies" />
@@ -14,7 +18,7 @@
 
     <PreferenceCategory android:title="@string/app_name">
         <Preference android:title="Visit Us" />
-        <Preference android:title="About Us"/>
+        <Preference android:title="About Us" />
         <Preference android:title="Developer" />
     </PreferenceCategory>
 </PreferenceScreen>
