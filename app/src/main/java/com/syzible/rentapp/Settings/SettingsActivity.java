@@ -1,4 +1,4 @@
-package com.syzible.rentapp;
+package com.syzible.rentapp.Settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
