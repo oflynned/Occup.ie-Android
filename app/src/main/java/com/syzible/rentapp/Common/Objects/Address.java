@@ -49,6 +49,6 @@ public class Address {
     }
 
     public String getFullAddress() {
-        return String.format("%s, %s, %s, %s, %s, %s", houseNumber, street, area, city, county, eircode);
+        return String.format("%s, %s, %s, %s, %s", street, area, city, county, eircode);
     }
 }
