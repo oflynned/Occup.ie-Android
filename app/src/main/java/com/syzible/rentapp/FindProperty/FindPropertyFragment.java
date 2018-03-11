@@ -16,7 +16,6 @@ import com.syzible.rentapp.R;
 import java.util.List;
 
 public class FindPropertyFragment extends Fragment implements FindPropertyView {
-
     private View view;
     private RecyclerView recyclerView;
     private FindPropertyPresenter findPropertyPresenter;
