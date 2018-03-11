@@ -29,8 +29,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.theah64.materialcolors:materialcolors:1.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile 'jp.wasabeef:blurry:2.1.1'
+    compile 'com.theah64.materialcolors:materialcolors:1.0.0'
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.3@aar'
 }
