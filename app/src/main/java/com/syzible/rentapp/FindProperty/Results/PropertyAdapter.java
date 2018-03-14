@@ -36,7 +36,9 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         holder.bedroomCount.setText(String.valueOf(property.getBedrooms()));
         holder.bathroomCount.setText(String.valueOf(property.getBathrooms()));
         holder.address.setText(property.getAddress().getFullAddress());
-        holder.rent.setText("€550.00 pm");
+
+        String rent = String.format("€%s.00", property.getListing().getRent()) + " pm";
+        holder.rent.setText(rent);
 
         ImageAdapter adapter = new ImageAdapter(holder.itemView.getContext(), property.getImages());
         holder.viewPager.setAdapter(adapter);
