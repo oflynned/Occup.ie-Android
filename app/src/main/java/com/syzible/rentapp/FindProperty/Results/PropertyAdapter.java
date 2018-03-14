@@ -1,14 +1,12 @@
-package com.syzible.rentapp.FindProperty;
+package com.syzible.rentapp.FindProperty.Results;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.syzible.rentapp.Common.Objects.Property;
 import com.syzible.rentapp.R;
 import com.viewpagerindicator.CirclePageIndicator;

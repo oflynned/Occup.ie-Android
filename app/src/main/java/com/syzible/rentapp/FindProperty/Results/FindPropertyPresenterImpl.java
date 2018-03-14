@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty;
+package com.syzible.rentapp.FindProperty.Results;
 
 import android.widget.Toast;
 

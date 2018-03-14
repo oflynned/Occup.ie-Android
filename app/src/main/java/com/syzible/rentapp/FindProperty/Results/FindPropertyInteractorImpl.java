@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty;
+package com.syzible.rentapp.FindProperty.Results;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.rentapp.Common.Network.Endpoints;
