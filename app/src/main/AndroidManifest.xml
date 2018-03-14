@@ -11,6 +11,11 @@
         android:roundIcon="@drawable/logo_1_png"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_api_key" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
