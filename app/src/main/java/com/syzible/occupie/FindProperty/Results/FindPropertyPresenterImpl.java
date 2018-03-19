@@ -45,7 +45,11 @@ public class FindPropertyPresenterImpl implements FindPropertyPresenter {
             @Override
             public void onSuccess(JSONArray results) throws JSONException {
                 List<Property> properties = getProperties(results);
-                getNonNullableView().showProperties(properties);
+                try {
+                    getNonNullableView().showProperties(properties);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

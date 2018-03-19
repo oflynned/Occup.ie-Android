@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_find_property) {
-
+            setFragment(getFragmentManager(), new FindPropertyFragment());
         } else if (id == R.id.nav_favourites) {
-
+            setFragment(getFragmentManager(), new ViewListingFragment());
         } else if (id == R.id.nav_applications) {
 
         } else if (id == R.id.nav_requests) {
