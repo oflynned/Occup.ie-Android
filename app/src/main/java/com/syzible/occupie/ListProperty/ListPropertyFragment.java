@@ -1,4 +1,4 @@
-package com.syzible.rentapp.ListProperty;
+package com.syzible.occupie.ListProperty;
 
 public class ListPropertyFragment {
 }
