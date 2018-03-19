@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Common.Network;
+package com.syzible.occupie.Common.Network;
 
 import android.content.Context;
 

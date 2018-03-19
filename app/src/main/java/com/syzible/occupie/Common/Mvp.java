@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Common;
+package com.syzible.occupie.Common;
 
 import android.content.Context;
 import android.view.View;

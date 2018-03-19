@@ -1,7 +1,7 @@
-package com.syzible.rentapp.Common.Network;
+package com.syzible.occupie.Common.Network;
 
 public class Endpoints {
-    private static final String HOST_URL = "https://jingly-development.herokuapp.com/api/v1";
+    private static final String HOST_URL = "https://occup-ie.herokuapp.com/api/v1";
 
     public static final String USER = HOST_URL + "/user";
     public static final String LISTING = HOST_URL + "/listing";

@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Common.Objects;
+package com.syzible.occupie.Common.Objects;
 
 import org.json.JSONArray;
 import org.json.JSONException;
