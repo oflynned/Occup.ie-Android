@@ -1,4 +1,4 @@
-package com.syzible.rentapp;
+package com.syzible.occupie;
 
 import org.junit.Test;
 

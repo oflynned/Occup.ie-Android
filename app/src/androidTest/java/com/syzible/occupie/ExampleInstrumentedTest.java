@@ -1,4 +1,4 @@
-package com.syzible.rentapp;
+package com.syzible.occupie;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
