@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Listing;
+package com.syzible.occupie.FindProperty.Listing;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

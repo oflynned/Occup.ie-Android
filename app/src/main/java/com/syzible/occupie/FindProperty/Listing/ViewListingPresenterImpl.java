@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Listing;
+package com.syzible.occupie.FindProperty.Listing;
 
 public class ViewListingPresenterImpl implements ViewListingPresenter {
 

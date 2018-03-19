@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Listing;
+package com.syzible.occupie.FindProperty.Listing;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.syzible.rentapp.R;
+import com.syzible.occupie.R;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 public class ViewListingFragment extends Fragment implements ViewListingView {

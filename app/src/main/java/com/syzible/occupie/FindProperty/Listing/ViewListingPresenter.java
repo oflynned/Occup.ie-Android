@@ -1,6 +1,6 @@
-package com.syzible.rentapp.FindProperty.Listing;
+package com.syzible.occupie.FindProperty.Listing;
 
-import com.syzible.rentapp.Common.Mvp;
+import com.syzible.occupie.Common.Mvp;
 
 public interface ViewListingPresenter extends Mvp.IPresenter<ViewListingView> {
 }

@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Listing;
+package com.syzible.occupie.FindProperty.Listing;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.syzible.rentapp.Common.Objects.Property;
-import com.syzible.rentapp.FindProperty.Results.ImageAdapter;
-import com.syzible.rentapp.FindProperty.Results.PropertyAdapter;
-import com.syzible.rentapp.R;
-import com.viewpagerindicator.CirclePageIndicator;
+import com.syzible.occupie.Common.Objects.Property;
+import com.syzible.occupie.R;
 
 import java.util.ArrayList;
 import java.util.List;
