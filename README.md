@@ -1,3 +1,3 @@
 # Android Client
 
-UI MVP for interacting with the Rent App REST service.
+UI MVP for interacting with the Occup.ie REST service.
