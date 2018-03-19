@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Results;
+package com.syzible.occupie.FindProperty.Results;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.syzible.rentapp.Common.Objects.Property;
-import com.syzible.rentapp.R;
+import com.syzible.occupie.Common.Objects.Property;
+import com.syzible.occupie.R;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Results;
+package com.syzible.occupie.FindProperty.Results;
 
 import org.json.JSONArray;
 import org.json.JSONException;

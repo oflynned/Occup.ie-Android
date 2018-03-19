@@ -1,8 +1,8 @@
-package com.syzible.rentapp.FindProperty.Results;
+package com.syzible.occupie.FindProperty.Results;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.syzible.rentapp.Common.Network.Endpoints;
-import com.syzible.rentapp.Common.Network.RestClient;
+import com.syzible.occupie.Common.Network.Endpoints;
+import com.syzible.occupie.Common.Network.RestClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;

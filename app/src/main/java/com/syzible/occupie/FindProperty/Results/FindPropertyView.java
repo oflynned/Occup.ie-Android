@@ -1,7 +1,7 @@
-package com.syzible.rentapp.FindProperty.Results;
+package com.syzible.occupie.FindProperty.Results;
 
-import com.syzible.rentapp.Common.Mvp;
-import com.syzible.rentapp.Common.Objects.Property;
+import com.syzible.occupie.Common.Mvp;
+import com.syzible.occupie.Common.Objects.Property;
 
 import java.util.List;
 

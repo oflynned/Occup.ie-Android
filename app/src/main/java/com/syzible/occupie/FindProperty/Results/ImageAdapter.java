@@ -1,4 +1,4 @@
-package com.syzible.rentapp.FindProperty.Results;
+package com.syzible.occupie.FindProperty.Results;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.syzible.rentapp.R;
+import com.syzible.occupie.R;
 
 import java.util.List;
 
