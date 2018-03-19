@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Favourites;
+package com.syzible.occupie.Favourites;
 
 public class FavouritesFragment {
 }

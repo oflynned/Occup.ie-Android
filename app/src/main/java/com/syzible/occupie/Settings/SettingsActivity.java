@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Settings;
+package com.syzible.occupie.Settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

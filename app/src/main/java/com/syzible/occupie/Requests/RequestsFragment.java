@@ -1,4 +1,4 @@
-package com.syzible.rentapp.Requests;
+package com.syzible.occupie.Requests;
 
 public class RequestsFragment {
 }

@@ -1,10 +1,10 @@
-package com.syzible.rentapp.Settings;
+package com.syzible.occupie.Settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 
-import com.syzible.rentapp.R;
+import com.syzible.occupie.R;
 
 /**
  * Created by ed on 29/05/2017.

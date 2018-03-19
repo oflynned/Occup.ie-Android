@@ -1,8 +1,7 @@
-package com.syzible.rentapp;
+package com.syzible.occupie;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,9 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.syzible.rentapp.FindProperty.Listing.ViewListingFragment;
-import com.syzible.rentapp.FindProperty.Results.FindPropertyFragment;
-import com.syzible.rentapp.Settings.SettingsActivity;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.syzible.occupie.FindProperty.Listing.ViewListingFragment;
+import com.syzible.occupie.FindProperty.Results.FindPropertyFragment;
+import com.syzible.occupie.Settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         setFragment(getFragmentManager(), new ViewListingFragment());
     }
