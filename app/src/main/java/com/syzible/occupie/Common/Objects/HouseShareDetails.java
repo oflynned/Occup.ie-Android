@@ -7,51 +7,37 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RentalDetails {
-    private String dwelling, description;
-    private int leaseLengthMonths;
-    private List<String> targetTenant;
+public class HouseShareDetails extends ListingDetails {
+    private int minTargetAge, maxTargetAge;
+    private List<String> targetProfession;
 
-    public RentalDetails(JSONObject o) throws JSONException {
-        this.dwelling = o.getString("dwelling");
-        this.description = o.getString("description");
-        this.leaseLengthMonths = o.getInt("lease_length_months");
+    public HouseShareDetails(JSONObject o) throws JSONException {
+        super(o);
+        this.minTargetAge = o.getInt("min_target_age");
+        this.maxTargetAge = o.getInt("max_target_age");
 
-        targetTenant = new ArrayList<>();
-        JSONArray a = o.getJSONArray("target_tenant");
-        for (int i = 0; i < a.length(); i++) targetTenant.add(a.getString(i));
+        targetProfession = new ArrayList<>();
+        JSONArray professionsSoughtAfter = o.getJSONArray("target_tenant");
+        for (int i = 0; i < professionsSoughtAfter.length(); i++)
+            targetProfession.add(professionsSoughtAfter.getString(i));
     }
 
-    public RentalDetails(String dwelling, String description, int leaseLengthMonths, List<String> targetTenant) {
-        this.dwelling = dwelling;
-        this.description = description;
-        this.leaseLengthMonths = leaseLengthMonths;
-        this.targetTenant = targetTenant;
+    public HouseShareDetails(String dwelling, String description, int leaseLengthMonths, List<String> targetTenant, int minTargetAge, int maxTargetAge, List<String> targetProfession) {
+        super(dwelling, description, leaseLengthMonths, targetTenant);
+        this.minTargetAge = minTargetAge;
+        this.maxTargetAge = maxTargetAge;
+        this.targetProfession = targetProfession;
     }
 
-    public String getDwelling() {
-        return dwelling;
+    public int getMinTargetAge() {
+        return minTargetAge;
     }
 
-    public String getDescription() {
-        return description;
+    public int getMaxTargetAge() {
+        return maxTargetAge;
     }
 
-    public int getLeaseLengthMonths() {
-        return leaseLengthMonths;
-    }
-
-    public List<String> getTargetTenant() {
-        return targetTenant;
-    }
-
-    @Override
-    public String toString() {
-        return "RentalDetails{" +
-                "target_tenant = '" + targetTenant + '\'' +
-                ",dwelling = '" + dwelling + '\'' +
-                ",description = '" + description + '\'' +
-                ",lease_length_months = '" + leaseLengthMonths + '\'' +
-                "}";
+    public List<String> getTargetProfession() {
+        return targetProfession;
     }
 }

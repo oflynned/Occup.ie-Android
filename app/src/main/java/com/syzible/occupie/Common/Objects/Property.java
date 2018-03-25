@@ -11,20 +11,31 @@ public class Property {
     private String type, landlordUuid;
     private int bedrooms, bathrooms;
     private Address address;
-    private Details details;
+    private ListingDetails details;
     private Facilities facilities;
     private Listing listing;
     private List<String> images = new ArrayList<>();
 
-    public Property(JSONObject o) throws JSONException {
+    public Property(JSONObject o) throws Exception {
         this.type = o.getString("type");
         this.landlordUuid = o.getString("landlord_uuid");
         this.bedrooms = o.getInt("bedrooms");
         this.bathrooms = o.getInt("bathrooms");
         this.address = new Address(o.getJSONObject("address"));
-        this.details = new Details(o.getJSONObject("details"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
         this.listing = new Listing(o.getJSONObject("listing"));
+
+        JSONObject details = o.getJSONObject("details");
+        switch (type) {
+            case "rental":
+                this.details = new RentalDetails(details);
+                break;
+            case "house_share":
+                this.details = new HouseShareDetails(details);
+                break;
+            default:
+                throw new Exception("unknown_listing_type");
+        }
 
         JSONArray urls = o.getJSONArray("images");
         for (int i = 0; i < urls.length(); i++) {
@@ -32,17 +43,17 @@ public class Property {
         }
     }
 
-    public Property(String type, String landlordUuid, int bedrooms, int bathrooms, List<String> images,
-                    Address address, Details details, Facilities facilities, Listing listing) {
+    public Property(String type, String landlordUuid, int bedrooms, int bathrooms, Address address,
+                    ListingDetails details, Facilities facilities, Listing listing, List<String> images) {
         this.type = type;
         this.landlordUuid = landlordUuid;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
-        this.images = images;
         this.address = address;
         this.details = details;
         this.facilities = facilities;
         this.listing = listing;
+        this.images = images;
     }
 
     public String getType() {
@@ -65,7 +76,7 @@ public class Property {
         return address;
     }
 
-    public Details getDetails() {
+    public ListingDetails getDetails() {
         return details;
     }
 
