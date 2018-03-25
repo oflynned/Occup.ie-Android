@@ -75,6 +75,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:gravity="center"
+                    android:tint="@android:color/tab_indicator_text"
                     app:srcCompat="@drawable/bed" />
             </LinearLayout>
 
@@ -99,6 +100,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:gravity="center"
+                    android:tint="@android:color/tab_indicator_text"
                     app:srcCompat="@drawable/shower" />
             </LinearLayout>
         </LinearLayout>
