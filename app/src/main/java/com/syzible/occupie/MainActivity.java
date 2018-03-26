@@ -15,6 +15,10 @@ import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.syzible.occupie.Authentication.CreateAccountActivity;
+import com.syzible.occupie.Common.Persistence.LocalPrefs;
+import com.syzible.occupie.Common.Persistence.OAuthUtils;
+import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.FindProperty.Listing.ViewListingFragment;
 import com.syzible.occupie.FindProperty.Results.FindPropertyFragment;
 import com.syzible.occupie.Settings.SettingsActivity;
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        setFragment(getFragmentManager(), new ViewListingFragment());
+        setFragment(getFragmentManager(), new FindPropertyFragment());
     }
 
     @Override
@@ -73,6 +77,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        } else if (id == R.id.logout_user) {
+            OAuthUtils.deleteFacebookToken(this, Target.user);
+            finish();
+            startActivity(new Intent(this, CreateAccountActivity.class));
+        } else if (id == R.id.logout_landlord) {
+
+        } else if (id == R.id.clear_prefs) {
+            for (LocalPrefs.Pref p : LocalPrefs.Pref.values()) {
+                LocalPrefs.purgePref(p, this);
+            }
+            OAuthUtils.deleteFacebookToken(this, Target.user);
+            finish();
+            startActivity(new Intent(this, CreateAccountActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -87,12 +104,6 @@ public class MainActivity extends AppCompatActivity
             setFragment(getFragmentManager(), new FindPropertyFragment());
         } else if (id == R.id.nav_favourites) {
             setFragment(getFragmentManager(), new ViewListingFragment());
-        } else if (id == R.id.nav_applications) {
-
-        } else if (id == R.id.nav_requests) {
-
-        } else if (id == R.id.nav_list_property) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
