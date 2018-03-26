@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_find_property"
+            android:icon="@drawable/magnifying_glass"
+            android:title="Find Property" />
+        <item
+            android:id="@+id/nav_favourites"
+            android:icon="@drawable/heart_filled"
+            android:title="Favourites" />
+        <item
+            android:id="@+id/nav_applications"
+            android:icon="@drawable/application"
+            android:title="Applications" />
+        <item
+            android:id="@+id/nav_requests"
+            android:icon="@drawable/sync"
+            android:title="Switch to Landlord" />
+    </group>
+
+    <item android:title="More">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/help"
+                android:title="Help" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/favourite"
+                android:title="Rate" />
+        </menu>
+    </item>
+
+</menu>
