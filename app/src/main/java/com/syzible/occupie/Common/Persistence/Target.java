@@ -1,4 +1,5 @@
 package com.syzible.occupie.Common.Persistence;
 
-public class Target {
+public enum Target {
+    landlord, user
 }
