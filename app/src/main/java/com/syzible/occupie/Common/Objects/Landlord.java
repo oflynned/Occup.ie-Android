@@ -6,93 +6,31 @@ import org.json.JSONObject;
 import java.util.Date;
 
 public class Landlord {
-    private String guid, googleToken, firebaseToken;
-    private String forename, surname, dob, gender, email, phoneNumber;
-    private boolean isIdVerified, isPhoneVerified;
-    private Date accountCreationTimestamp;
-    private int tosAccepted, privacyPolicyAccepted;
+
+    private String guid, forename, surname, sex, email, profilePicture, phoneNumber, creationTime;
+    private boolean identityVerified, phoneVerified;
+    private int tosVersionAccepted, privacyVersionAccepted;
+    private Date dob;
 
     public Landlord(JSONObject o) throws JSONException {
         this.guid = o.getString("_id");
-        this.googleToken = o.getString("google_token");
-        this.firebaseToken = o.getString("firebase_token");
-        this.forename = o.getString("forename");
-        this.surname = o.getString("surname");
+
+        JSONObject details = o.getJSONObject("details");
+        this.forename = details.getString("forename");
+        this.surname = details.getString("surname");
+        this.sex = details.getString("sex");
+        this.dob = new Date(details.getString("dob"));
+        this.email = details.getString("email");
+        this.profilePicture = details.getString("profile_picture");
+        this.phoneNumber = details.getString("phone_number");
+
+        JSONObject meta = o.getJSONObject("meta");
+        this.identityVerified = meta.getBoolean("identity_verified");
+        this.phoneVerified = meta.getBoolean("phone_verified");
+        this.creationTime = meta.getString("creation_time");
+        this.tosVersionAccepted = meta.getInt("tos_version_accepted");
+        this.privacyVersionAccepted = meta.getInt("privacy_version_accepted");
     }
 
-    public Landlord(String guid, String googleToken, String firebaseToken, String forename,
-                    String surname, String dob, String gender, String email, String phoneNumber,
-                    boolean isIdVerified, boolean isPhoneVerified, Date accountCreationTimestamp,
-                    int tosAccepted, int privacyPolicyAccepted) {
-        this.guid = guid;
-        this.googleToken = googleToken;
-        this.firebaseToken = firebaseToken;
-        this.forename = forename;
-        this.surname = surname;
-        this.dob = dob;
-        this.gender = gender;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.isIdVerified = isIdVerified;
-        this.isPhoneVerified = isPhoneVerified;
-        this.accountCreationTimestamp = accountCreationTimestamp;
-        this.tosAccepted = tosAccepted;
-        this.privacyPolicyAccepted = privacyPolicyAccepted;
-    }
 
-    public String getGuid() {
-        return guid;
-    }
-
-    public String getGoogleToken() {
-        return googleToken;
-    }
-
-    public String getFirebaseToken() {
-        return firebaseToken;
-    }
-
-    public String getForename() {
-        return forename;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public boolean isIdVerified() {
-        return isIdVerified;
-    }
-
-    public boolean isPhoneVerified() {
-        return isPhoneVerified;
-    }
-
-    public Date getAccountCreationTimestamp() {
-        return accountCreationTimestamp;
-    }
-
-    public int getTosAccepted() {
-        return tosAccepted;
-    }
-
-    public int getPrivacyPolicyAccepted() {
-        return privacyPolicyAccepted;
-    }
 }

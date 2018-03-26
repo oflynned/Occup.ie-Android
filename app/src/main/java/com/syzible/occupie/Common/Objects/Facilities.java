@@ -24,27 +24,27 @@ public class Facilities {
         this.hasGarden = hasGarden;
     }
 
-    public boolean isHasWashingMachine() {
+    public boolean hasWashingMachine() {
         return hasWashingMachine;
     }
 
-    public boolean isHasDryer() {
+    public boolean hasDryer() {
         return hasDryer;
     }
 
-    public boolean isHasParking() {
+    public boolean hasParking() {
         return hasParking;
     }
 
-    public boolean isHasWifi() {
+    public boolean hasWifi() {
         return hasWifi;
     }
 
-    public boolean isHasCentralHeating() {
+    public boolean hasCentralHeating() {
         return hasCentralHeating;
     }
 
-    public boolean isHasGarden() {
+    public boolean hasGarden() {
         return hasGarden;
     }
 }
