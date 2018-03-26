@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/burgundy_500</color>
     <color name="colorPrimaryDark">@color/burgundy_700</color>
-    <color name="colorAccent">@color/green_500</color>
+    <color name="colorAccent">@color/turquoise_500</color>
 
     <color name="burgundy_50">#f0e0e6</color>
     <color name="burgundy_100">#dab3c2</color>
@@ -15,14 +15,18 @@
     <color name="burgundy_800">#67001f</color>
     <color name="burgundy_900">#540013</color>
 
-    <color name="green_50">#e1f4ef</color>
-    <color name="green_100">#b4e5d6</color>
-    <color name="green_200">#82d3bb</color>
-    <color name="green_300">#4fc1a0</color>
-    <color name="green_400">#2ab48b</color>
-    <color name="green_500">#04a777</color>
-    <color name="green_600">#039f6f</color>
-    <color name="green_700">#039664</color>
-    <color name="green_800">#028c5a</color>
-    <color name="green_900">#017c47</color>
+    <color name="turquoise_50">#e1e9f0</color>
+    <color name="turquoise_100">#b4c9d9</color>
+    <color name="turquoise_200">#82a5bf</color>
+    <color name="turquoise_300">#4f81a5</color>
+    <color name="turquoise_400">#2a6692</color>
+    <color name="turquoise_500">#044b7f</color>
+    <color name="turquoise_600">#034477</color>
+    <color name="turquoise_700">#033b6c</color>
+    <color name="turquoise_800">#023362</color>
+    <color name="turquoise_900">#01234f</color>
+    <color name="turquoise_A100">#82aeff</color>
+    <color name="turquoise_A200">#4f8cff</color>
+    <color name="turquoise_A400">#1c6bff</color>
+    <color name="turquoise_A700">#035bff</color>
 </resources>

@@ -18,12 +18,8 @@
             android:title="Applications" />
         <item
             android:id="@+id/nav_requests"
-            android:icon="@drawable/request"
-            android:title="Requests" />
-        <item
-            android:id="@+id/nav_list_property"
-            android:icon="@drawable/house"
-            android:title="List Property" />
+            android:icon="@drawable/sync"
+            android:title="Switch to Landlord" />
     </group>
 
     <item android:title="More">
