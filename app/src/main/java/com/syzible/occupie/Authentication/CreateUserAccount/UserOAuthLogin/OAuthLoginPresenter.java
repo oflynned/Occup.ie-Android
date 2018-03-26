@@ -1,9 +1,15 @@
 package com.syzible.occupie.Authentication.CreateUserAccount.UserOAuthLogin;
 
+import com.facebook.CallbackManager;
 import com.syzible.occupie.Common.Mvp;
 
-public interface FragmentOAuthLoginPresenter extends Mvp.IPresenter<FragmentOAuthLoginView> {
-    void onFacebookCallback();
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    void generatePayload();
+import java.io.UnsupportedEncodingException;
+
+public interface OAuthLoginPresenter extends Mvp.IPresenter<OAuthLoginView> {
+    void onFacebookCallback(CallbackManager callbackManager);
+
+    void generatePayload(JSONObject o, String facebookAccessToken) throws JSONException, UnsupportedEncodingException;
 }

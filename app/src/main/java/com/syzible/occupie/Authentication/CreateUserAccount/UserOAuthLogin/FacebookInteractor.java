@@ -1,4 +1,5 @@
 package com.syzible.occupie.Authentication.CreateUserAccount.UserOAuthLogin;
 
-public class FacebookInteractor {
+public interface FacebookInteractor {
+    void onRequestProfile();
 }
