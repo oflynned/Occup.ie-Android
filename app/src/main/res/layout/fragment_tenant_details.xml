@@ -16,7 +16,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:hint="Forename" />
+            android:hint="County (Dublin)" />
 
         <EditText
             android:layout_width="0dp"
@@ -25,16 +25,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:hint="Surname" />
+            android:hint="Area" />
     </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="DOB" />
 
     <EditText
         android:layout_width="match_parent"
@@ -42,7 +35,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Gender" />
+        android:hint="Hobby crumbs" />
 
     <EditText
         android:layout_width="match_parent"
@@ -50,6 +43,28 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Professional/Student/Other" />
+        android:hint="Personal Description" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Switch
+            android:id="@+id/tenant_currently_searching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tenant_currently_searching"
+            android:layout_alignBottom="@+id/tenant_currently_searching"
+            android:layout_toEndOf="@+id/tenant_currently_searching"
+            android:gravity="center_vertical"
+            android:text="Currently searching?" />
+    </RelativeLayout>
 
 </LinearLayout>

@@ -6,35 +6,39 @@
     <ImageView
         android:layout_width="192dp"
         android:layout_height="192dp"
-        android:layout_above="@+id/tenant_login_content"
+        android:layout_above="@+id/tenant_facebook_login_button"
         android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_margin="16dp" />
 
-    <TextView
-        android:id="@+id/tenant_login_content"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/tenant_facebook_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="32dp" />
+
+    <TextView
+        android:id="@+id/tenant_agreement_to_tos"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tenant_facebook_login_button"
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:gravity="center"
-        android:text="Choose your sign up method below in order to find new property as a tenant." />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tenant_login_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"
-        android:text="LOGIN" />
+        android:text="By signing in with Facebook, you agree to our terms of service and privacy policy." />
 
     <TextView
+        android:id="@+id/tenant_continue_without_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_margin="32dp"
+        android:clickable="true"
+        android:focusable="true"
         android:text="Continue without logging in" />
 
 </RelativeLayout>
