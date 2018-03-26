@@ -1,4 +1,20 @@
-package com.syzible.occupie.Common.Objects;
+package com.syzible.occupie.Common.Time;
 
-public class Iso8601Date {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+public class DateHelpers {
+
+    public static String getIso8601Date(Date date) {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+        return df.format(date);
+    }
+
+    public static Date getDateFromIso8601(String string) {
+        return null;
+    }
 }
