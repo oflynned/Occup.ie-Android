@@ -24,6 +24,18 @@ public class LocalPrefs {
                 .putInt(pref.name(), version).apply();
     }
 
+    public static String getFullName(Context context) {
+        // TODO expand for landlord
+        return String.format("%s %s", getStringPref(context, Pref.user_forename), getStringPref(context, Pref.user_surname));
+    }
+
+    public static String getCurrentProfile(Context context) {
+        if (getStringPref(context, Pref.current_account).equals(Target.landlord.name()))
+            return "Landlord";
+
+        return "Tenant";
+    }
+
     public static String getStringPref(Context context, Pref pref) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(pref.name(), "");

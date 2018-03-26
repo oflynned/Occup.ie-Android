@@ -129,7 +129,12 @@ public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_forename, forename);
+                LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_surname, surname);
+                LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
                 LocalPrefs.setBooleanPref(context, LocalPrefs.Pref.is_user_first_run_done, true);
+
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
             }

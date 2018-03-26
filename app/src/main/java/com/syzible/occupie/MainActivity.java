@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -42,6 +44,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView nameNavView = headerView.findViewById(R.id.nav_header_name);
+        TextView currentProfile = headerView.findViewById(R.id.nav_header_state);
+
+        nameNavView.setText(LocalPrefs.getFullName(this));
+        currentProfile.setText(LocalPrefs.getCurrentProfile(this));
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
