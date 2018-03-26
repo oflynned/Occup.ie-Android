@@ -58,7 +58,12 @@ public class FindPropertyPresenterImpl implements FindPropertyPresenter {
         ArrayList<Property> properties = new ArrayList<>();
 
         for (int i = 0; i < array.length(); i++) {
-            Property property = new Property(array.getJSONObject(i));
+            Property property = null;
+            try {
+                property = new Property(array.getJSONObject(i));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             properties.add(property);
         }
 

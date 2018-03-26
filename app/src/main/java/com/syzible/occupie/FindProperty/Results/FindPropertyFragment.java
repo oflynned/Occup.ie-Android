@@ -23,7 +23,7 @@ public class FindPropertyFragment extends Fragment implements FindPropertyView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_find_property, container, false);
+        view = inflater.inflate(R.layout.fragment_find_listings, container, false);
         setupRecyclerView(view);
         return view;
     }

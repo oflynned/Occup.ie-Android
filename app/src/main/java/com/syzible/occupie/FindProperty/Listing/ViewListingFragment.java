@@ -24,7 +24,7 @@ public class ViewListingFragment extends Fragment implements ViewListingView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_listing, container, false);
+        View view = inflater.inflate(R.layout.fragment_listing_rental, container, false);
 
         favouriteFab = view.findViewById(R.id.view_listing_favourite_fab);
         favouriteFab.setOnClickListener((v) -> onFavouriteClick());
