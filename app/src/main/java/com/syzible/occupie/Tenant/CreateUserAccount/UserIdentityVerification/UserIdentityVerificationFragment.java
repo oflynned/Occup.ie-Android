@@ -1,6 +1,6 @@
-package com.syzible.occupie.Common.Authentication.CreateUserAccount.UserDetailsConfirmation;
+package com.syzible.occupie.Tenant.CreateUserAccount.UserIdentityVerification;
 
 import android.app.Fragment;
 
-public class UserDetailsConfirmationFragment extends Fragment {
+public class UserIdentityVerificationFragment extends Fragment {
 }

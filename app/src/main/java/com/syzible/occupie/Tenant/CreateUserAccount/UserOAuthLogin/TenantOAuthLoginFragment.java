@@ -1,4 +1,4 @@
-package com.syzible.occupie.Common.Authentication.CreateUserAccount.UserOAuthLogin;
+package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -17,17 +17,17 @@ import com.syzible.occupie.R;
 
 import java.util.Arrays;
 
-public class OAuthLoginFragment extends Fragment implements OAuthLoginView {
+public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLoginView {
 
     private CallbackManager callbackManager;
-    private OAuthLoginPresenter presenter;
+    private TenantOAuthLoginPresenter presenter;
 
-    public OAuthLoginFragment() {
+    public TenantOAuthLoginFragment() {
 
     }
 
-    public static OAuthLoginFragment getInstance() {
-        return new OAuthLoginFragment();
+    public static TenantOAuthLoginFragment getInstance() {
+        return new TenantOAuthLoginFragment();
     }
 
     @Override
@@ -46,13 +46,13 @@ public class OAuthLoginFragment extends Fragment implements OAuthLoginView {
 
         LoginButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
-                OAuthLoginFragment.this,
+                TenantOAuthLoginFragment.this,
                 Arrays.asList("public_profile", "email")
                 // TODO request birthday
         ));
 
         if (presenter == null)
-            presenter = new OAuthLoginPresenterImpl();
+            presenter = new TenantOAuthLoginPresenterImpl();
 
         presenter.attach(this);
         presenter.onFacebookCallback(callbackManager);

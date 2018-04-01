@@ -1,4 +1,4 @@
-package com.syzible.occupie.Common.Authentication.CreateUserAccount.UserOAuthLogin;
+package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,17 +28,17 @@ import java.util.Date;
 import cz.msebera.android.httpclient.Header;
 
 
-public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
+public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter {
 
-    private OAuthLoginView view;
+    private TenantOAuthLoginView view;
 
     @Override
-    public void attach(OAuthLoginView view) {
+    public void attach(TenantOAuthLoginView view) {
         this.view = view;
     }
 
     @Override
-    public OAuthLoginView getNonNullableView() throws IllegalStateException {
+    public TenantOAuthLoginView getNonNullableView() throws IllegalStateException {
         if (view == null)
             throw new IllegalStateException();
 

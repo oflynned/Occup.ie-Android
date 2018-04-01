@@ -1,4 +1,4 @@
-package com.syzible.occupie.Common.Authentication.CreateUserAccount.UserDetailsConfirmation;
+package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
 
 import android.app.Fragment;
 
