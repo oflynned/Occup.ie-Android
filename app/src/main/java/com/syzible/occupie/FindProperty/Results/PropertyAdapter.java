@@ -31,8 +31,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     }
 
     private void formatCard(final ViewHolder holder, Property property) {
-        holder.bedroomCount.setText(String.valueOf(property.getBedrooms()));
-        holder.bathroomCount.setText(String.valueOf(property.getBathrooms()));
+        holder.bedroomCount.setText(String.valueOf(property.getBedrooms().size()));
+        holder.bathroomCount.setText(String.valueOf(property.getBathrooms().size()));
         holder.address.setText(property.getAddress().getFullAddress());
 
         String rent = String.format("€%s.00", property.getListing().getRent()) + " pm";

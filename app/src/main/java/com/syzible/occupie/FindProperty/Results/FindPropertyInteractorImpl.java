@@ -1,5 +1,7 @@
 package com.syzible.occupie.FindProperty.Results;
 
+import android.content.Context;
+
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
@@ -12,8 +14,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class FindPropertyInteractorImpl implements FindPropertyInteractor {
     @Override
-    public void fetchResult(final OnFetchCompleted<JSONObject> onFetchCompleted, String id) {
-        RestClient.get(Endpoints.RENTAL + "/" + id, new BaseJsonHttpResponseHandler<JSONObject>() {
+    public void fetchResult(Context context, final OnFetchCompleted<JSONObject> onFetchCompleted, String id) {
+        RestClient.get(context, Endpoints.RENTAL + "/" + id, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 try {
@@ -36,8 +38,8 @@ public class FindPropertyInteractorImpl implements FindPropertyInteractor {
     }
 
     @Override
-    public void fetchResults(final OnFetchCompleted<JSONArray> onFetchCompleted) {
-        RestClient.get(Endpoints.RENTAL, new BaseJsonHttpResponseHandler<JSONArray>() {
+    public void fetchResults(Context context, final OnFetchCompleted<JSONArray> onFetchCompleted) {
+        RestClient.get(context, Endpoints.RENTAL, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONArray response) {
                 try {

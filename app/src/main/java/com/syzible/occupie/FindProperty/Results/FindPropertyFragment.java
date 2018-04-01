@@ -16,34 +16,32 @@ import com.syzible.occupie.R;
 import java.util.List;
 
 public class FindPropertyFragment extends Fragment implements FindPropertyView {
-    private View view;
     private RecyclerView recyclerView;
     private FindPropertyPresenter findPropertyPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_find_listings, container, false);
+        View view = inflater.inflate(R.layout.fragment_find_listings, container, false);
         setupRecyclerView(view);
         return view;
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (findPropertyPresenter == null)
             findPropertyPresenter = new FindPropertyPresenterImpl();
 
         findPropertyPresenter.attach(this);
         findPropertyPresenter.getProperties();
 
-        super.onResume();
+        super.onStart();
     }
 
     @Override
-    public void onPause() {
+    public void onDestroy() {
         findPropertyPresenter.detach();
-
-        super.onPause();
+        super.onDestroy();
     }
 
     @Override
