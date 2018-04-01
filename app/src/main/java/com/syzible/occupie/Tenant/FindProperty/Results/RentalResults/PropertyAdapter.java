@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Results.RentalResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
 
 import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.syzible.occupie.Common.Objects.Rental;
-import com.syzible.occupie.FindProperty.Common.ImageAdapter;
-import com.syzible.occupie.FindProperty.Listings.RentalListing.ViewRentalFragment;
+import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
+import com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing.ViewRentalFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
 import com.viewpagerindicator.CirclePageIndicator;

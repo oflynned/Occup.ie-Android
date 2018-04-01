@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults;
 
 import android.content.Context;
 
@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class FindRentalInteractorImpl implements FindRentalInteractor {
+public class FindHouseShareInteractorImpl implements FindHouseShareInteractor {
     @Override
     public void fetchResult(Context context, final OnFetchCompleted<JSONObject> onFetchCompleted, String id) {
         RestClient.get(context, Endpoints.HOUSE_SHARE + "/" + id, new BaseJsonHttpResponseHandler<JSONObject>() {
@@ -39,7 +39,7 @@ public class FindRentalInteractorImpl implements FindRentalInteractor {
 
     @Override
     public void fetchResults(Context context, final OnFetchCompleted<JSONArray> onFetchCompleted) {
-        RestClient.get(context, Endpoints.RENTAL, new BaseJsonHttpResponseHandler<JSONArray>() {
+        RestClient.get(context, Endpoints.HOUSE_SHARE, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONArray response) {
                 try {

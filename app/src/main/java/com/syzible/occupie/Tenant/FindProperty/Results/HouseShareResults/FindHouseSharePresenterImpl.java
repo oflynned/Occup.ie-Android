@@ -1,8 +1,8 @@
-package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults;
 
 import android.widget.Toast;
 
-import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.Common.Objects.HouseShare;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,34 +10,34 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindRentalPresenterImpl implements FindRentalPresenter {
-    private FindRentalView findRentalView;
-    private FindRentalInteractor findRentalInteractor;
+public class FindHouseSharePresenterImpl implements FindHouseSharePresenter {
+    private FindHouseShareView findHouseShareView;
+    private FindHouseShareInteractor findHouseShareInteractor;
 
     @Override
-    public void attach(FindRentalView findRentalView) {
-        this.findRentalView = findRentalView;
-        this.findRentalInteractor = new FindRentalInteractorImpl();
+    public void attach(FindHouseShareView findHouseShareView) {
+        this.findHouseShareView = findHouseShareView;
+        this.findHouseShareInteractor = new FindHouseShareInteractorImpl();
     }
 
     @Override
     public void detach() {
-        this.findRentalView = null;
-        this.findRentalInteractor = null;
+        this.findHouseShareView = null;
+        this.findHouseShareInteractor = null;
     }
 
     @Override
-    public FindRentalView getNonNullableView() throws IllegalStateException {
-        if (findRentalView == null)
+    public FindHouseShareView getNonNullableView() throws IllegalStateException {
+        if (findHouseShareView == null)
             throw new IllegalStateException("view not attached");
 
-        return findRentalView;
+        return findHouseShareView;
     }
 
     @Override
     public void getProperties() {
-        findRentalInteractor.fetchResults(getNonNullableView().getContext(),
-                new FindRentalInteractor.OnFetchCompleted<JSONArray>() {
+        findHouseShareInteractor.fetchResults(getNonNullableView().getContext(),
+                new FindHouseShareInteractor.OnFetchCompleted<JSONArray>() {
                     @Override
                     public void onFailure(int statusCode, String message) {
                         Toast.makeText(getNonNullableView().getContext(),
@@ -48,7 +48,7 @@ public class FindRentalPresenterImpl implements FindRentalPresenter {
                     @Override
                     public void onSuccess(JSONArray results) throws JSONException {
                         try {
-                            List<Rental> properties = getProperties(results);
+                            List<HouseShare> properties = getProperties(results);
                             getNonNullableView().showProperties(properties);
                             getNonNullableView().setProgressBarLoading(false);
                         } catch (IllegalStateException e) {
@@ -58,12 +58,12 @@ public class FindRentalPresenterImpl implements FindRentalPresenter {
                 });
     }
 
-    private List<Rental> getProperties(JSONArray array) throws JSONException {
-        ArrayList<Rental> properties = new ArrayList<>();
+    private List<HouseShare> getProperties(JSONArray array) throws JSONException {
+        ArrayList<HouseShare> properties = new ArrayList<>();
 
         for (int i = 0; i < array.length(); i++) {
             try {
-                Rental property = new Rental(array.getJSONObject(i));
+                HouseShare property = new HouseShare(array.getJSONObject(i));
                 properties.add(property);
             } catch (Exception e) {
                 e.printStackTrace();

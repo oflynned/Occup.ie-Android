@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,31 +11,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.Common.Objects.HouseShare;
 import com.syzible.occupie.Tenant.FindProperty.Common.DividerDecorator;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.R;
 
 import java.util.List;
 
-public class FindRentalFragment extends Fragment implements FindRentalView {
+public class FindHouseShareFragment extends Fragment implements FindHouseShareView {
     private RecyclerView recyclerView;
-    private FindRentalPresenter findRentalPresenter;
+    private FindHouseSharePresenter findHouseSharePresenter;
     private ProgressBar progressBar;
     private PropertyType propertyType;
 
-    public FindRentalFragment() {
+    public FindHouseShareFragment() {
 
     }
 
-    public static FindRentalFragment getInstance(PropertyType propertyType) {
-        return new FindRentalFragment().setPropertyType(propertyType);
+    public static FindHouseShareFragment getInstance(PropertyType propertyType) {
+        return new FindHouseShareFragment().setPropertyType(propertyType);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find_listings, container, false);
+
         progressBar = view.findViewById(R.id.find_listings_progress_bar);
         setupRecyclerView(view);
         return view;
@@ -43,23 +44,23 @@ public class FindRentalFragment extends Fragment implements FindRentalView {
 
     @Override
     public void onStart() {
-        if (findRentalPresenter == null)
-            findRentalPresenter = new FindRentalPresenterImpl();
+        if (findHouseSharePresenter == null)
+            findHouseSharePresenter = new FindHouseSharePresenterImpl();
 
-        findRentalPresenter.attach(this);
-        findRentalPresenter.getProperties();
+        findHouseSharePresenter.attach(this);
+        findHouseSharePresenter.getProperties();
 
         super.onStart();
     }
 
     @Override
     public void onDestroy() {
-        findRentalPresenter.detach();
+        findHouseSharePresenter.detach();
         super.onDestroy();
     }
 
     @Override
-    public void showProperties(List<Rental> properties) {
+    public void showProperties(List<HouseShare> properties) {
         RecyclerView.Adapter adapter = new PropertyAdapter(properties, getFragmentManager());
         recyclerView.setAdapter(adapter);
     }
@@ -77,7 +78,7 @@ public class FindRentalFragment extends Fragment implements FindRentalView {
         recyclerView.addItemDecoration(new DividerDecorator(getActivity(), 16));
     }
 
-    private FindRentalFragment setPropertyType(PropertyType propertyType) {
+    private FindHouseShareFragment setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
         return this;
     }

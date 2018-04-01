@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Results.RentalResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
 
 import com.syzible.occupie.Common.Mvp;
 

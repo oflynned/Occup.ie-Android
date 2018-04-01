@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Results.HouseShareResults;
+package com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults;
 
 import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.syzible.occupie.Common.Objects.HouseShare;
-import com.syzible.occupie.FindProperty.Common.ImageAdapter;
-import com.syzible.occupie.FindProperty.Listings.HouseShareListing.ViewHouseShareFragment;
+import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
+import com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing.ViewHouseShareFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
 import com.viewpagerindicator.CirclePageIndicator;
