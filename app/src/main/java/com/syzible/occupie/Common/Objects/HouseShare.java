@@ -6,33 +6,28 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rental {
+public class HouseShare {
     private String type, landlordUuid;
     private List<Bedroom> houseShareBedrooms;
-    private List<String> bathrooms, rentalBedrooms;
+    private List<String> bathrooms;
     private Address address;
     private ListingDetails details;
     private Facilities facilities;
     private Listing listing;
     private List<String> images = new ArrayList<>();
 
-    public Rental(JSONObject o) throws Exception {
+    public HouseShare(JSONObject o) throws Exception {
         this.type = o.getString("type");
         this.landlordUuid = o.getString("landlord_uuid");
         this.address = new Address(o.getJSONObject("address"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
         this.listing = new Listing(o.getJSONObject("listing"));
 
-        rentalBedrooms = new ArrayList<>();
         houseShareBedrooms = new ArrayList<>();
         JSONArray bedroomList = o.getJSONArray("bedrooms");
         for (int i = 0; i < bedroomList.length(); i++) {
-            if (bedroomList.get(i) instanceof String) {
-                rentalBedrooms.add(bedroomList.getString(i));
-            } else {
-                Bedroom bedroom = new Bedroom(bedroomList.getJSONObject(i));
-                houseShareBedrooms.add(bedroom);
-            }
+            Bedroom bedroom = new Bedroom(bedroomList.getJSONObject(i));
+            houseShareBedrooms.add(bedroom);
         }
 
         bathrooms = new ArrayList<>();
@@ -58,8 +53,8 @@ public class Rental {
         }
     }
 
-    public List<?> getBedrooms() {
-        return type.equals("house_share") ? houseShareBedrooms : rentalBedrooms;
+    public List<Bedroom> getBedrooms() {
+        return houseShareBedrooms;
     }
 
     public String getType() {

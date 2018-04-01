@@ -3,25 +3,33 @@ package com.syzible.occupie.Common.Objects;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Address {
-    private String houseNumber, street, area, city, county, eircode;
+    private String apartmentNumber, houseNumber, street, area, city, county, eircode;
 
     public Address(JSONObject o) throws JSONException {
+        this.apartmentNumber = (o.has("apartment_number") && !o.isNull("apartment_number")) ? o.getString("apartment_number") : null;
         this.houseNumber = o.has("house_number") ? o.getString("house_number") : "";
+        this.eircode = o.has("eircode") ? o.getString("eircode") : "";
         this.street = o.getString("street");
         this.area = o.getString("area");
         this.city = o.getString("city");
         this.county = o.getString("county");
-        this.eircode = o.has("eircode") ? o.getString("eircode") : "";
     }
 
-    public Address(String houseNumber, String street, String area, String city, String county, String eircode) {
+    public Address(String apartmentNumber, String houseNumber, String street, String area, String city, String county, String eircode) {
+        this.apartmentNumber = apartmentNumber;
         this.houseNumber = houseNumber;
         this.street = street;
         this.area = area;
         this.city = city;
         this.county = county;
         this.eircode = eircode;
+    }
+
+    public String getApartmentNumber() {
+        return apartmentNumber;
     }
 
     public String getHouseNumber() {
@@ -52,6 +60,9 @@ public class Address {
         if (houseNumber.equals("") || eircode.equals(""))
             return String.format("%s, %s, %s, %s", street, area, city, county);
 
-        return String.format("%s, %s, %s, %s, %s, %s", houseNumber, street, area, city, county, eircode);
+        if (apartmentNumber == null)
+            return String.format("%s %s, %s, %s, %s, %s", houseNumber, street, area, city, county, eircode);
+
+        return String.format("%s.%s %s, %s, %s, %s, %s", houseNumber, apartmentNumber, street, area, city, county, eircode);
     }
 }

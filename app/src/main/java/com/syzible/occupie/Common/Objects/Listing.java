@@ -6,13 +6,11 @@ import org.json.JSONObject;
 import java.util.Date;
 
 public class Listing {
-    private int rent;
     private Date created, expires;
     private String plan, status, ber;
     private boolean isOwnerOccupied, isFurnished;
 
     public Listing(JSONObject o) throws JSONException {
-        this.rent = o.getInt("rent");
         this.created = new Date();
         this.expires = new Date();
         this.plan = o.getString("plan");
@@ -30,10 +28,6 @@ public class Listing {
         this.ber = ber;
         this.isOwnerOccupied = isOwnerOccupied;
         this.isFurnished = isFurnished;
-    }
-
-    public int getRent() {
-        return rent;
     }
 
     public Date getCreated() {
