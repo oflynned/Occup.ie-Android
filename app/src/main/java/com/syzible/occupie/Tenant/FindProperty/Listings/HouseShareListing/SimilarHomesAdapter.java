@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Listings.HouseShareListing;
+package com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;

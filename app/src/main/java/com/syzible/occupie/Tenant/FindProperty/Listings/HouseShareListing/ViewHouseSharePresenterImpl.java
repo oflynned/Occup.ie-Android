@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Listings.HouseShareListing;
+package com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing;
 
 public class ViewHouseSharePresenterImpl implements ViewHouseSharePresenter {
 

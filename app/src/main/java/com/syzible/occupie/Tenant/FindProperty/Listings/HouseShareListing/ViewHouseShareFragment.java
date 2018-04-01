@@ -1,4 +1,4 @@
-package com.syzible.occupie.FindProperty.Listings.HouseShareListing;
+package com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing;
 
 import android.app.Fragment;
 import android.os.Bundle;
