@@ -1,5 +1,6 @@
 package com.syzible.occupie;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,12 +19,15 @@ import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.syzible.occupie.Authentication.CreateAccountActivity;
+import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
-import com.syzible.occupie.FindProperty.Results.FindPropertyFragment;
-import com.syzible.occupie.Settings.SettingsActivity;
+import com.syzible.occupie.Tenant.Favourites.FavouritesFragment;
+import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
+import com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults.FindHouseShareFragment;
+import com.syzible.occupie.Tenant.FindProperty.Results.RentalResults.FindRentalFragment;
+import com.syzible.occupie.Tenant.Settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,9 +66,9 @@ public class MainActivity extends AppCompatActivity
 
         // TODO set default landlord page to be own property listings manager
         if (currentUser == Target.landlord) {
-            setFragment(getFragmentManager(), FindPropertyFragment.getInstance());
+
         } else {
-            setFragment(getFragmentManager(), FindPropertyFragment.getInstance());
+            setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
         }
     }
 
@@ -121,17 +125,29 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.nav_requests) {
 
             } else if (id == R.id.nav_switch_to_tenant) {
-                logout(Target.landlord);
+                new AlertDialog.Builder(this)
+                        .setTitle("Switch to Tenant Profile?")
+                        .setMessage("Are you sure you want to switch to a tenant profile?")
+                        .setPositiveButton("OK", (dialog, which) -> logout(Target.landlord))
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         } else {
-            if (id == R.id.nav_find_property) {
-                setFragment(getFragmentManager(), new FindPropertyFragment());
+            if (id == R.id.nav_find_rental) {
+                setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
+            } else if (id == R.id.nav_find_house_share) {
+                setFragment(getFragmentManager(), FindHouseShareFragment.getInstance(PropertyType.house_share));
             } else if (id == R.id.nav_favourites) {
-
+                setFragment(getFragmentManager(), FavouritesFragment.getInstance());
             } else if (id == R.id.nav_applications) {
-
+                setFragment(getFragmentManager(), FavouritesFragment.getInstance());
             } else if (id == R.id.nav_switch_to_landlord) {
-                logout(Target.user);
+                new AlertDialog.Builder(this)
+                        .setTitle("Switch to Landlord Profile?")
+                        .setMessage("Are you sure you want to switch to a landlord profile?")
+                        .setPositiveButton("OK", (dialog, which) -> logout(Target.user))
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         }
 
