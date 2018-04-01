@@ -1,7 +1,7 @@
 package com.syzible.occupie.Common.Network;
 
 public class Endpoints {
-    private static final String HOST_URL = "https://occup-ie.herokuapp.com/api/v1";
+    private static final String HOST_URL = "http://10.0.2.2:3000/api/v1"; //"http://www.occup.ie/api/v1";
 
     public static final String USER = HOST_URL + "/user";
     public static final String RENTAL = HOST_URL + "/rental";

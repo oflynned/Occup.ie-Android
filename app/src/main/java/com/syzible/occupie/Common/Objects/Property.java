@@ -1,7 +1,6 @@
 package com.syzible.occupie.Common.Objects;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class Property {
     private String type, landlordUuid;
-    private int bedrooms, bathrooms;
+    private List<String> bedrooms, bathrooms;
     private Address address;
     private ListingDetails details;
     private Facilities facilities;
@@ -19,11 +18,19 @@ public class Property {
     public Property(JSONObject o) throws Exception {
         this.type = o.getString("type");
         this.landlordUuid = o.getString("landlord_uuid");
-        this.bedrooms = o.getInt("bedrooms");
-        this.bathrooms = o.getInt("bathrooms");
         this.address = new Address(o.getJSONObject("address"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
         this.listing = new Listing(o.getJSONObject("listing"));
+
+        bedrooms = new ArrayList<>();
+        JSONArray bedroomList = o.getJSONArray("bedrooms");
+        for (int i = 0; i < bedroomList.length(); i++)
+            bedrooms.add(bedroomList.getString(i));
+
+        bathrooms = new ArrayList<>();
+        JSONArray bathroomList = o.getJSONArray("bathrooms");
+        for (int i = 0; i < bathroomList.length(); i++)
+            bathrooms.add(bathroomList.getString(i));
 
         JSONObject details = o.getJSONObject("details");
         switch (type) {
@@ -43,7 +50,7 @@ public class Property {
         }
     }
 
-    public Property(String type, String landlordUuid, int bedrooms, int bathrooms, Address address,
+    public Property(String type, String landlordUuid, List<String> bedrooms, List<String> bathrooms, Address address,
                     ListingDetails details, Facilities facilities, Listing listing, List<String> images) {
         this.type = type;
         this.landlordUuid = landlordUuid;
@@ -64,11 +71,11 @@ public class Property {
         return landlordUuid;
     }
 
-    public int getBedrooms() {
+    public List<String> getBedrooms() {
         return bedrooms;
     }
 
-    public int getBathrooms() {
+    public List<String> getBathrooms() {
         return bathrooms;
     }
 

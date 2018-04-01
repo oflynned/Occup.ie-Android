@@ -7,12 +7,12 @@ public class Address {
     private String houseNumber, street, area, city, county, eircode;
 
     public Address(JSONObject o) throws JSONException {
-        this.houseNumber = o.getString("house_number");
+        this.houseNumber = o.has("house_number") ? o.getString("house_number") : "";
         this.street = o.getString("street");
         this.area = o.getString("area");
         this.city = o.getString("city");
         this.county = o.getString("county");
-        this.eircode = o.getString("eircode");
+        this.eircode = o.has("eircode") ? o.getString("eircode") : "";
     }
 
     public Address(String houseNumber, String street, String area, String city, String county, String eircode) {
@@ -49,6 +49,9 @@ public class Address {
     }
 
     public String getFullAddress() {
+        if (houseNumber.equals("") || eircode.equals(""))
+            return String.format("%s, %s, %s, %s", street, area, city, county);
+
         return String.format("%s, %s, %s, %s, %s, %s", houseNumber, street, area, city, county, eircode);
     }
 }
