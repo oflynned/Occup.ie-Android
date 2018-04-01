@@ -54,6 +54,12 @@ public class OAuthLoginFragment extends Fragment implements OAuthLoginView {
     }
 
     @Override
+    public void onDestroy() {
+        presenter.detach();
+        super.onDestroy();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);

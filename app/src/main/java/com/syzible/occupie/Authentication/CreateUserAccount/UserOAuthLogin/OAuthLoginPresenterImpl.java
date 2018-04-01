@@ -3,7 +3,6 @@ package com.syzible.occupie.Authentication.CreateUserAccount.UserOAuthLogin;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -17,14 +16,17 @@ import com.syzible.occupie.Common.Network.RestClient;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
+import com.syzible.occupie.Common.Time.DateHelpers;
 import com.syzible.occupie.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
+
 
 public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
 
@@ -85,6 +87,9 @@ public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
 
     @Override
     public void generatePayload(JSONObject o, String facebookAccessToken) throws JSONException, UnsupportedEncodingException {
+        String birthday = DateHelpers.getIso8601Date(new Date(94, 6, 11));
+        System.out.println(birthday);
+
         String facebookId = o.getString("id");
         String pic = "https://graph.facebook.com/" + facebookId + "/picture?type=large";
         String email = o.getString("email");
@@ -98,7 +103,7 @@ public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
         details.put("surname", surname);
         details.put("profile_picture", pic);
         details.put("sex", sex);
-        details.put("dob", "11/07/1994");
+        details.put("dob", birthday);
         details.put("profession", "professional");
 
         JSONObject meta = new JSONObject();
@@ -111,24 +116,26 @@ public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
         JSONObject oauth = new JSONObject();
         oauth.put("oauth_provider", "facebook");
         oauth.put("oauth_id", facebookId);
-        oauth.put("oauth_token", facebookAccessToken);
 
         JSONObject payload = new JSONObject();
         payload.put("details", details);
         payload.put("meta", meta);
         payload.put("oauth", oauth);
 
-        RestClient.post(getNonNullableView().getContext(), Endpoints.USER, payload, new BaseJsonHttpResponseHandler<JSONObject>() {
+        Context context = getNonNullableView().getContext();
+        try {
+            OAuthUtils.saveId(facebookId, Target.user, context);
+            OAuthUtils.saveToken(facebookAccessToken, Target.user, context);
+            OAuthUtils.saveProvider(oauth.getString("oauth_provider"), Target.user, context);
+            LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RestClient.post(context, Endpoints.USER, payload, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 Context context = getNonNullableView().getContext();
-                try {
-                    OAuthUtils.saveId(oauth.getString("oauth_id"), Target.user, context);
-                    OAuthUtils.saveToken(oauth.getString("oauth_token"), Target.user, context);
-                    OAuthUtils.saveProvider(oauth.getString("oauth_provider"), Target.user, context);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
                 LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_forename, forename);
                 LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_surname, surname);
@@ -141,8 +148,9 @@ public class OAuthLoginPresenterImpl implements OAuthLoginPresenter {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
-                Toast.makeText(getNonNullableView().getContext(), String.format("%s: failure!", statusCode), Toast.LENGTH_LONG).show();
-                System.out.println(statusCode + " " + errorResponse);
+                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_id, context);
+                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_token, context);
+                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_provider, context);
             }
 
             @Override
