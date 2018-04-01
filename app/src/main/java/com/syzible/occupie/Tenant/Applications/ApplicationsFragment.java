@@ -1,4 +1,4 @@
-package com.syzible.occupie.Applications;
+package com.syzible.occupie.Tenant.Applications;
 
 public class ApplicationsFragment {
 }
