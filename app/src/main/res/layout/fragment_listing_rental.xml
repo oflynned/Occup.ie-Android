@@ -568,6 +568,5 @@
         app:fabSize="normal"
         app:layout_anchor="@+id/image_pager_holder"
         app:layout_anchorGravity="end|right|bottom"
-        app:layout_behavior="com.syzible.occupie.FindProperty.Listing.MarkFavouriteFabBehaviour"
         app:srcCompat="@drawable/heart_outline" />
 </android.support.design.widget.CoordinatorLayout>

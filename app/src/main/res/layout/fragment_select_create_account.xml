@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/create_landlord_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Landlord Account" />
+
+        <Button
+            android:id="@+id/create_user_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create User Account" />
+
+        <Button
+            android:id="@+id/continue_without_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue Without Account" />
+    </LinearLayout>
+</RelativeLayout>
