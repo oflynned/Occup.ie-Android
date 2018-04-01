@@ -62,26 +62,31 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/street_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="22 Goldsmith St.," />
 
                         <TextView
+                            android:id="@+id/area_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Phibsborough," />
 
                         <TextView
+                            android:id="@+id/city_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dublin," />
 
                         <TextView
+                            android:id="@+id/county_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Co. Dublin," />
 
                         <TextView
+                            android:id="@+id/eircode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="D07 FK2W" />
@@ -167,7 +172,6 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:id="@+id/property_listing_flame"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_vertical"
@@ -504,6 +508,7 @@
                         android:text="Deposit" />
 
                     <TextView
+                        android:id="@+id/deposit_status_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
@@ -523,6 +528,7 @@
                         android:text="Rent" />
 
                     <TextView
+                        android:id="@+id/rent_status_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"

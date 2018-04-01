@@ -17,7 +17,7 @@
             android:icon="@drawable/application"
             android:title="Applications" />
         <item
-            android:id="@+id/nav_requests"
+            android:id="@+id/nav_switch_to_landlord"
             android:icon="@drawable/sync"
             android:title="Switch to Landlord" />
     </group>

@@ -5,21 +5,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_find_property"
-            android:icon="@drawable/magnifying_glass"
-            android:title="Find Property" />
-        <item
-            android:id="@+id/nav_favourites"
-            android:icon="@drawable/heart_filled"
-            android:title="Favourites" />
-        <item
-            android:id="@+id/nav_applications"
-            android:icon="@drawable/application"
-            android:title="Applications" />
+            android:id="@+id/nav_my_listings"
+            android:icon="@drawable/house"
+            android:title="My Listings" />
         <item
             android:id="@+id/nav_requests"
+            android:icon="@drawable/request"
+            android:title="Requests" />
+        <item
+            android:id="@+id/nav_switch_to_tenant"
             android:icon="@drawable/sync"
-            android:title="Switch to Landlord" />
+            android:title="Switch to Tenant" />
     </group>
 
     <item android:title="More">
