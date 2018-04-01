@@ -1,4 +1,4 @@
-package com.syzible.occupie.Authentication;
+package com.syzible.occupie.Common.Authentication;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.syzible.occupie.Authentication.CreateUserAccount.UserOAuthLogin.OAuthLoginFragment;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.MainActivity;
@@ -31,12 +30,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
 
-        if (getSupportActionBar() != null) {
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
-        setFragment(getFragmentManager(), new OAuthLoginFragment());
+        setFragment(getFragmentManager(), new SelectCreateAccountFragment());
     }
 
     @Override
