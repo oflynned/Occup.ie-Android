@@ -20,13 +20,16 @@ public class SelectCreateAccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_select_create_account, container, false);
 
         Button createLandlordAccount = view.findViewById(R.id.create_landlord_account);
-        createLandlordAccount.setOnClickListener(v -> CreateAccountActivity.setFragment(getFragmentManager(), null));
+        // createLandlordAccount.setOnClickListener(v -> CreateAccountActivity.setFragment(getFragmentManager(), null));
 
         Button createTenantAccount = view.findViewById(R.id.create_user_account);
         createTenantAccount.setOnClickListener(v -> CreateAccountActivity.setFragment(getFragmentManager(), TenantOAuthLoginFragment.getInstance()));
 
         Button continueWithoutLogin = view.findViewById(R.id.continue_without_account);
-        continueWithoutLogin.setOnClickListener(v -> startActivity(new Intent(getActivity(), MainActivity.class)));
+        continueWithoutLogin.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        });
 
         return view;
     }
