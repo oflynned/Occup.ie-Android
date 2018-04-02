@@ -12,8 +12,12 @@ import android.widget.TextView;
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
+import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation.UserDetailsConfirmationFragment;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -42,7 +46,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
         View view = inflater.inflate(R.layout.fragment_tenant_oauth_login, container, false);
 
         TextView continueTextView = view.findViewById(R.id.tenant_continue_without_account);
-        continueTextView.setOnClickListener((v) -> onContinueClick());
+        continueTextView.setOnClickListener((v) -> onContinueWithAccount());
 
         LoginButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
@@ -73,7 +77,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     }
 
     @Override
-    public void onContinueClick() {
+    public void onContinueWithAccount() {
         getActivity().finish();
         startActivity(new Intent(getActivity(), MainActivity.class));
     }
@@ -81,5 +85,10 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     @Override
     public void onTosClick() {
 
+    }
+
+    @Override
+    public void onContinueAccountCreation(JSONObject oauthProfile) {
+        CreateAccountActivity.setFragment(getFragmentManager(), UserDetailsConfirmationFragment.getInstance(oauthProfile));
     }
 }

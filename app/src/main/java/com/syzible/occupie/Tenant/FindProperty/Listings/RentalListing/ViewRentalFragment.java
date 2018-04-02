@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.syzible.occupie.Common.Objects.Rental;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
+import com.viewpagerindicator.CirclePageIndicator;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 public class ViewRentalFragment extends Fragment implements ViewRentalView {
@@ -60,6 +63,15 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView {
 
         rent = view.findViewById(R.id.rent_status_bar);
         deposit = view.findViewById(R.id.deposit_status_bar);
+        
+        ImageAdapter adapter = new ImageAdapter(getContext(), property.getImages());
+        ViewPager viewPager = view.findViewById(R.id.property_image);
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
+
+        CirclePageIndicator indicator = view.findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+
 
         return view;
     }

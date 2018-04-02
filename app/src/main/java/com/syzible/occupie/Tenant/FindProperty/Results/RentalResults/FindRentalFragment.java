@@ -60,7 +60,7 @@ public class FindRentalFragment extends Fragment implements FindRentalView {
 
     @Override
     public void showProperties(List<Rental> properties) {
-        RecyclerView.Adapter adapter = new PropertyAdapter(properties, getFragmentManager());
+        RecyclerView.Adapter adapter = new PropertyResultsAdapter(properties, getFragmentManager());
         recyclerView.setAdapter(adapter);
     }
 

@@ -1,7 +1,6 @@
 package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.facebook.CallbackManager;
@@ -16,13 +15,13 @@ import com.syzible.occupie.Common.Network.RestClient;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
-import com.syzible.occupie.Common.Time.DateHelpers;
-import com.syzible.occupie.MainActivity;
+import com.syzible.occupie.Common.Helpers.DateHelpers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -98,8 +97,8 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
         JSONObject details = new JSONObject();
         details.put("email", email);
-        details.put("forename", forename);
-        details.put("surname", surname);
+        details.put("forename", URLEncoder.encode(forename, "UTF-8"));
+        details.put("surname", URLEncoder.encode(surname, "UTF-8"));
         details.put("profile_picture", pic);
         details.put("sex", sex);
         details.put("dob", birthday);
@@ -107,7 +106,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
         JSONObject meta = new JSONObject();
         meta.put("identity_verified", false);
-        meta.put("creation_time", System.currentTimeMillis());
+        meta.put("creation_time", DateHelpers.getIso8601Date(new Date()));
         meta.put("firebase_token", "firebase_token");
         meta.put("tos_version_accepted", 1);
         meta.put("privacy_version_accepted", 1);
@@ -144,8 +143,18 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
                 LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
                 LocalPrefs.setBooleanPref(context, LocalPrefs.Pref.is_user_first_run_done, true);
 
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
+                JSONObject details = new JSONObject();
+                try {
+                    details = response.getJSONObject("details");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if (details.has("hobbies") && details.has("description")) {
+                    getNonNullableView().onContinueWithAccount();
+                } else {
+                    getNonNullableView().onContinueAccountCreation(response);
+                }
             }
 
             @Override

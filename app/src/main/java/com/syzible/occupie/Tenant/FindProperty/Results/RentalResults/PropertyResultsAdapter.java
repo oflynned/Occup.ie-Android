@@ -21,11 +21,11 @@ import java.util.List;
 /**
  * Created by ed on 30/10/2016
  */
-public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
+public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResultsAdapter.ViewHolder> {
     private List<Rental> rentals = new ArrayList<>();
     private FragmentManager manager;
 
-    public PropertyAdapter(List<Rental> rentals, FragmentManager manager) {
+    public PropertyResultsAdapter(List<Rental> rentals, FragmentManager manager) {
         this.rentals = rentals;
         this.manager = manager;
     }
