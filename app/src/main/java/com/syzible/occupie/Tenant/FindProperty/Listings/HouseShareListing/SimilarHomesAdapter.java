@@ -27,7 +27,7 @@ public class SimilarHomesAdapter extends RecyclerView.Adapter<SimilarHomesAdapte
     }
 
     private void formatCard(final SimilarHomesAdapter.ViewHolder holder, Rental property) {
-        holder.address.setText(property.getAddress().getFullAddress());
+        holder.address.setText(property.getAddress().getTileAddress());
         holder.rent.setText(String.format("€%s", property.getRent()));
 
         //ImageAdapter adapter = new ImageAdapter(holder.itemView.getContext(), property.getImages());
@@ -48,7 +48,7 @@ public class SimilarHomesAdapter extends RecyclerView.Adapter<SimilarHomesAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ViewPager viewPager;
-        TextView bedroomCount, bathroomCount, address, rent;
+        TextView bedroomCount, address, rent;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -56,7 +56,6 @@ public class SimilarHomesAdapter extends RecyclerView.Adapter<SimilarHomesAdapte
             viewPager = itemView.findViewById(R.id.property_image);
             rent = itemView.findViewById(R.id.property_tile_rent);
             bedroomCount = itemView.findViewById(R.id.property_tile_bedroom_count);
-            bathroomCount = itemView.findViewById(R.id.property_tile_bathroom_count);
             address = itemView.findViewById(R.id.property_tile_address);
         }
     }

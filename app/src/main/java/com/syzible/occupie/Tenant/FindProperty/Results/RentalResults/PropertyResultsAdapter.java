@@ -38,8 +38,7 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
 
     private void formatCard(final ViewHolder holder, Rental rental) {
         holder.bedroomCount.setText(String.valueOf(rental.getBedrooms().size()));
-        holder.bathroomCount.setText(String.valueOf(rental.getBathrooms().size()));
-        holder.address.setText(rental.getAddress().getFullAddress());
+        holder.address.setText(rental.getAddress().getTileAddress());
         holder.rent.setText(String.format("€%s pm", rental.getRent()));
 
         ImageAdapter adapter = new ImageAdapter(holder.itemView.getContext(), rental.getImages());
@@ -68,7 +67,7 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ViewPager viewPager;
-        TextView bedroomCount, bathroomCount, address, rent;
+        TextView bedroomCount, address, rent;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -76,7 +75,6 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
             viewPager = itemView.findViewById(R.id.property_image);
             rent = itemView.findViewById(R.id.property_tile_rent);
             bedroomCount = itemView.findViewById(R.id.property_tile_bedroom_count);
-            bathroomCount = itemView.findViewById(R.id.property_tile_bathroom_count);
             address = itemView.findViewById(R.id.property_tile_address);
         }
     }

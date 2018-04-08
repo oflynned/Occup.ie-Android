@@ -38,8 +38,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     private void formatCard(final ViewHolder holder, HouseShare houseShare) {
         holder.bedroomCount.setText(String.valueOf(houseShare.getBedrooms().size()));
-        holder.bathroomCount.setText(String.valueOf(houseShare.getBathrooms().size()));
-        holder.address.setText(houseShare.getAddress().getFullAddress());
+        holder.address.setText(houseShare.getAddress().getTileAddress());
 
         // TODO allow for multiple rents to be shown
         holder.rent.setText(String.format("€%s pm", houseShare.getBedrooms().get(0).getRent()));
@@ -70,7 +69,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ViewPager viewPager;
-        TextView bedroomCount, bathroomCount, address, rent;
+        TextView bedroomCount, address, rent;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -78,7 +77,6 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             viewPager = itemView.findViewById(R.id.property_image);
             rent = itemView.findViewById(R.id.property_tile_rent);
             bedroomCount = itemView.findViewById(R.id.property_tile_bedroom_count);
-            bathroomCount = itemView.findViewById(R.id.property_tile_bathroom_count);
             address = itemView.findViewById(R.id.property_tile_address);
         }
     }
