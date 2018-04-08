@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
@@ -34,33 +33,34 @@ public class CreateAccountActivity extends AppCompatActivity {
         } else {
             setFragment(getFragmentManager(), SelectCreateAccountFragment.getInstance());
         }
-
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+    public void onBackPressed() {
+        int fragmentSize = getFragmentManager().getBackStackEntryCount();
+        if (fragmentSize == 1) {
             finish();
+        } else {
+            if (getFragmentManager().getBackStackEntryCount() > 1) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public static void setFragment(FragmentManager fragmentManager, Fragment fragment) {
-        if (fragmentManager != null)
-            fragmentManager.beginTransaction()
-                    .replace(R.id.signup_holder, fragment)
-                    .addToBackStack(null)
-                    .commit();
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction().replace(R.id.signup_holder, fragment).commit();
+        }
     }
 
-
     public static void setFragmentBackstack(FragmentManager fragmentManager, Fragment fragment) {
-
-        if (fragmentManager != null)
+        if (fragmentManager != null) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_layout, fragment)
-                    .addToBackStack(fragment.getClass().getName())
+                    .replace(R.id.signup_holder, fragment)
+                    .addToBackStack(fragment.getClass().getSimpleName())
                     .commit();
+        }
     }
 }

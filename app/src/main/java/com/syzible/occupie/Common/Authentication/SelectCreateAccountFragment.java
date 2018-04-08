@@ -23,7 +23,7 @@ public class SelectCreateAccountFragment extends Fragment {
         // createLandlordAccount.setOnClickListener(v -> CreateAccountActivity.setFragment(getFragmentManager(), null));
 
         Button createTenantAccount = view.findViewById(R.id.create_user_account);
-        createTenantAccount.setOnClickListener(v -> CreateAccountActivity.setFragment(getFragmentManager(), TenantOAuthLoginFragment.getInstance()));
+        createTenantAccount.setOnClickListener(v -> CreateAccountActivity.setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance()));
 
         Button continueWithoutLogin = view.findViewById(R.id.continue_without_account);
         continueWithoutLogin.setOnClickListener(v -> {
