@@ -5,68 +5,98 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/signup_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="32dp"
         android:orientation="vertical">
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_alignParentTop="true"
+            android:indeterminate="false"
+            android:progress="33"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What's your name?" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/details_confirmation_forename"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Forename" />
+
+                <EditText
+                    android:id="@+id/details_confirmation_surname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Surname" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="When were you born?" />
 
             <EditText
-                android:id="@+id/details_confirmation_forename"
-                android:layout_width="0dp"
+                android:id="@+id/details_confirmation_dob"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:hint="Forename" />
+                android:layout_marginTop="4dp"
+                android:hint="DOB" />
 
-            <EditText
-                android:id="@+id/details_confirmation_surname"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:hint="Surname" />
+                android:text="What's your sex?" />
+
+            <Spinner
+                android:id="@+id/details_confirmation_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/sexes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="What's your profession?" />
+
+            <Spinner
+                android:id="@+id/details_confirmation_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/professions" />
+
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/details_confirmation_dob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="DOB" />
-
-        <Spinner
-            android:id="@+id/details_confirmation_sex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/sexes"
-            android:hint="Sex" />
-
-        <EditText
-            android:id="@+id/details_confirmation_profession"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="Professional/Student/Other" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/signup_next_screen"
