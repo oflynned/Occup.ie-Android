@@ -1,7 +1,7 @@
 package com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults;
 
-import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.syzible.occupie.Common.Objects.HouseShare;
-import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
-import com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing.ViewHouseShareFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
+import com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing.ViewHouseShareFragment;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -23,11 +23,9 @@ import java.util.List;
  */
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
     private List<HouseShare> houseShares = new ArrayList<>();
-    private FragmentManager manager;
 
-    public PropertyAdapter(List<HouseShare> houseShares, FragmentManager manager) {
+    PropertyAdapter(List<HouseShare> houseShares) {
         this.houseShares = houseShares;
-        this.manager = manager;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
         holder.itemView.setOnClickListener(v -> {
             ViewHouseShareFragment fragment = ViewHouseShareFragment.getInstance(houseShare);
-            MainActivity.setFragmentBackstack(manager, fragment);
+            MainActivity.setFragmentBackstack(((AppCompatActivity) holder.itemView.getContext()).getFragmentManager(), fragment);
         });
     }
 

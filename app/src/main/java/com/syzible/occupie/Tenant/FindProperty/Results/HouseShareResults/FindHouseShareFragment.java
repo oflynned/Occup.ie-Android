@@ -61,7 +61,7 @@ public class FindHouseShareFragment extends Fragment implements FindHouseShareVi
 
     @Override
     public void showProperties(List<HouseShare> properties) {
-        RecyclerView.Adapter adapter = new PropertyAdapter(properties, getFragmentManager());
+        RecyclerView.Adapter adapter = new PropertyAdapter(properties);
         recyclerView.setAdapter(adapter);
     }
 

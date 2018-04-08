@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.R;
 import com.syzible.occupie.Tenant.FindProperty.Common.DividerDecorator;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
-import com.syzible.occupie.R;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class FindRentalFragment extends Fragment implements FindRentalView {
 
     @Override
     public void showProperties(List<Rental> properties) {
-        RecyclerView.Adapter adapter = new PropertyResultsAdapter(properties, getFragmentManager());
+        RecyclerView.Adapter adapter = new PropertyResultsAdapter(properties);
         recyclerView.setAdapter(adapter);
     }
 

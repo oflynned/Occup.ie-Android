@@ -2,6 +2,7 @@ package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
 
 import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,11 @@ import java.util.List;
  */
 public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResultsAdapter.ViewHolder> {
     private List<Rental> rentals = new ArrayList<>();
-    private FragmentManager manager;
 
     private static final int OFFSCREEN_PAGE_LIMIT = 3;
 
-    PropertyResultsAdapter(List<Rental> rentals, FragmentManager manager) {
+    PropertyResultsAdapter(List<Rental> rentals) {
         this.rentals = rentals;
-        this.manager = manager;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
 
         holder.itemView.setOnClickListener(v -> {
             ViewRentalFragment fragment = ViewRentalFragment.getInstance(rental);
-            MainActivity.setFragmentBackstack(manager, fragment);
+            MainActivity.setFragmentBackstack(((AppCompatActivity) holder.itemView.getContext()).getFragmentManager(), fragment);
         });
     }
 
