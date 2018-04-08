@@ -1,6 +1,7 @@
 package com.syzible.occupie.Common.Helpers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,9 +15,14 @@ public class DateHelpers {
     }
 
     public static String getBirthdayFormat(String birthday) {
-        Date date = new Date(birthday);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-        return df.format(date);
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.UK).parse(birthday);
+            return DateFormat.getDateInstance(DateFormat.SHORT).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        throw new IllegalStateException();
     }
 
     public static Date getDateFromIso8601(String string) {

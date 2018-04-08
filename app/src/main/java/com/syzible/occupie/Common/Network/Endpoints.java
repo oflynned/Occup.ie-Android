@@ -5,6 +5,7 @@ public class Endpoints {
     private static final String HOST_URL = STEM_URL + "/api/v1";
 
     public static final String USER = HOST_URL + "/user";
+    public static final String CHECK_USER_EXISTS = USER + "/me";
     public static final String RENTAL = HOST_URL + "/rental";
     public static final String HOUSE_SHARE = HOST_URL + "/house-share";
     public static final String LANDLORD = HOST_URL + "/landlord";

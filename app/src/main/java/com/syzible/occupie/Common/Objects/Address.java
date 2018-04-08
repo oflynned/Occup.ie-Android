@@ -56,13 +56,7 @@ public class Address {
         return eircode;
     }
 
-    public String getFullAddress() {
-        if (houseNumber.equals("") || eircode.equals(""))
-            return String.format("%s, %s, %s, %s", street, area, city, county);
-
-        if (apartmentNumber == null)
-            return String.format("%s %s, %s, %s, %s, %s", houseNumber, street, area, city, county, eircode);
-
-        return String.format("%s.%s %s, %s, %s, %s, %s", houseNumber, apartmentNumber, street, area, city, county, eircode);
+    public String getTileAddress() {
+        return String.format("%s, %s, %s", street, area, city);
     }
 }
