@@ -136,7 +136,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
         RestClient.get(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
-                getNonNullableView().onContinueWithAccount();
+                getNonNullableView().onContinueToMain();
             }
 
             @Override

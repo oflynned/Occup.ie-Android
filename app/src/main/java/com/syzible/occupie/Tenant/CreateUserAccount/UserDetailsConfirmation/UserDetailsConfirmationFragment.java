@@ -21,8 +21,8 @@ import java.io.UnsupportedEncodingException;
 public class UserDetailsConfirmationFragment extends Fragment implements UserDetailsConfirmationView {
 
     private EditText forename, surname;
-    private Spinner sex;
-    private EditText dob, profession;
+    private Spinner sex, profession;
+    private EditText dob;
 
     private UserDetailsConfirmationPresenter presenter;
     private JSONObject oauth;
@@ -107,7 +107,17 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     @Override
     public void setProfession(String profession) {
-        this.profession.setText(profession);
+        switch (profession) {
+            case "student":
+                this.profession.setSelection(0);
+                break;
+            case "professional":
+                this.profession.setSelection(1);
+                break;
+            default:
+                this.profession.setSelection(2);
+                break;
+        }
     }
 
     public void setOauth(JSONObject oauth) {
@@ -136,7 +146,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     @Override
     public String getProfession() {
-        return profession.getText().toString();
+        return String.valueOf(profession.getSelectedItemPosition());
     }
 
     @Override

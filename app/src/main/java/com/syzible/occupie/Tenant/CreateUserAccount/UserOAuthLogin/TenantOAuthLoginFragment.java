@@ -46,7 +46,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
         View view = inflater.inflate(R.layout.fragment_tenant_oauth_login, container, false);
 
         TextView continueTextView = view.findViewById(R.id.tenant_continue_without_account);
-        continueTextView.setOnClickListener((v) -> onContinueWithAccount());
+        continueTextView.setOnClickListener((v) -> onContinueToMain());
 
         LoginButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
@@ -77,7 +77,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     }
 
     @Override
-    public void onContinueWithAccount() {
+    public void onContinueToMain() {
         getActivity().finish();
         startActivity(new Intent(getActivity(), MainActivity.class));
     }
