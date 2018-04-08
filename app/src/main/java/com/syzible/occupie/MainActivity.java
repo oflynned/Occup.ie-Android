@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logout(Target target) {
+        LocalPrefs.purgePref(LocalPrefs.Pref.current_account, this);
         OAuthUtils.deleteFacebookToken(this, target);
         finish();
         startActivity(new Intent(this, CreateAccountActivity.class));
