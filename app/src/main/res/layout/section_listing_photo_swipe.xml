@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_pager_holder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/property_image"
+        android:layout_width="match_parent"
+        android:layout_height="256dp" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/property_image"
+        android:gravity="bottom"
+        android:padding="8dp"
+        app:centered="true"
+        app:fillColor="@color/colorPrimary"
+        app:layout_anchor="@+id/property_image"
+        app:layout_anchorGravity="end|bottom"
+        app:pageColor="#fff"
+        app:snap="false" />
+</RelativeLayout>
