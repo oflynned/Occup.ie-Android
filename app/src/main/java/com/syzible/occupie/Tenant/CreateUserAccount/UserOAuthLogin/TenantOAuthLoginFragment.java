@@ -88,7 +88,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     }
 
     @Override
-    public void onContinueAccountCreation(JSONObject oauthProfile) {
-        CreateAccountActivity.setFragment(getFragmentManager(), UserDetailsConfirmationFragment.getInstance(oauthProfile));
+    public void onContinueAccountCreation(JSONObject profile) {
+        CreateAccountActivity.setFragment(getFragmentManager(), UserDetailsConfirmationFragment.getInstance(profile));
     }
 }

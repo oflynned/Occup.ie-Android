@@ -10,12 +10,12 @@ import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.syzible.occupie.Common.Helpers.DateHelpers;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
-import com.syzible.occupie.Common.Helpers.DateHelpers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,7 +106,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
         JSONObject meta = new JSONObject();
         meta.put("identity_verified", false);
-        meta.put("creation_time", DateHelpers.getIso8601Date(new Date()));
+        meta.put("creation_time", System.currentTimeMillis());
         meta.put("firebase_token", "firebase_token");
         meta.put("tos_version_accepted", 1);
         meta.put("privacy_version_accepted", 1);
@@ -122,7 +122,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
         Context context = getNonNullableView().getContext();
         cacheIdentity(context, facebookId, facebookAccessToken);
-        requestAccount(context, payload, forename, surname);
+        requestAccount(context, payload);
     }
 
     private void cacheIdentity(Context context, String facebookId, String facebookAccessToken) {
@@ -132,36 +132,16 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
         LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
     }
 
-    private void requestAccount(Context context, JSONObject payload, String forename, String surname) throws UnsupportedEncodingException {
-        RestClient.post(context, Endpoints.USER, payload, new BaseJsonHttpResponseHandler<JSONObject>() {
+    private void requestAccount(Context context, JSONObject payload) throws UnsupportedEncodingException {
+        RestClient.get(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
-                Context context = getNonNullableView().getContext();
-
-                LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_forename, forename);
-                LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_surname, surname);
-                LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
-                LocalPrefs.setBooleanPref(context, LocalPrefs.Pref.is_user_first_run_done, true);
-
-                JSONObject details = new JSONObject();
-                try {
-                    details = response.getJSONObject("details");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (details.has("hobbies") && details.has("description")) {
-                    getNonNullableView().onContinueWithAccount();
-                } else {
-                    getNonNullableView().onContinueAccountCreation(response);
-                }
+                getNonNullableView().onContinueWithAccount();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
-                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_id, context);
-                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_token, context);
-                LocalPrefs.purgePref(LocalPrefs.Pref.user_oauth_provider, context);
+                getNonNullableView().onContinueAccountCreation(payload);
             }
 
             @Override
