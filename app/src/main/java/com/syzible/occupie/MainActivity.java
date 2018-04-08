@@ -3,7 +3,6 @@ package com.syzible.occupie;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -78,7 +77,22 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            int fragmentSize = getFragmentManager().getBackStackEntryCount();
+            if (fragmentSize == 1) {
+                new AlertDialog.Builder(this)
+                        .setTitle(String.format("Close %s?", getString(R.string.app_name)))
+                        .setMessage(String.format("Are you sure you want to close %s? Click close to confirm.", getString(R.string.app_name)))
+                        .setPositiveButton("Close", (dialog, which) -> finish())
+                        .setNegativeButton("Cancel", null)
+                        .create()
+                        .show();
+            } else {
+                if (fragmentSize > 1) {
+                    getFragmentManager().popBackStack();
+                } else {
+                    super.onBackPressed();
+                }
+            }
         }
     }
 
@@ -157,20 +171,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static void setFragment(FragmentManager fragmentManager, Fragment fragment) {
-        if (fragmentManager != null)
+        if (fragmentManager != null) {
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_layout, fragment)
                     .addToBackStack(null)
                     .commit();
+        }
     }
 
     public static void setFragmentBackstack(FragmentManager fragmentManager, Fragment fragment) {
-        if (fragmentManager != null)
+        if (fragmentManager != null) {
+            String tag = fragment.getClass().getSimpleName();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_layout, fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(fragment.getClass().getName())
+                    .addToBackStack(tag)
                     .commit();
+        }
     }
 
     private void logout(Target target) {
