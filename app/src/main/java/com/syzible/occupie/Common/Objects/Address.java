@@ -3,8 +3,6 @@ package com.syzible.occupie.Common.Objects;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 public class Address {
     private String apartmentNumber, houseNumber, street, area, city, county, eircode;
 
@@ -57,6 +55,8 @@ public class Address {
     }
 
     public String getTileAddress() {
+        if (!houseNumber.equals(""))
+            return String.format("%s %s, %s, %s", houseNumber, street, area, city);
         return String.format("%s, %s, %s", street, area, city);
     }
 }

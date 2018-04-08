@@ -27,8 +27,8 @@ public class SelectCreateAccountFragment extends Fragment {
 
         Button continueWithoutLogin = view.findViewById(R.id.continue_without_account);
         continueWithoutLogin.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
+            startActivity(new Intent(getActivity(), MainActivity.class));
         });
 
         return view;
