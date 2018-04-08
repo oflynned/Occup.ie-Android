@@ -2,7 +2,7 @@ package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
 
 import com.syzible.occupie.Common.Mvp;
 
-import java.util.Date;
+import org.json.JSONObject;
 
 public interface UserDetailsConfirmationView extends Mvp.IView {
     void setForename(String forename);
@@ -14,4 +14,18 @@ public interface UserDetailsConfirmationView extends Mvp.IView {
     void setSex(String gender);
 
     void setProfession(String profession);
+
+    String getForename();
+
+    String getSurname();
+
+    String getSex();
+
+    String getDob();
+
+    String getProfession();
+
+    boolean isSectionCompleted();
+
+    void setNextFragment(JSONObject profile);
 }

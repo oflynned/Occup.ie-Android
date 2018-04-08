@@ -3,15 +3,20 @@ package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.CreateUserAccount.UserProfileBuilder.UserProfileBuilderFragment;
 
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class UserDetailsConfirmationFragment extends Fragment implements UserDetailsConfirmationView {
 
@@ -32,6 +37,15 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
         sex = view.findViewById(R.id.details_confirmation_sex);
         profession = view.findViewById(R.id.details_confirmation_profession);
         dob = view.findViewById(R.id.details_confirmation_dob);
+
+        FloatingActionButton next = view.findViewById(R.id.signup_next_screen);
+        next.setOnClickListener(v -> {
+            try {
+                presenter.updateAccount();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
 
         return view;
     }
@@ -98,5 +112,41 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     public void setOauth(JSONObject oauth) {
         this.oauth = oauth;
+    }
+
+    @Override
+    public String getForename() {
+        return forename.getText().toString();
+    }
+
+    @Override
+    public String getSurname() {
+        return surname.getText().toString();
+    }
+
+    @Override
+    public String getSex() {
+        return String.valueOf(sex.getSelectedItemPosition());
+    }
+
+    @Override
+    public String getDob() {
+        return dob.getText().toString();
+    }
+
+    @Override
+    public String getProfession() {
+        return profession.getText().toString();
+    }
+
+    @Override
+    public boolean isSectionCompleted() {
+        return !getForename().isEmpty() && !getSurname().isEmpty() &&
+                !getDob().isEmpty() && !getSex().isEmpty() && !getProfession().isEmpty();
+    }
+
+    @Override
+    public void setNextFragment(JSONObject profile) {
+        CreateAccountActivity.setFragmentBackstack(getFragmentManager(), UserProfileBuilderFragment.getInstance(profile));
     }
 }
