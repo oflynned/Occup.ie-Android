@@ -33,4 +33,8 @@ public class SelectCreateAccountFragment extends Fragment {
 
         return view;
     }
+
+    public static SelectCreateAccountFragment getInstance() {
+        return new SelectCreateAccountFragment();
+    }
 }

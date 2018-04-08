@@ -12,11 +12,9 @@ import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin.TenantOAuthLoginFragment;
 
 public class CreateAccountActivity extends AppCompatActivity {
-
-    private static final int NUM_PAGES = 3;
-    private int currentPage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,13 @@ public class CreateAccountActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
 
-        setFragment(getFragmentManager(), new SelectCreateAccountFragment());
+        String target = getIntent().getStringExtra("target");
+        if (target != null && target.equals(Target.user.name())) {
+            setFragment(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
+        } else {
+            setFragment(getFragmentManager(), SelectCreateAccountFragment.getInstance());
+        }
+
     }
 
     @Override
