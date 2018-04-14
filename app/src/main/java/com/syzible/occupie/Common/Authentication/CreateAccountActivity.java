@@ -22,10 +22,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         if (OAuthUtils.hasExistingToken(this, Target.user)) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
-        }
+        }*/
 
         String target = getIntent().getStringExtra("target");
         if (target != null && target.equals(Target.user.name())) {

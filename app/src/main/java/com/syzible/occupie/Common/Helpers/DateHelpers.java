@@ -22,7 +22,8 @@ public class DateHelpers {
             e.printStackTrace();
         }
 
-        throw new IllegalStateException();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+        return format.format(new Date(birthday));
     }
 
     public static Date getDateFromIso8601(String string) {
