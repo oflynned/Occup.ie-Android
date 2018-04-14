@@ -11,6 +11,8 @@ public interface UserDetailsConfirmationView extends Mvp.IView {
 
     void setDob(String dob);
 
+    void setEmail(String email);
+
     void setSex(String gender);
 
     void setProfession(String profession);
@@ -22,6 +24,8 @@ public interface UserDetailsConfirmationView extends Mvp.IView {
     String getSex();
 
     String getDob();
+
+    String getEmail();
 
     String getProfession();
 

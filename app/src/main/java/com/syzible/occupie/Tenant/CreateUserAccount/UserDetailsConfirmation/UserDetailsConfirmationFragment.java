@@ -20,12 +20,12 @@ import java.io.UnsupportedEncodingException;
 
 public class UserDetailsConfirmationFragment extends Fragment implements UserDetailsConfirmationView {
 
-    private EditText forename, surname;
+    private EditText forename, surname, email;
     private Spinner sex, profession;
     private EditText dob;
 
     private UserDetailsConfirmationPresenter presenter;
-    private JSONObject oauth;
+    private JSONObject profile;
 
     @Nullable
     @Override
@@ -37,6 +37,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
         sex = view.findViewById(R.id.details_confirmation_sex);
         profession = view.findViewById(R.id.details_confirmation_profession);
         dob = view.findViewById(R.id.details_confirmation_dob);
+        email = view.findViewById(R.id.details_confirmation_email);
 
         FloatingActionButton next = view.findViewById(R.id.signup_next_screen);
         next.setOnClickListener(v -> {
@@ -56,7 +57,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
             presenter = new UserDetailsConfirmationPresenterImpl();
 
         presenter.attach(this);
-        presenter.parsePayload(oauth);
+        presenter.parsePayload(profile);
         super.onStart();
     }
 
@@ -66,12 +67,12 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
         super.onStop();
     }
 
-    public static UserDetailsConfirmationFragment getInstance(JSONObject oauth) {
+    public static UserDetailsConfirmationFragment getInstance(JSONObject profile) {
         UserDetailsConfirmationFragment fragment = new UserDetailsConfirmationFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("oauth", oauth.toString());
+        bundle.putString("oauth", profile.toString());
         fragment.setArguments(bundle);
-        fragment.setOauth(oauth);
+        fragment.setProfile(profile);
         return fragment;
     }
 
@@ -88,6 +89,11 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
     @Override
     public void setDob(String dob) {
         this.dob.setText(dob);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email.setText(email);
     }
 
     @Override
@@ -120,8 +126,8 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
         }
     }
 
-    public void setOauth(JSONObject oauth) {
-        this.oauth = oauth;
+    public void setProfile(JSONObject profile) {
+        this.profile = profile;
     }
 
     @Override
@@ -136,7 +142,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     @Override
     public String getSex() {
-        return String.valueOf(sex.getSelectedItemPosition());
+        return sex.getSelectedItem().toString().toLowerCase();
     }
 
     @Override
@@ -145,13 +151,18 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
     }
 
     @Override
+    public String getEmail() {
+        return email.getText().toString();
+    }
+
+    @Override
     public String getProfession() {
-        return String.valueOf(profession.getSelectedItemPosition());
+        return profession.getSelectedItem().toString().toLowerCase();
     }
 
     @Override
     public boolean isSectionCompleted() {
-        return !getForename().isEmpty() && !getSurname().isEmpty() &&
+        return !getForename().isEmpty() && !getSurname().isEmpty() && !getEmail().isEmpty() &&
                 !getDob().isEmpty() && !getSex().isEmpty() && !getProfession().isEmpty();
     }
 

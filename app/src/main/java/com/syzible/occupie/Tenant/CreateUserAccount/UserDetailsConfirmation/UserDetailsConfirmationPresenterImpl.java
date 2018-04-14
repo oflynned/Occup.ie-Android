@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import com.syzible.occupie.Common.Helpers.DateHelpers;
 import com.syzible.occupie.Common.Helpers.Encoding;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,13 +37,14 @@ public class UserDetailsConfirmationPresenterImpl implements UserDetailsConfirma
     public void parsePayload(JSONObject profile) {
         this.profile = profile;
 
-        String forename = null, surname = null, sex = null, dob = null;
+        String forename = null, surname = null, sex = null, dob = null, email = null;
         try {
             JSONObject details = profile.getJSONObject("details");
             forename = Encoding.decode(details.getString("forename"));
             surname = Encoding.decode(details.getString("surname"));
             sex = details.getString("sex");
             dob = DateHelpers.getBirthdayFormat(details.getString("dob"));
+            email = details.getString("email");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -51,6 +53,7 @@ public class UserDetailsConfirmationPresenterImpl implements UserDetailsConfirma
         getNonNullableView().setSurname(surname);
         getNonNullableView().setSex(sex);
         getNonNullableView().setDob(dob);
+        getNonNullableView().setEmail(email);
     }
 
     @Override
@@ -62,6 +65,7 @@ public class UserDetailsConfirmationPresenterImpl implements UserDetailsConfirma
             details.put("sex", getNonNullableView().getSex());
             details.put("profession", getNonNullableView().getProfession());
             details.put("dob", DateHelpers.getDateFromIso8601(getNonNullableView().getDob()));
+            details.put("email", getNonNullableView().getEmail());
             profile.put("details", details);
         } catch (JSONException e) {
             e.printStackTrace();
