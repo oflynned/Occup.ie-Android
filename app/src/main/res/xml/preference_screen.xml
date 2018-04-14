@@ -17,6 +17,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/app_name">
+        <Preference android:title="Help" />
         <Preference android:title="Visit Us" />
         <Preference android:title="About Us" />
         <Preference android:title="Developer" />

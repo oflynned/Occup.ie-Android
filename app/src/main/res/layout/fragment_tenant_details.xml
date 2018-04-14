@@ -5,76 +5,43 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/signup_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="32dp"
         android:orientation="vertical">
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_alignParentTop="true"
+            android:indeterminate="false"
+            android:progress="66"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
             <EditText
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:hint="County (Dublin)" />
+                android:hint="Hobby crumbs" />
 
             <EditText
-                android:layout_width="0dp"
+                android:id="@+id/user_signup_personal_description"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:hint="Area" />
+                android:hint="Personal Description"
+                android:maxLines="10" />
         </LinearLayout>
 
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="Hobby crumbs" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="Personal Description" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Switch
-                android:id="@+id/tenant_currently_searching"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tenant_currently_searching"
-                android:layout_alignBottom="@+id/tenant_currently_searching"
-                android:layout_toEndOf="@+id/tenant_currently_searching"
-                android:gravity="center_vertical"
-                android:text="Currently searching?" />
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/signup_next_screen"
