@@ -6,6 +6,8 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -34,7 +36,12 @@ public class UserProfileBuilderPresenterImpl implements UserProfileBuilderPresen
     }
 
     @Override
-    public void createAccount(JSONObject account) throws UnsupportedEncodingException {
+    public void createAccount(JSONObject account) throws UnsupportedEncodingException, JSONException {
+        JSONObject details = account.getJSONObject("details");
+        details.put("hobbies", getNonNullableView().getHobbies()); // TODO fetch and parse real hobby data
+        details.put("description", getNonNullableView().getDescription()); // TODO fetch real description
+        account.put("details", details);
+
         RestClient.post(getNonNullableView().getContext(), Endpoints.USER, account, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
