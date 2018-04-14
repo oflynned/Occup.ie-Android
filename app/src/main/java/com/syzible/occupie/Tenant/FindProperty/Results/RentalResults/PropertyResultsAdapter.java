@@ -1,6 +1,5 @@
 package com.syzible.occupie.Tenant.FindProperty.Results.RentalResults;
 
-import android.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -17,14 +16,13 @@ import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
 import com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing.ViewRentalFragment;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ed on 30/10/2016
  */
 public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResultsAdapter.ViewHolder> {
-    private List<Rental> rentals = new ArrayList<>();
+    private List<Rental> rentals;
 
     private static final int OFFSCREEN_PAGE_LIMIT = 3;
 
@@ -57,10 +55,17 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
         CirclePageIndicator indicator = holder.itemView.findViewById(R.id.indicator);
         indicator.setViewPager(holder.viewPager);
 
-        holder.itemView.setOnClickListener(v -> {
-            ViewRentalFragment fragment = ViewRentalFragment.getInstance(rental);
-            MainActivity.setFragmentBackstack(((AppCompatActivity) holder.itemView.getContext()).getFragmentManager(), fragment);
-        });
+        holder.itemView.setOnClickListener(v -> showProperty(rental, holder));
+        holder.viewPager.setOnClickListener(v -> showProperty(rental, holder));
+        holder.dwellingType.setOnClickListener(v -> showProperty(rental, holder));
+        holder.bedroomCount.setOnClickListener(v -> showProperty(rental, holder));
+        holder.address.setOnClickListener(v -> showProperty(rental, holder));
+        holder.rent.setOnClickListener(v -> showProperty(rental, holder));
+    }
+
+    private void showProperty(Rental rental, ViewHolder holder) {
+        ViewRentalFragment fragment = ViewRentalFragment.getInstance(rental);
+        MainActivity.setFragmentBackstack(((AppCompatActivity) holder.itemView.getContext()).getFragmentManager(), fragment);
     }
 
     @Override
