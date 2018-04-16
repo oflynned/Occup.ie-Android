@@ -11,7 +11,7 @@ import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
-import com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin.TenantOAuthLoginFragment;
+import com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin.TenantOAuthLoginFragment;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -22,11 +22,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
         if (OAuthUtils.hasExistingToken(this, Target.user)) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
-        }*/
+        }
 
         String target = getIntent().getStringExtra("target");
         if (target != null && target.equals(Target.user.name())) {
