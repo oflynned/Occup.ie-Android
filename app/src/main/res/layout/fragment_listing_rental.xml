@@ -19,6 +19,11 @@
             <include layout="@layout/section_listing_photo_swipe" />
 
             <include layout="@layout/section_listing_header" />
+
+            <include layout="@layout/section_map_listing" />
+
+            <include layout="@layout/section_listing_facilities" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -30,6 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2 bedrooms" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:text="·" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:text="BER A1"
+            android:textColor="@color/teal_500"/>
     </LinearLayout>
 
     <TextView
