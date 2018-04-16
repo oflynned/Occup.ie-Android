@@ -1,32 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/teepee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/sacramento"
+                android:text="@string/app_name"
+                android:textSize="48sp" />
+        </LinearLayout>
+
+        <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/create_landlord_account"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Landlord Account" />
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:text="Login as a Landlord"
+            app:fb_borderColor="@color/colorAccent"
+            app:fb_borderWidth="1dp"
+            app:fb_defaultColor="@color/colorAccent"
+            app:fb_focusColor="@color/colorPrimary"
+            app:fb_ghost="true"
+            app:fb_radius="8dp"
+            app:fb_textColor="@color/colorAccent" />
 
-        <Button
+        <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/create_user_account"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create User Account" />
-
-        <Button
-            android:id="@+id/continue_without_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue Without Account" />
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:text="Login as a Tenant"
+            app:fb_borderColor="@color/colorPrimary"
+            app:fb_borderWidth="1dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/colorAccent"
+            app:fb_ghost="true"
+            app:fb_radius="8dp"
+            app:fb_textColor="@color/colorPrimary" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/continue_without_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:text="Continue Without Account" />
 </RelativeLayout>

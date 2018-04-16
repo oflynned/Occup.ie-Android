@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Management">
-        <Preference android:title="Profile" />
-        <Preference android:title="Verification" />
-        <Preference android:title="Log Out" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Push Notifications">
-        <SwitchPreference android:title="Currently searching" />
+        <Preference android:title="Manage Profile" />
+        <Preference android:title="Push Notifications" />
+        <Preference android:title="Help" />
+        <Preference
+            android:summary="@string/app_version"
+            android:title="Version" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Policies">
         <Preference android:title="Terms of Service" />
-        <Preference android:title="Privacy Policies" />
+        <Preference android:title="Privacy Policy" />
         <Preference android:title="FAQ" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/app_name">
-        <Preference android:title="Help" />
         <Preference android:title="Visit Us" />
         <Preference android:title="About Us" />
         <Preference android:title="Developer" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Danger Zone">
+        <Preference
+            android:summary="Currently logged in as..."
+            android:title="Log Out" />
+        <Preference
+            android:summary="Warning! Account deletion is irreversible!"
+            android:title="Delete Account" />
     </PreferenceCategory>
 </PreferenceScreen>
