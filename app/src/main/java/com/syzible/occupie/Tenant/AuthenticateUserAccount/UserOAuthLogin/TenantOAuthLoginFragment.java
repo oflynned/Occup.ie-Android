@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.facebook.login.widget.LoginButton;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
-import com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation.UserDetailsConfirmationFragment;
+import com.syzible.occupie.Tenant.AuthenticateUserAccount.UserDetailsConfirmation.UserDetailsConfirmationFragment;
 
 import org.json.JSONObject;
 

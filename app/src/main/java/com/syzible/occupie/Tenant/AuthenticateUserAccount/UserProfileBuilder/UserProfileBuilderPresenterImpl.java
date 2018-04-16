@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserProfileBuilder;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserProfileBuilder;
 
 import android.support.design.widget.Snackbar;
 
@@ -6,7 +6,6 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

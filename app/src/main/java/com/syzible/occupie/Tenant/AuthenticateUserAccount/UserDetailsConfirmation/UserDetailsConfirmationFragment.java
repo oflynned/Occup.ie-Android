@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserDetailsConfirmation;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.Spinner;
 
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.R;
-import com.syzible.occupie.Tenant.CreateUserAccount.UserProfileBuilder.UserProfileBuilderFragment;
+import com.syzible.occupie.Tenant.AuthenticateUserAccount.UserProfileBuilder.UserProfileBuilderFragment;
 
 import org.json.JSONObject;
 

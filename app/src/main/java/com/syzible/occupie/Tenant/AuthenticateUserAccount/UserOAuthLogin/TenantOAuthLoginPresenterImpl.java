@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin;
 
 import android.content.Context;
 import android.os.Bundle;

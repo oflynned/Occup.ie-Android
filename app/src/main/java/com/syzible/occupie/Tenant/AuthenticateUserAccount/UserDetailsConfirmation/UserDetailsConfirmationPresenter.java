@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserDetailsConfirmation;
 
 import com.syzible.occupie.Common.Mvp;
 

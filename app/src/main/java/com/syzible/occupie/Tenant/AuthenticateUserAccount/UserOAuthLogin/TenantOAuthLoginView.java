@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserOAuthLogin;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin;
 
 import com.syzible.occupie.Common.Mvp;
 

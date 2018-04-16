@@ -56,7 +56,6 @@ public class PropertyResultsAdapter extends RecyclerView.Adapter<PropertyResults
         indicator.setViewPager(holder.viewPager);
 
         holder.itemView.setOnClickListener(v -> showProperty(rental, holder));
-        holder.viewPager.setOnClickListener(v -> showProperty(rental, holder));
         holder.dwellingType.setOnClickListener(v -> showProperty(rental, holder));
         holder.bedroomCount.setOnClickListener(v -> showProperty(rental, holder));
         holder.address.setOnClickListener(v -> showProperty(rental, holder));

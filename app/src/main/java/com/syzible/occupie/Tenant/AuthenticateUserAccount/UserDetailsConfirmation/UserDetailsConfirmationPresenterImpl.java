@@ -1,11 +1,10 @@
-package com.syzible.occupie.Tenant.CreateUserAccount.UserDetailsConfirmation;
+package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserDetailsConfirmation;
 
 import android.support.design.widget.Snackbar;
 
 import com.syzible.occupie.Common.Helpers.DateHelpers;
 import com.syzible.occupie.Common.Helpers.Encoding;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
