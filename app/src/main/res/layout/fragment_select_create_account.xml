@@ -46,7 +46,7 @@
             app:fb_borderColor="@color/colorAccent"
             app:fb_borderWidth="1dp"
             app:fb_defaultColor="@color/colorAccent"
-            app:fb_focusColor="@color/colorPrimary"
+            app:fb_focusColor="@color/pineapple_300"
             app:fb_ghost="true"
             app:fb_radius="8dp"
             app:fb_textColor="@color/colorAccent" />
@@ -64,7 +64,7 @@
             app:fb_borderColor="@color/colorPrimary"
             app:fb_borderWidth="1dp"
             app:fb_defaultColor="@color/colorPrimary"
-            app:fb_focusColor="@color/colorAccent"
+            app:fb_focusColor="@color/desire_300"
             app:fb_ghost="true"
             app:fb_radius="8dp"
             app:fb_textColor="@color/colorPrimary" />

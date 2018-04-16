@@ -33,4 +33,34 @@
     <color name="pineapple_A200">#ff40e2</color>
     <color name="pineapple_A400">#ff0dda</color>
     <color name="pineapple_A700">#f200cd</color>
+
+    <color name="crayola_50">#e7eeff</color>
+    <color name="crayola_100">#c3d5ff</color>
+    <color name="crayola_200">#9bb9ff</color>
+    <color name="crayola_300">#739cff</color>
+    <color name="crayola_400">#5587ff</color>
+    <color name="crayola_500">#3772ff</color>
+    <color name="crayola_600">#316aff</color>
+    <color name="crayola_700">#2a5fff</color>
+    <color name="crayola_800">#2355ff</color>
+    <color name="crayola_900">#1642ff</color>
+    <color name="crayola_A100">#ffffff</color>
+    <color name="crayola_A200">#fcfcff</color>
+    <color name="crayola_A400">#c9d1ff</color>
+    <color name="crayola_A700">#afbcff</color>
+
+    <color name="sunglow_50">#fff9e8</color>
+    <color name="sunglow_100">#feefc6</color>
+    <color name="sunglow_200">#fee5a0</color>
+    <color name="sunglow_300">#feda79</color>
+    <color name="sunglow_400">#fdd25d</color>
+    <color name="sunglow_500">#fdca40</color>
+    <color name="sunglow_600">#fdc53a</color>
+    <color name="sunglow_700">#fcbd32</color>
+    <color name="sunglow_800">#fcb72a</color>
+    <color name="sunglow_900">#fcab1c</color>
+    <color name="sunglow_A100">#ffffff</color>
+    <color name="sunglow_A200">#fffefc</color>
+    <color name="sunglow_A400">#ffeac9</color>
+    <color name="sunglow_A700">#ffe0b0</color>
 </resources>

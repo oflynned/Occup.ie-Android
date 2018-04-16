@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <ImageView
-        android:layout_width="192dp"
-        android:layout_height="192dp"
-        android:layout_above="@+id/tenant_facebook_login_button"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/tenant_facebook_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="32dp" />
-
-    <TextView
-        android:id="@+id/tenant_agreement_to_tos"
+    <LinearLayout
         android:layout_width="256dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tenant_facebook_login_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:gravity="center"
-        android:text="By signing in with Facebook, you agree to our terms of service and privacy policy." />
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:src="@drawable/teepee"
+            android:layout_margin="16dp"/>
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/tenant_google_login_button"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:text="Login with Google"
+            app:fb_borderColor="@color/colorPrimary"
+            app:fb_borderWidth="1dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/desire_300"
+            app:fb_ghost="true"
+            app:fb_radius="8dp"
+            app:fb_textColor="@color/colorPrimary" />
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/tenant_facebook_login_button"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:text="Login with Facebook"
+            app:fb_borderColor="@color/crayola_500"
+            app:fb_borderWidth="1dp"
+            app:fb_defaultColor="@color/crayola_500"
+            app:fb_focusColor="@color/crayola_300"
+            app:fb_ghost="true"
+            app:fb_radius="8dp"
+            app:fb_textColor="@color/crayola_500" />
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/tenant_agreement_to_tos"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="By signing in, you agree to our terms of service and privacy policy." />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tenant_continue_without_account"
@@ -37,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"
+        android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
         android:text="Continue without logging in" />
