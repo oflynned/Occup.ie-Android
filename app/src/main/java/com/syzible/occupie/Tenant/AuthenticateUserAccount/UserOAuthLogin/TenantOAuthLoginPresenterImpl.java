@@ -132,8 +132,8 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
         LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
     }
 
-    private void requestAccount(Context context, JSONObject payload) throws UnsupportedEncodingException {
-        RestClient.get(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
+    private void requestAccount(Context context, JSONObject payload) {
+        RestClient.head(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 getNonNullableView().onContinueToMain();
@@ -146,7 +146,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
             @Override
             protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return new JSONObject(rawJsonData);
+                return null;
             }
         });
     }

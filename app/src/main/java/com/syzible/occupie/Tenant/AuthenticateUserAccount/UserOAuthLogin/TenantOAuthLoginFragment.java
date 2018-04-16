@@ -21,6 +21,8 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLoginView {
 
     private CallbackManager callbackManager;
@@ -48,26 +50,30 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
         TextView continueTextView = view.findViewById(R.id.tenant_continue_without_account);
         continueTextView.setOnClickListener((v) -> onContinueToMain());
 
-        LoginButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
+        FancyButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
                 TenantOAuthLoginFragment.this,
                 Arrays.asList("public_profile", "email")
                 // TODO request birthday
         ));
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
         if (presenter == null)
             presenter = new TenantOAuthLoginPresenterImpl();
 
         presenter.attach(this);
         presenter.onFacebookCallback(callbackManager);
-
-        return view;
+        super.onStart();
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroyView() {
         presenter.detach();
-        super.onDestroy();
+        super.onDestroyView();
     }
 
     @Override

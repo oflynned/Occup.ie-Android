@@ -48,13 +48,17 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
             }
         });
 
+        return view;
+    }
+
+    @Override
+    public void onStart() {
         if (presenter == null)
             presenter = new UserDetailsConfirmationPresenterImpl();
 
         presenter.attach(this);
         presenter.parsePayload(profile);
-
-        return view;
+        super.onStart();
     }
 
     @Override
