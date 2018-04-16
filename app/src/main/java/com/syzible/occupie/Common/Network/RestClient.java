@@ -19,6 +19,10 @@ public class RestClient {
     private static AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     private static SyncHttpClient syncHttpClient = new SyncHttpClient();
 
+    public static void head(Context context, String url, AsyncHttpResponseHandler handler) {
+        getClient(context).head(url, handler);
+    }
+
     public static void get(Context context, String url, AsyncHttpResponseHandler handler) {
         getClient(context).get(url, handler);
     }
