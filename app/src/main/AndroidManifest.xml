@@ -6,9 +6,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo_1_png"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_1_png"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
