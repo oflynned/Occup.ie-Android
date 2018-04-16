@@ -48,17 +48,13 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
             }
         });
 
-        return view;
-    }
-
-    @Override
-    public void onStart() {
         if (presenter == null)
             presenter = new UserDetailsConfirmationPresenterImpl();
 
         presenter.attach(this);
         presenter.parsePayload(profile);
-        super.onStart();
+
+        return view;
     }
 
     @Override
@@ -98,7 +94,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     @Override
     public void setSex(String sex) {
-        switch (sex) {
+        switch (sex.toLowerCase()) {
             case "male":
                 this.sex.setSelection(0);
                 break;
@@ -113,7 +109,7 @@ public class UserDetailsConfirmationFragment extends Fragment implements UserDet
 
     @Override
     public void setProfession(String profession) {
-        switch (profession) {
+        switch (profession.toLowerCase()) {
             case "student":
                 this.profession.setSelection(0);
                 break;
