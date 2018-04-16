@@ -29,9 +29,9 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         String target = getIntent().getStringExtra("target");
         if (target != null && target.equals(Target.user.name())) {
-            setFragment(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
+            setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
         } else {
-            setFragment(getFragmentManager(), SelectCreateAccountFragment.getInstance());
+            setFragmentBackstack(getFragmentManager(), SelectCreateAccountFragment.getInstance());
         }
     }
 

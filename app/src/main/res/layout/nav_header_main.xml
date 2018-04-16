@@ -12,10 +12,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:adjustViewBounds="true"
         android:id="@+id/nav_header_profile_pic"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
         android:src="@drawable/teepee" />
 
     <TextView
