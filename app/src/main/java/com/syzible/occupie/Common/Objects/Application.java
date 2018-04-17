@@ -15,8 +15,8 @@ public class Application {
         this.landlordId = o.getString("landlord_id");
         this.listingId = o.getString("listing_id");
         this.status = o.getString("status");
-        this.creationTime = new Date(o.getString("creation_time"));
-        this.lastUpdated = new Date(o.getString("last_updated"));
+        this.creationTime = new Date(); //new Date(o.getString("creation_time"));
+        this.lastUpdated = new Date(); //new Date(o.getString("last_updated"));
     }
 
     public Application(String userId, String landlordId, String listingId) {
