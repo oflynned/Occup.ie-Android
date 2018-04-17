@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
+import com.syzible.occupie.Common.Persistence.LocalPrefs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +45,13 @@ public class UserProfileBuilderPresenterImpl implements UserProfileBuilderPresen
         RestClient.post(getNonNullableView().getContext(), Endpoints.USER, account, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
+                try {
+                    String uuid = response.getString("_id");
+                    LocalPrefs.setStringPref(getNonNullableView().getContext(), LocalPrefs.Pref.user_id, uuid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 getNonNullableView().onProfileCompleted();
             }
 

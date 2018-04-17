@@ -133,10 +133,16 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
     }
 
     private void requestAccount(Context context, JSONObject payload) {
-        RestClient.head(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
+        RestClient.get(context, Endpoints.CHECK_USER_EXISTS, new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
-                getNonNullableView().onContinueToMain();
+                try {
+                    System.out.println(response);
+                    LocalPrefs.setStringPref(getNonNullableView().getContext(), LocalPrefs.Pref.user_id, response.getString("_id"));
+                    getNonNullableView().onContinueToMain();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -146,7 +152,7 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
 
             @Override
             protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return null;
+                return new JSONObject(rawJsonData);
             }
         });
     }
