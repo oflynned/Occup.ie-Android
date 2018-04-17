@@ -22,6 +22,7 @@ import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
+import com.syzible.occupie.Tenant.Applications.ApplicationsFragment;
 import com.syzible.occupie.Tenant.Favourites.FavouritesFragment;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults.FindHouseShareFragment;
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.nav_favourites) {
                 setFragment(getFragmentManager(), FavouritesFragment.getInstance());
             } else if (id == R.id.nav_applications) {
-                setFragment(getFragmentManager(), FavouritesFragment.getInstance());
+                setFragment(getFragmentManager(), ApplicationsFragment.getInstance());
             } else if (id == R.id.nav_switch_to_landlord) {
                 new AlertDialog.Builder(this)
                         .setTitle("Switch to Landlord Profile?")
