@@ -19,13 +19,10 @@ public class Application {
         this.lastUpdated = new Date(o.getString("last_updated"));
     }
 
-    public Application(String userId, String landlordId, String listingId, String status, Date creationTime, Date lastUpdated) {
+    public Application(String userId, String landlordId, String listingId) {
         this.userId = userId;
         this.landlordId = landlordId;
         this.listingId = listingId;
-        this.status = status;
-        this.creationTime = creationTime;
-        this.lastUpdated = lastUpdated;
     }
 
     public String getUserId() {
@@ -50,5 +47,13 @@ public class Application {
 
     public Date getLastUpdated() {
         return lastUpdated;
+    }
+
+    public JSONObject getPayload() throws JSONException {
+        JSONObject o = new JSONObject();
+        o.put("user_id", userId);
+        o.put("landlord_id", landlordId);
+        o.put("listing_id", listingId);
+        return o;
     }
 }

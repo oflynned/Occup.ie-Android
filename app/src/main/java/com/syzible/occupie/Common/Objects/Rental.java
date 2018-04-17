@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rental {
-    private String type, landlordUuid;
+    private String type, landlordUuid, propertyUuid;
     private List<String> bathrooms, bedrooms;
     private Address address;
     private ListingDetails details;
@@ -18,6 +18,7 @@ public class Rental {
 
     public Rental(JSONObject o) throws Exception {
         this.type = o.getString("type");
+        this.propertyUuid = o.getString("_id");
         this.landlordUuid = o.getString("landlord_uuid");
         this.address = new Address(o.getJSONObject("address"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
@@ -72,6 +73,10 @@ public class Rental {
 
     public String getType() {
         return type;
+    }
+
+    public String getPropertyUuid() {
+        return propertyUuid;
     }
 
     public String getLandlordUuid() {
