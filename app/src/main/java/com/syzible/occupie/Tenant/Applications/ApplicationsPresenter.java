@@ -1,4 +1,7 @@
 package com.syzible.occupie.Tenant.Applications;
 
-public class ApplicationsPresenter {
+import com.syzible.occupie.Common.Mvp;
+
+public interface ApplicationsPresenter extends Mvp.IPresenter<ApplicationsView> {
+    void getApplications();
 }

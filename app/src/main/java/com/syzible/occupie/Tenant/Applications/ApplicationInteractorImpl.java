@@ -1,42 +1,43 @@
-package com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing;
+package com.syzible.occupie.Tenant.Applications;
 
 import android.content.Context;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
-import com.syzible.occupie.Common.Objects.Application;
+import com.syzible.occupie.Common.Persistence.LocalPrefs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
 public class ApplicationInteractorImpl implements ApplicationInteractor {
+
     @Override
-    public void apply(Context context, OnApplyCompleted<JSONObject> onApplyCompleted, Application application) throws UnsupportedEncodingException, JSONException {
-        RestClient.post(context, Endpoints.APPLICATION, application.getPayload(), new BaseJsonHttpResponseHandler<JSONObject>() {
+    public void getApplications(Context context, OnApplicationInteracted<JSONArray> callback) {
+        String uuid = LocalPrefs.getStringPref(context, LocalPrefs.Pref.user_id);
+        String endpoint = String.format("%s?user_id=%s", Endpoints.APPLICATION, uuid);
+        System.out.println(endpoint);
+        RestClient.get(context, endpoint, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONArray response) {
+                System.out.println(response);
                 try {
-                    onApplyCompleted.onSuccess(response);
+                    callback.onSuccess(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
-                onApplyCompleted.onFailure(statusCode, rawJsonData);
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONArray errorResponse) {
+                callback.onFailure(statusCode, rawJsonData);
             }
 
             @Override
-            protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                System.out.println(rawJsonData);
-                return new JSONObject(rawJsonData);
+            protected JSONArray parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new JSONArray(rawJsonData);
             }
         });
     }
