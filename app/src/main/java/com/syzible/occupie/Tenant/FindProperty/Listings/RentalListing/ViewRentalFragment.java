@@ -6,16 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.Common.Helpers.StringHelper;
+import com.syzible.occupie.Common.Objects.Application;
 import com.syzible.occupie.Common.Objects.Rental;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.Target;
@@ -23,18 +24,25 @@ import com.syzible.occupie.R;
 import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class ViewRentalFragment extends Fragment implements ViewRentalView {
+public class ViewRentalFragment extends Fragment implements ViewRentalView{
 
     private ViewRentalPresenter presenter;
+    private ApplicationInteractor interactor;
+
     private FloatingActionButton favouriteFab;
     private boolean isFavourite = false;
 
     private Rental property;
+
     private TextView propertyType, bedroomCount;
     private TextView address, description, deposit, rent;
-    private FancyButton enquire;
 
     public ViewRentalFragment() {
 
@@ -61,7 +69,7 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView {
         rent = view.findViewById(R.id.rent_status_bar);
         deposit = view.findViewById(R.id.deposit_status_bar);
 
-        enquire = view.findViewById(R.id.enquire_to_listing);
+        FancyButton enquire = view.findViewById(R.id.enquire_to_listing);
         enquire.setOnClickListener((v) -> onEnquireClick());
 
         ImageAdapter adapter = new ImageAdapter(getContext(), property.getImages());
@@ -79,6 +87,9 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView {
     public void onStart() {
         if (presenter == null)
             presenter = new ViewRentalPresenterImpl();
+
+        if (interactor == null)
+            interactor = new ApplicationInteractorImpl();
 
         presenter.attach(this);
         presenter.displayListingDetails();
@@ -104,11 +115,14 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView {
 
     @Override
     public void onEnquireClick() {
+        String userId = LocalPrefs.getStringPref(getContext(), LocalPrefs.Pref.user_id);
+        Application application = new Application(userId, property.getLandlordUuid(), property.getPropertyUuid());
+
         if (LocalPrefs.isUserLoggedIn(getContext())) {
             new AlertDialog.Builder(getContext())
                     .setTitle("Apply to Listing")
                     .setMessage("Are you sure you want to enquire about becoming a tenant at this property? The landlord should accept or reject your application soon, and you can get in contact once accepted.")
-                    .setPositiveButton("Enquire", (dialog, which) -> Toast.makeText(getContext(), property.getAddress().getTileAddress(), Toast.LENGTH_SHORT).show())
+                    .setPositiveButton("Enquire", (dialog, which) -> presenter.applyToListing(application))
                     .setNegativeButton("Cancel", null)
                     .create()
                     .show();

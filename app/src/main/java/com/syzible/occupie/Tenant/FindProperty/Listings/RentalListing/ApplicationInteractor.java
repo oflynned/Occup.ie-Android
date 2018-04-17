@@ -4,14 +4,15 @@ import android.content.Context;
 
 import com.syzible.occupie.Common.Objects.Application;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public interface FindRentalInteractor {
-    void apply(Context context, OnFetchCompleted<JSONObject> onFetchCompleted, Application application);
+import java.io.UnsupportedEncodingException;
 
-    interface OnFetchCompleted<T> {
+public interface ApplicationInteractor {
+    void apply(Context context, OnApplyCompleted<JSONObject> onApplyCompleted, Application application) throws UnsupportedEncodingException, JSONException;
+
+    interface OnApplyCompleted<T> {
         void onFailure(int statusCode, String message);
 
         void onSuccess(T result) throws JSONException;
