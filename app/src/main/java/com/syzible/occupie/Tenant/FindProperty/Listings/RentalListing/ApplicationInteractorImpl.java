@@ -18,7 +18,6 @@ import cz.msebera.android.httpclient.Header;
 public class ApplicationInteractorImpl implements ApplicationInteractor {
     @Override
     public void apply(Context context, OnApplyCompleted<JSONObject> onApplyCompleted, Application application) throws UnsupportedEncodingException, JSONException {
-        System.out.println(application.getPayload().toString());
         RestClient.post(context, Endpoints.APPLICATION, application.getPayload(), new BaseJsonHttpResponseHandler<JSONObject>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
