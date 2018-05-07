@@ -10,4 +10,6 @@ public class Endpoints {
     public static final String HOUSE_SHARE = HOST_URL + "/house-share";
     public static final String LANDLORD = HOST_URL + "/landlord";
     public static final String APPLICATION = HOST_URL + "/application";
+
+    public static final String FEATURE_FLAGS = HOST_URL + "/feature-flags";
 }
