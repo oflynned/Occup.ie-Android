@@ -1,3 +1,3 @@
 # Android Client
 
-UI MVP for interacting with the Occup.ie REST service.
+MVP for interacting with the Occup.ie REST service as a tenant or landlord role. 
