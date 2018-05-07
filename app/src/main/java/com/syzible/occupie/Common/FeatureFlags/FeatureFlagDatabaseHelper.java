@@ -3,6 +3,7 @@ package com.syzible.occupie.Common.FeatureFlags;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -25,7 +26,7 @@ public class FeatureFlagDatabaseHelper extends SQLiteOpenHelper {
     private static final String DELETE_FEATURE_FLAG_TABLE =
             "DROP TABLE IF EXISTS " + FeatureFlagDatabase.Columns.TABLE_NAME + ";";
 
-    public FeatureFlagDatabaseHelper(Context context) {
+    private FeatureFlagDatabaseHelper(Context context) {
         super(context, FeatureFlagDatabase.DATABASE_NAME, null, DB_VERSION);
     }
 
@@ -40,19 +41,20 @@ public class FeatureFlagDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static FeatureFlag getFeatureFlag(Context context, String name) {
+    public static FeatureFlag getFeatureFlag(Context context, Flags flag) throws FeatureFlagNotPresentException {
         FeatureFlagDatabaseHelper db = new FeatureFlagDatabaseHelper(context);
         SQLiteDatabase readDb = db.getReadableDatabase();
         String tableName = FeatureFlagDatabase.Columns.TABLE_NAME;
 
         String query = "SELECT * FROM " + tableName +
-                " WHERE " + FeatureFlagDatabase.Columns.FLAG_NAME + "='" + name + "'" +
-                " LIMIT 1;";
+                " WHERE " + FeatureFlagDatabase.Columns.FLAG_NAME + "='" + flag.name() + "';";
         Cursor cursor = readDb.rawQuery(query, null);
-        FeatureFlag featureFlag = null;
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
+
+            System.out.println("Cursor dump");
+            System.out.println(DatabaseUtils.dumpCursorToString(cursor));
 
             String flagName = cursor.getString(0);
             String title = cursor.getString(1);
@@ -63,15 +65,15 @@ public class FeatureFlagDatabaseHelper extends SQLiteOpenHelper {
             boolean shouldKickSession = cursor.getInt(6) == 1;
             boolean shouldShowDialog = cursor.getInt(7) == 1;
 
-            featureFlag = new FeatureFlag(flagName, title, description, dialogTitle, dialogBody, enabled, shouldKickSession, shouldShowDialog);
-            System.out.println(featureFlag);
+            readDb.close();
+            cursor.close();
+            db.close();
+
+            return new FeatureFlag(flagName, title, description, dialogTitle, dialogBody,
+                    shouldKickSession, shouldShowDialog, enabled);
+        } else {
+            throw new FeatureFlagNotPresentException();
         }
-
-        readDb.close();
-        cursor.close();
-        db.close();
-
-        return featureFlag;
     }
 
     public static void updateFeatureFlags(Context context, List<FeatureFlag> featureFlags) {

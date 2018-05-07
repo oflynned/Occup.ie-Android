@@ -17,11 +17,12 @@ import cz.msebera.android.httpclient.Header;
 
 public class FeatureFlagUtils {
 
-    private static Callback<List<FeatureFlag>> getSaveLocallyCallback(Context context) {
-        return new Callback<List<FeatureFlag>>() {
+    private static ParameterCallback<List<FeatureFlag>> getSaveLocallyCallback(Context context, Callback callback) {
+        return new ParameterCallback<List<FeatureFlag>>() {
             @Override
             public void onSuccess(List<FeatureFlag> featureFlags) {
                 FeatureFlagDatabaseHelper.updateFeatureFlags(context, featureFlags);
+                callback.onCallback();
             }
 
             @Override
@@ -31,24 +32,42 @@ public class FeatureFlagUtils {
         };
     }
 
-    public static boolean isFlagEnabled(Context context, String flagName) {
-        FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
-        return featureFlag != null && featureFlag.isEnabled();
+    public static boolean isFlagEnabled(Context context, Flags flagName) {
+        try {
+            FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
+            return featureFlag.isEnabled();
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
-    public static boolean shouldFlagShowDialog(Context context, String flagName) {
-        FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
-        return featureFlag != null && featureFlag.shouldShowDialog();
+    public static boolean shouldFlagShowDialog(Context context, Flags flagName) {
+        try {
+            FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
+            return featureFlag.shouldShowDialog();
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 
-    public static boolean shouldFlagKickSession(Context context, String flagName) {
-        FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
-        return featureFlag != null && featureFlag.shouldKickSession();
+    public static boolean shouldFlagKickSession(Context context, Flags flagName) {
+        try {
+            FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);
+            return featureFlag.shouldKickSession();
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
-    public static void getRemoteFeatureFlags(Context context) {
-        Callback<List<FeatureFlag>> callback = getSaveLocallyCallback(context);
+    public static void getRemoteFeatureFlags(Context context, Callback action) {
+        ParameterCallback<List<FeatureFlag>> callback = getSaveLocallyCallback(context, action);
 
         RestClient.get(context, Endpoints.FEATURE_FLAGS, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override

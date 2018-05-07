@@ -1,4 +1,5 @@
 package com.syzible.occupie.Common.FeatureFlags;
 
-public class Callback {
+public interface Callback {
+    void onCallback();
 }

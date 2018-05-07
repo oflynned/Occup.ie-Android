@@ -11,6 +11,7 @@ public class FeatureFlag {
         this.flagName = flagName;
         this.title = o.getString("title");
         this.description = o.getString("description");
+        this.isEnabled = o.getBoolean("enabled");
 
         JSONObject effects = o.getJSONObject("effects");
         this.shouldKickSession = effects.getBoolean("should_kick_session");
