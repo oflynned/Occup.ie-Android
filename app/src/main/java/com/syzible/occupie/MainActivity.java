@@ -15,16 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
-import com.syzible.occupie.Common.FeatureFlags.Callback;
-import com.syzible.occupie.Common.FeatureFlags.FeatureFlag;
-import com.syzible.occupie.Common.FeatureFlags.FeatureFlagDatabase;
-import com.syzible.occupie.Common.FeatureFlags.FeatureFlagDatabaseHelper;
-import com.syzible.occupie.Common.FeatureFlags.FeatureFlagUtils;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
@@ -34,8 +28,6 @@ import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults.FindHouseShareFragment;
 import com.syzible.occupie.Tenant.FindProperty.Results.RentalResults.FindRentalFragment;
 import com.syzible.occupie.Tenant.Settings.SettingsActivity;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,22 +64,11 @@ public class MainActivity extends AppCompatActivity
         nameNavView.setText(LocalPrefs.getFullName(this));
         currentProfile.setText(LocalPrefs.getCurrentProfile(this));
 
-        FeatureFlagUtils.getRemoteFeatureFlags(this);
-
-        // TODO set default landlord page to be own property listings manager
         if (currentUser == Target.landlord) {
-
+            // TODO set default landlord page to be own property listings manager
         } else {
-            FeatureFlagDatabaseHelper.printDbContents(this);
-            if (FeatureFlagDatabaseHelper.getFeatureFlag(this, "app_killswitch").isEnabled()) {
-                Toast.makeText(this, "App killswitch enabled", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "App killswitch disabled", Toast.LENGTH_LONG).show();
-            }
-
             setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
         }
-
     }
 
     @Override
