@@ -1,5 +1,6 @@
 package com.syzible.occupie.Common.Authentication;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -7,6 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.syzible.occupie.Common.FeatureFlags.FeatureFlag;
+import com.syzible.occupie.Common.FeatureFlags.FeatureFlagDatabaseHelper;
+import com.syzible.occupie.Common.FeatureFlags.FeatureFlagNotPresentException;
+import com.syzible.occupie.Common.FeatureFlags.FeatureFlagUtils;
+import com.syzible.occupie.Common.FeatureFlags.Flags;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.MainActivity;
@@ -21,17 +27,40 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup_holder);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
-        if (OAuthUtils.hasExistingToken(this, Target.user)) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FeatureFlagUtils.getRemoteFeatureFlags(this, this::setupActivity);
+    }
 
-        String target = getIntent().getStringExtra("target");
-        if (target != null && target.equals(Target.user.name())) {
-            setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
-        } else {
-            setFragmentBackstack(getFragmentManager(), SelectCreateAccountFragment.getInstance());
+    private void setupActivity() {
+        try {
+            FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(this, Flags.app_killswitch);
+
+            if (featureFlag.isEnabled()) {
+                new AlertDialog.Builder(CreateAccountActivity.this)
+                        .setTitle(featureFlag.getDialogTitle())
+                        .setMessage(featureFlag.getDialogBody())
+                        .setPositiveButton("OK", (dialog, which) -> CreateAccountActivity.this.finish())
+                        .setCancelable(false)
+                        .show();
+            } else {
+                if (OAuthUtils.hasExistingToken(this, Target.user)) {
+                    finish();
+                    startActivity(new Intent(this, MainActivity.class));
+                }
+
+                String target = getIntent().getStringExtra("target");
+                if (target != null && target.equals(Target.user.name())) {
+                    setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
+                } else {
+                    setFragmentBackstack(getFragmentManager(), SelectCreateAccountFragment.getInstance());
+                }
+            }
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
         }
     }
 
