@@ -1,4 +1,4 @@
 package com.syzible.occupie.Common.FeatureFlags;
 
-public class Callback {
+public class FeatureFlagNotPresentException {
 }
