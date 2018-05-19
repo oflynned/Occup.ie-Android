@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "817602563662",
+    "firebase_url": "https://occup-ie.firebaseio.com",
+    "project_id": "occup-ie",
+    "storage_bucket": "occup-ie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817602563662:android:4c55aa4a09b6dfce",
+        "android_client_info": {
+          "package_name": "com.syzible.occupie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817602563662-cg36j5htdpd3oirvigl26hpikgunrp4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.syzible.occupie",
+            "certificate_hash": "e78f9e74f0d2218a5ccbe9d8a1e27893a133433e"
+          }
+        },
+        {
+          "client_id": "817602563662-kpj6i77ioqbmndotiipiao45bupquori.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm97_uHPwXqmZCfFbnpyNz2UauzdIjuz0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817602563662-kpj6i77ioqbmndotiipiao45bupquori.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
