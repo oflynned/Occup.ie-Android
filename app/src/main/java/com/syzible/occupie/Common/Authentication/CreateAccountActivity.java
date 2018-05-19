@@ -43,7 +43,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 new AlertDialog.Builder(CreateAccountActivity.this)
                         .setTitle(featureFlag.getDialogTitle())
                         .setMessage(featureFlag.getDialogBody())
-                        .setPositiveButton("OK", (dialog, which) -> CreateAccountActivity.this.finish())
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            CreateAccountActivity.this.finish();
+                            System.exit(0);
+                        })
                         .setCancelable(false)
                         .show();
             } else {

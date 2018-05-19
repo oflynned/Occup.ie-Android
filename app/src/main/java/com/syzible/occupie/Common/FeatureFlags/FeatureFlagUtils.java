@@ -32,6 +32,16 @@ public class FeatureFlagUtils {
         };
     }
 
+    public static FeatureFlag getFeatureFlag(Context context, Flags flag) {
+        try {
+            return FeatureFlagDatabaseHelper.getFeatureFlag(context, flag);
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static boolean isFlagEnabled(Context context, Flags flagName) {
         try {
             FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(context, flagName);

@@ -53,9 +53,6 @@ public class FeatureFlagDatabaseHelper extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
 
-            System.out.println("Cursor dump");
-            System.out.println(DatabaseUtils.dumpCursorToString(cursor));
-
             String flagName = cursor.getString(0);
             String title = cursor.getString(1);
             String description = cursor.getString(2);
@@ -121,9 +118,6 @@ public class FeatureFlagDatabaseHelper extends SQLiteOpenHelper {
 
         int rowNum = cursor.getCount();
         int colNum = cursor.getColumnCount();
-
-        System.out.println("Number of rows in " + tableName + " is " + rowNum);
-        System.out.println("Number of columns in each row is " + colNum);
 
         for (int r = 0; r < rowNum; r++) {
             for (int col = 0; col < colNum; col++) {
