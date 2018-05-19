@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
+import com.syzible.occupie.Common.Authentication.FCMTokenService;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity
         } else {
             setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
         }
+
+        Intent fcmService = new Intent(this, FCMTokenService.class);
+        startService(fcmService);
+        System.out.println(FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override
