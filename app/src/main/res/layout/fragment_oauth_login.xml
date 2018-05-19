@@ -20,7 +20,7 @@
             android:layout_margin="16dp"/>
 
         <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/tenant_google_login_button"
+            android:id="@+id/google_login_button"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
             app:fb_textColor="@color/colorPrimary" />
 
         <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/tenant_facebook_login_button"
+            android:id="@+id/facebook_login_button"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -59,7 +59,7 @@
 
         <TextView
             android:layout_marginTop="16dp"
-            android:id="@+id/tenant_agreement_to_tos"
+            android:id="@+id/agreement_to_tos"
             android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -70,7 +70,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tenant_continue_without_account"
+        android:id="@+id/continue_without_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
