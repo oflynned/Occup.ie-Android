@@ -18,11 +18,9 @@ public class ApplicationInteractorImpl implements ApplicationInteractor {
     public void getApplications(Context context, OnApplicationInteracted<JSONArray> callback) {
         String uuid = LocalPrefs.getStringPref(context, LocalPrefs.Pref.user_id);
         String endpoint = String.format("%s?user_id=%s", Endpoints.APPLICATION, uuid);
-        System.out.println(endpoint);
         RestClient.get(context, endpoint, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONArray response) {
-                System.out.println(response);
                 try {
                     callback.onSuccess(response);
                 } catch (JSONException e) {

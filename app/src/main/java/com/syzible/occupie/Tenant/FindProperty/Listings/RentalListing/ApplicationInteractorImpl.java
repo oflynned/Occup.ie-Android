@@ -35,7 +35,6 @@ public class ApplicationInteractorImpl implements ApplicationInteractor {
 
             @Override
             protected JSONObject parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                System.out.println(rawJsonData);
                 return new JSONObject(rawJsonData);
             }
         });

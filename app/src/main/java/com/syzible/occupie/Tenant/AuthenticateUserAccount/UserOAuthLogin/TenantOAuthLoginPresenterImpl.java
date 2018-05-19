@@ -26,7 +26,6 @@ import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
-
 public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter {
 
     private TenantOAuthLoginView view;
@@ -137,7 +136,6 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 try {
-                    System.out.println(response);
                     LocalPrefs.setStringPref(getNonNullableView().getContext(), LocalPrefs.Pref.user_id, response.getString("_id"));
                     getNonNullableView().onContinueToMain();
                 } catch (JSONException e) {

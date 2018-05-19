@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.LoginButton;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
@@ -45,12 +44,12 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tenant_oauth_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_oauth_login, container, false);
 
-        TextView continueTextView = view.findViewById(R.id.tenant_continue_without_account);
+        TextView continueTextView = view.findViewById(R.id.continue_without_account);
         continueTextView.setOnClickListener((v) -> onContinueToMain());
 
-        FancyButton facebookLoginButton = view.findViewById(R.id.tenant_facebook_login_button);
+        FancyButton facebookLoginButton = view.findViewById(R.id.facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
                 TenantOAuthLoginFragment.this,
                 Arrays.asList("public_profile", "email")
@@ -62,18 +61,18 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
 
     @Override
     public void onStart() {
+        super.onStart();
         if (presenter == null)
             presenter = new TenantOAuthLoginPresenterImpl();
 
         presenter.attach(this);
         presenter.onFacebookCallback(callbackManager);
-        super.onStart();
     }
 
     @Override
     public void onDestroyView() {
-        presenter.detach();
         super.onDestroyView();
+        presenter.detach();
     }
 
     @Override
