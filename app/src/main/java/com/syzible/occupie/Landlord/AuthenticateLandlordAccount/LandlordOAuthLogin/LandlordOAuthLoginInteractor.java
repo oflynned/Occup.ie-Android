@@ -10,7 +10,7 @@ import com.syzible.occupie.Common.Helpers.CallbackParameter;
 import org.json.JSONObject;
 
 public interface LandlordOAuthLoginInteractor {
-    void cacheOAuthIdentity(Context context, String provider, String oauthId, String accessToken);
+    void cacheOAuthIdentity(Context context, String provider, String oauthId, String accessToken, String forename, String surname);
 
     void requestAccount(Context context, JSONObject payload);
 

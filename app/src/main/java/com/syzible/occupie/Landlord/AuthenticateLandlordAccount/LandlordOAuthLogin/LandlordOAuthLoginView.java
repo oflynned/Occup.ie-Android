@@ -12,7 +12,7 @@ public interface LandlordOAuthLoginView extends Mvp.IView {
 
     void onContinueAccountCreation(JSONObject oauthProfile);
 
-    void cacheOAuthIdentity(String provider, String userId, String accessToken);
+    void cacheOAuthIdentity(String provider, String userId, String accessToken, String forename, String surname);
 
     void requestAccount(JSONObject payload);
 

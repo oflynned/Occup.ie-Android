@@ -40,7 +40,9 @@ public class LandlordOAuthLoginPresenterImpl implements LandlordOAuthLoginPresen
             public void onSuccess(String userId, String accessToken, JSONObject profile) {
                 try {
                     JSONObject payload = generatePayload(userId, profile);
-                    getNonNullableView().cacheOAuthIdentity("facebook", userId, accessToken);
+                    String forename = profile.getString("first_name");
+                    String surname = profile.getString("last_name");
+                    getNonNullableView().cacheOAuthIdentity("facebook", userId, accessToken, forename, surname);
                     getNonNullableView().requestAccount(payload);
                 } catch (JSONException e) {
                     e.printStackTrace();

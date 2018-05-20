@@ -102,8 +102,8 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
     }
 
     @Override
-    public void cacheOAuthIdentity(String provider, String userId, String accessToken) {
-        interactor.cacheOAuthIdentity(getActivity(), provider, userId, accessToken);
+    public void cacheOAuthIdentity(String provider, String userId, String accessToken, String forename, String surname) {
+        interactor.cacheOAuthIdentity(getActivity(), provider, userId, accessToken, forename, surname);
     }
 
     @Override

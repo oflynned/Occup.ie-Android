@@ -37,10 +37,12 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
     }
 
     @Override
-    public void cacheOAuthIdentity(Context context, String provider, String oauthId, String accessToken) {
+    public void cacheOAuthIdentity(Context context, String provider, String oauthId, String accessToken, String forename, String surname) {
         OAuthUtils.saveId(oauthId, Target.landlord, context);
         OAuthUtils.saveToken(accessToken, Target.landlord, context);
         OAuthUtils.saveProvider(provider, Target.landlord, context);
+        LocalPrefs.setStringPref(context, LocalPrefs.Pref.landlord_forename, forename);
+        LocalPrefs.setStringPref(context, LocalPrefs.Pref.landlord_surname, surname);
         LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.landlord.name());
     }
 
