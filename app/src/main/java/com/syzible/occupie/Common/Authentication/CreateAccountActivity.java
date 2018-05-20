@@ -13,8 +13,10 @@ import com.syzible.occupie.Common.FeatureFlags.FeatureFlagDatabaseHelper;
 import com.syzible.occupie.Common.FeatureFlags.FeatureFlagNotPresentException;
 import com.syzible.occupie.Common.FeatureFlags.FeatureFlagUtils;
 import com.syzible.occupie.Common.FeatureFlags.Flags;
+import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
+import com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordOAuthLogin.LandlordOAuthLoginFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
 import com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin.TenantOAuthLoginFragment;
@@ -36,10 +38,19 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void setupActivity() {
+        FeatureFlag featureFlag = null;
         try {
-            FeatureFlag featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(this, Flags.app_killswitch);
+            featureFlag = FeatureFlagDatabaseHelper.getFeatureFlag(this, Flags.app_killswitch);
+        } catch (FeatureFlagNotPresentException e) {
+            e.printStackTrace();
+        }
 
+        if (featureFlag != null) {
             if (featureFlag.isEnabled()) {
+                if (featureFlag.shouldKickSession())
+                    for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
+                        LocalPrefs.purgePref(p, this);
+
                 new AlertDialog.Builder(CreateAccountActivity.this)
                         .setTitle(featureFlag.getDialogTitle())
                         .setMessage(featureFlag.getDialogBody())
@@ -59,14 +70,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
 
                 String target = getIntent().getStringExtra("target");
-                if (target != null && target.equals(Target.user.name())) {
-                    setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
+                if (target != null) {
+                    if (target.equals(Target.user.name())) {
+                        setFragmentBackstack(getFragmentManager(), TenantOAuthLoginFragment.getInstance());
+                    } else if (target.equals(Target.landlord.name())) {
+                        setFragmentBackstack(getFragmentManager(), LandlordOAuthLoginFragment.getInstance());
+                    }
                 } else {
                     setFragmentBackstack(getFragmentManager(), SelectCreateAccountFragment.getInstance());
                 }
             }
-        } catch (FeatureFlagNotPresentException e) {
-            e.printStackTrace();
         }
     }
 

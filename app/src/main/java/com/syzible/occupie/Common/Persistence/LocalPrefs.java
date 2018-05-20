@@ -25,8 +25,11 @@ public class LocalPrefs {
     }
 
     public static String getFullName(Context context) {
-        // TODO expand for landlord
-        return String.format("%s %s", getStringPref(context, Pref.user_forename), getStringPref(context, Pref.user_surname));
+        if (getStringPref(context, Pref.current_account).equals(Target.user.name()))
+            return String.format("%s %s", getStringPref(context, Pref.user_forename), getStringPref(context, Pref.user_surname));
+        else if (getStringPref(context, Pref.current_account).equals(Target.landlord.name()))
+            return String.format("%s %s", getStringPref(context, Pref.landlord_forename), getStringPref(context, Pref.landlord_surname));
+        else return "";
     }
 
     public static String getCurrentProfile(Context context) {

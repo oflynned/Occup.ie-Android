@@ -11,9 +11,7 @@ public class ServerBroadcastService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        boolean isLoggedIn = LocalPrefs.isUserLoggedIn(getApplicationContext()) ||
-                LocalPrefs.isLandlordLoggedIn(getApplicationContext());
-
+        boolean isLoggedIn = LocalPrefs.isSomeoneLoggedIn(getApplicationContext());
         if (remoteMessage.getData().size() > 0 && isLoggedIn) {
             System.out.println(remoteMessage.getData());
             String event = remoteMessage.getData().get("event_type");
