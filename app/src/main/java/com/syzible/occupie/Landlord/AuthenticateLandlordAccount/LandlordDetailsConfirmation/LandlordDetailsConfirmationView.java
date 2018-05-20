@@ -17,8 +17,6 @@ public interface LandlordDetailsConfirmationView extends Mvp.IView {
 
     void setEmail(String email);
 
-    void setPhoneNumber(String phoneNumber);
-
     String getForename();
 
     String getSurname();
@@ -29,9 +27,9 @@ public interface LandlordDetailsConfirmationView extends Mvp.IView {
 
     String getEmail();
 
-    String getPhoneNumber();
-
     boolean isSectionCompleted();
 
-    void setNextFragment(JSONObject profile);
+    void createAccount(JSONObject profile);
+
+    void onProfileCompleted();
 }

@@ -29,6 +29,13 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
         this.view = view;
     }
 
+    private LandlordOAuthLoginView getView() {
+        if (view == null)
+            throw new IllegalStateException();
+
+        return view;
+    }
+
     @Override
     public void cacheOAuthIdentity(Context context, String provider, String oauthId, String accessToken) {
         OAuthUtils.saveId(oauthId, Target.landlord, context);
@@ -43,9 +50,8 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 try {
-                    System.out.println("was success -> continuing to main");
                     LocalPrefs.setStringPref(context, LocalPrefs.Pref.landlord_id, response.getString("_id"));
-                    view.onContinueToMain();
+                    getView().onContinueToMain();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -53,8 +59,7 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
-                System.out.println("failed -> generate new account");
-                view.onContinueAccountCreation(payload);
+                getView().onContinueAccountCreation(payload);
             }
 
             @Override

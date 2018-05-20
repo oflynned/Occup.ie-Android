@@ -1,5 +1,7 @@
 package com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordDetailsConfirmation;
 
+import android.support.design.widget.Snackbar;
+
 import com.syzible.occupie.Common.Helpers.DateHelpers;
 import com.syzible.occupie.Common.Helpers.Encoding;
 
@@ -36,13 +38,30 @@ public class LandlordDetailsConfirmationPresenterImpl implements LandlordDetails
     }
 
     @Override
-    public void updateAccount() throws UnsupportedEncodingException {
+    public void updateAccount() {
+        try {
+            JSONObject details = profile.getJSONObject("details");
+            details.put("forename", Encoding.encode(getNonNullableView().getForename()));
+            details.put("surname", Encoding.encode(getNonNullableView().getSurname()));
+            details.put("sex", getNonNullableView().getSex());
+            details.put("dob", DateHelpers.getDateFromIso8601(getNonNullableView().getDob()));
+            details.put("email", getNonNullableView().getEmail());
+            details.put("phone_number", "+353861231234"); // TODO add back in phone verification
+            profile.put("details", details);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        if (getNonNullableView().isSectionCompleted()) {
+            getNonNullableView().createAccount(profile);
+        } else {
+            Snackbar.make(getNonNullableView().getView(), "Please complete all fields", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void attach(LandlordDetailsConfirmationView landlordDetailsConfirmationView) {
-        this.view = view;
+        this.view = landlordDetailsConfirmationView;
     }
 
     @Override
