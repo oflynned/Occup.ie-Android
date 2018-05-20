@@ -11,4 +11,10 @@ public interface LandlordOAuthLoginView extends Mvp.IView {
     void onTosClick();
 
     void onContinueAccountCreation(JSONObject oauthProfile);
+
+    void cacheOAuthIdentity(String provider, String userId, String accessToken);
+
+    void requestAccount(JSONObject payload);
+
+    void registerFacebookAccountRequest();
 }
