@@ -34,14 +34,14 @@ public class FeatureFlagUtils {
         };
     }
 
-    public static FeatureFlag getFeatureFlag(Context context, Flags flag) {
+    public static FeatureFlag getFeatureFlag(Context context, Flags flag) throws FeatureFlagNotPresentException {
         try {
             return FeatureFlagDatabaseHelper.getFeatureFlag(context, flag);
         } catch (FeatureFlagNotPresentException e) {
             e.printStackTrace();
         }
 
-        return null;
+        throw new FeatureFlagNotPresentException();
     }
 
     public static boolean isFlagEnabled(Context context, Flags flagName) {

@@ -5,5 +5,5 @@ import org.json.JSONObject;
 public interface CallbackOAuth {
     void onSuccess(String userId, String accessToken, JSONObject profile);
 
-    void onFail();
+    void onFailure();
 }

@@ -53,6 +53,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (OAuthUtils.hasExistingToken(this, Target.user)) {
                     finish();
                     startActivity(new Intent(this, MainActivity.class));
+                } else if (OAuthUtils.hasExistingToken(this, Target.landlord)) {
+                    finish();
+                    startActivity(new Intent(this, MainActivity.class));
                 }
 
                 String target = getIntent().getStringExtra("target");

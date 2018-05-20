@@ -86,4 +86,8 @@ public class LocalPrefs {
                 .getBoolean((target == Target.landlord ?
                         Pref.is_landlord_first_run_done : Pref.is_user_first_run_done).name(), false);
     }
+
+    public static boolean isSomeoneLoggedIn(Context context) {
+        return isLandlordLoggedIn(context) || isUserLoggedIn(context);
+    }
 }
