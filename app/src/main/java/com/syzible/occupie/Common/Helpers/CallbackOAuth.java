@@ -1,7 +1,9 @@
 package com.syzible.occupie.Common.Helpers;
 
-public interface CallbackOption {
-    void onSuccess();
+import org.json.JSONObject;
+
+public interface CallbackOAuth {
+    void onSuccess(String userId, String accessToken, JSONObject profile);
 
     void onFail();
 }

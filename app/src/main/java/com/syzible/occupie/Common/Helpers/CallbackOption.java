@@ -1,5 +1,7 @@
-package com.syzible.occupie.Common.FeatureFlags;
+package com.syzible.occupie.Common.Helpers;
 
-public interface Callback {
-    void onCallback();
+public interface CallbackOption {
+    void onSuccess();
+
+    void onFail();
 }

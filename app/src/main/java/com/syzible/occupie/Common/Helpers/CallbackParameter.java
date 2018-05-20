@@ -1,6 +1,6 @@
-package com.syzible.occupie.Common.FeatureFlags;
+package com.syzible.occupie.Common.Helpers;
 
-public interface ParameterCallback<T> {
+public interface CallbackParameter<T> {
     void onSuccess(T t);
 
     void onFailure();

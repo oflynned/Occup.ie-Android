@@ -3,6 +3,8 @@ package com.syzible.occupie.Common.FeatureFlags;
 import android.content.Context;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.syzible.occupie.Common.Helpers.Callback;
+import com.syzible.occupie.Common.Helpers.CallbackParameter;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 
@@ -17,8 +19,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class FeatureFlagUtils {
 
-    private static ParameterCallback<List<FeatureFlag>> getSaveLocallyCallback(Context context, Callback callback) {
-        return new ParameterCallback<List<FeatureFlag>>() {
+    private static CallbackParameter<List<FeatureFlag>> getSaveLocallyCallback(Context context, Callback callback) {
+        return new CallbackParameter<List<FeatureFlag>>() {
             @Override
             public void onSuccess(List<FeatureFlag> featureFlags) {
                 FeatureFlagDatabaseHelper.updateFeatureFlags(context, featureFlags);
@@ -77,7 +79,7 @@ public class FeatureFlagUtils {
     }
 
     public static void getRemoteFeatureFlags(Context context, Callback action) {
-        ParameterCallback<List<FeatureFlag>> callback = getSaveLocallyCallback(context, action);
+        CallbackParameter<List<FeatureFlag>> callback = getSaveLocallyCallback(context, action);
 
         RestClient.get(context, Endpoints.FEATURE_FLAGS, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
