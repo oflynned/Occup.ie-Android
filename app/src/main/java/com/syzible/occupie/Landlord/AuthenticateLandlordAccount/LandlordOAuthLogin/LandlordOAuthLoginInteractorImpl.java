@@ -11,8 +11,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.syzible.occupie.Common.Helpers.CallbackOAuth;
-import com.syzible.occupie.Common.Helpers.CallbackOption;
-import com.syzible.occupie.Common.Helpers.CallbackParameter;
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
@@ -21,8 +19,6 @@ import com.syzible.occupie.Common.Persistence.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -47,6 +43,7 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 try {
+                    System.out.println("was success -> continuing to main");
                     LocalPrefs.setStringPref(context, LocalPrefs.Pref.landlord_id, response.getString("_id"));
                     view.onContinueToMain();
                 } catch (JSONException e) {
@@ -56,6 +53,7 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, JSONObject errorResponse) {
+                System.out.println("failed -> generate new account");
                 view.onContinueAccountCreation(payload);
             }
 
@@ -90,7 +88,7 @@ public class LandlordOAuthLoginInteractorImpl implements LandlordOAuthLoginInter
             @Override
             public void onError(FacebookException e) {
                 e.printStackTrace();
-                callback.onFail();
+                callback.onFailure();
             }
         });
     }

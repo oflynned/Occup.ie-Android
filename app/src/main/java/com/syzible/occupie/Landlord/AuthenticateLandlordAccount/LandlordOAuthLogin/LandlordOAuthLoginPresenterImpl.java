@@ -1,7 +1,7 @@
 
 package com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordOAuthLogin;
 
-import com.syzible.occupie.Common.Helpers.CallbackParameter;
+import com.syzible.occupie.Common.Helpers.CallbackOAuth;
 import com.syzible.occupie.Common.Helpers.DateHelpers;
 
 import org.json.JSONException;
@@ -14,7 +14,6 @@ import java.util.Date;
 public class LandlordOAuthLoginPresenterImpl implements LandlordOAuthLoginPresenter {
 
     private LandlordOAuthLoginView view;
-    private LandlordOAuthLoginInteractor interactor;
 
     @Override
     public void attach(LandlordOAuthLoginView landlordOAuthLoginView) {
@@ -35,14 +34,14 @@ public class LandlordOAuthLoginPresenterImpl implements LandlordOAuthLoginPresen
     }
 
     @Override
-    public CallbackParameter<JSONObject> onFacebookCallback(String userId, String accessToken) {
-        return new CallbackParameter<JSONObject>() {
+    public CallbackOAuth onFacebookCallback() {
+        return new CallbackOAuth() {
             @Override
-            public void onSuccess(JSONObject o) {
+            public void onSuccess(String userId, String accessToken, JSONObject profile) {
                 try {
-                    JSONObject payload = generatePayload(o, accessToken);
-                    view.cacheOAuthIdentity("facebook", userId, accessToken);
-                    view.requestAccount(payload);
+                    JSONObject payload = generatePayload(userId, profile);
+                    getNonNullableView().cacheOAuthIdentity("facebook", userId, accessToken);
+                    getNonNullableView().requestAccount(payload);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -58,11 +57,10 @@ public class LandlordOAuthLoginPresenterImpl implements LandlordOAuthLoginPresen
     }
 
     @Override
-    public JSONObject generatePayload(JSONObject o, String facebookAccessToken) throws JSONException, UnsupportedEncodingException {
+    public JSONObject generatePayload(String userId, JSONObject o) throws JSONException, UnsupportedEncodingException {
         String birthday = DateHelpers.getIso8601Date(new Date(94, 6, 11));
 
-        String facebookId = o.getString("id");
-        String pic = "https://graph.facebook.com/" + facebookId + "/picture?type=large";
+        String pic = "https://graph.facebook.com/" + userId + "/picture?type=large";
         String email = o.getString("email");
         String forename = o.getString("first_name");
         String surname = o.getString("last_name");
@@ -84,7 +82,7 @@ public class LandlordOAuthLoginPresenterImpl implements LandlordOAuthLoginPresen
 
         JSONObject oauth = new JSONObject();
         oauth.put("oauth_provider", "facebook");
-        oauth.put("oauth_id", facebookId);
+        oauth.put("oauth_id", userId);
 
         JSONObject payload = new JSONObject();
         payload.put("details", details);

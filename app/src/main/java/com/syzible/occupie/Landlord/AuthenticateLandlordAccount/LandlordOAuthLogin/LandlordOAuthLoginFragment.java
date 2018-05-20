@@ -1,7 +1,6 @@
 package com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordOAuthLogin;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,16 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
-import com.syzible.occupie.Common.Helpers.CallbackOAuth;
-import com.syzible.occupie.Common.Helpers.CallbackParameter;
-import com.syzible.occupie.Common.Persistence.LocalPrefs;
-import com.syzible.occupie.Common.Persistence.OAuthUtils;
-import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordDetailsConfirmation.LandlordDetailsConfirmationFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
@@ -81,8 +74,8 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         presenter.detach();
     }
 
@@ -120,16 +113,6 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
 
     @Override
     public void registerFacebookAccountRequest() {
-        interactor.requestFacebookData(callbackManager, new CallbackOAuth() {
-            @Override
-            public void onSuccess(String userId, String accessToken, JSONObject profile) {
-                presenter.onFacebookCallback(userId, accessToken);
-            }
-
-            @Override
-            public void onFail() {
-
-            }
-        });
+        interactor.requestFacebookData(callbackManager, presenter.onFacebookCallback());
     }
 }

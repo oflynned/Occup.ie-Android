@@ -46,23 +46,24 @@ public class LandlordDetailsConfirmationFragment extends Fragment implements Lan
             }
         });
 
+        System.out.println("LOADED CONFIRMATION FRAGMENT");
         return view;
     }
 
     @Override
     public void onStart() {
+        super.onStart();
         if (presenter == null)
             presenter = new LandlordDetailsConfirmationPresenterImpl();
 
         presenter.attach(this);
-        presenter.parsePayload(profile);
-        super.onStart();
+        // presenter.parsePayload(profile);
     }
 
     @Override
     public void onStop() {
-        presenter.detach();
         super.onStop();
+        presenter.detach();
     }
 
     @Override
