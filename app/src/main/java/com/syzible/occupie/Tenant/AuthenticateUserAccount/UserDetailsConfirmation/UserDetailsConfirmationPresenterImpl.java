@@ -56,7 +56,7 @@ public class UserDetailsConfirmationPresenterImpl implements UserDetailsConfirma
     }
 
     @Override
-    public void updateAccount() throws UnsupportedEncodingException {
+    public void updateAccount() {
         try {
             JSONObject details = profile.getJSONObject("details");
             details.put("forename", Encoding.encode(getNonNullableView().getForename()));
