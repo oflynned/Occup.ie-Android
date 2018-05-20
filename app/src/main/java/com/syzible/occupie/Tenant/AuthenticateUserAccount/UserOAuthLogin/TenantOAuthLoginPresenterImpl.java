@@ -120,14 +120,16 @@ public class TenantOAuthLoginPresenterImpl implements TenantOAuthLoginPresenter 
         payload.put("oauth", oauth);
 
         Context context = getNonNullableView().getContext();
-        cacheIdentity(context, facebookId, facebookAccessToken);
+        cacheIdentity(context, facebookId, facebookAccessToken, forename, surname);
         requestAccount(context, payload);
     }
 
-    private void cacheIdentity(Context context, String facebookId, String facebookAccessToken) {
-        OAuthUtils.saveId(facebookId, Target.user, context);
-        OAuthUtils.saveToken(facebookAccessToken, Target.user, context);
+    private void cacheIdentity(Context context, String userId, String accessToken, String forename, String surname) {
+        OAuthUtils.saveId(userId, Target.user, context);
+        OAuthUtils.saveToken(accessToken, Target.user, context);
         OAuthUtils.saveProvider("facebook", Target.user, context);
+        LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_forename, forename);
+        LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_surname, surname);
         LocalPrefs.setStringPref(context, LocalPrefs.Pref.current_account, Target.user.name());
     }
 

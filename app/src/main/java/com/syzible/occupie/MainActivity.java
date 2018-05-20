@@ -24,7 +24,6 @@ import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.Tenant.Applications.ApplicationsFragment;
-import com.syzible.occupie.Tenant.Favourites.FavouritesFragment;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults.FindHouseShareFragment;
 import com.syzible.occupie.Tenant.FindProperty.Results.RentalResults.FindRentalFragment;
@@ -33,7 +32,6 @@ import com.syzible.occupie.Tenant.Settings.SettingsActivity;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Target currentUser;
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         currentUser = LocalPrefs.getCurrentProfile(this).equals("Landlord") ? Target.landlord : Target.user;
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.inflateMenu(currentUser == Target.landlord ?
                 R.menu.activity_main_drawer_landlord : R.menu.activity_main_drawer_tenant);
         navigationView.setNavigationItemSelectedListener(this);
@@ -63,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         TextView nameNavView = headerView.findViewById(R.id.nav_header_name);
         TextView currentProfile = headerView.findViewById(R.id.nav_header_state);
 
+
+        System.out.println(LocalPrefs.getFullName(this));
         nameNavView.setText(LocalPrefs.getFullName(this));
         currentProfile.setText(LocalPrefs.getCurrentProfile(this));
 
@@ -72,8 +72,7 @@ public class MainActivity extends AppCompatActivity
             setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
         }
 
-        Intent fcmService = new Intent(this, FCMTokenService.class);
-        startService(fcmService);
+        startService(new Intent(this, FCMTokenService.class));
     }
 
     @Override
@@ -147,7 +146,11 @@ public class MainActivity extends AppCompatActivity
                 new AlertDialog.Builder(this)
                         .setTitle("Switch to Tenant Profile?")
                         .setMessage("Are you sure you want to switch to a tenant profile?")
-                        .setPositiveButton("OK", (dialog, which) -> logout(Target.landlord))
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
+                                LocalPrefs.purgePref(p, this);
+                            logout(Target.landlord);
+                        })
                         .setNegativeButton("Cancel", null)
                         .show();
             }
@@ -156,15 +159,17 @@ public class MainActivity extends AppCompatActivity
                 setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
             } else if (id == R.id.nav_find_house_share) {
                 setFragment(getFragmentManager(), FindHouseShareFragment.getInstance(PropertyType.house_share));
-            } else if (id == R.id.nav_favourites) {
-                setFragment(getFragmentManager(), FavouritesFragment.getInstance());
             } else if (id == R.id.nav_applications) {
                 setFragment(getFragmentManager(), ApplicationsFragment.getInstance());
             } else if (id == R.id.nav_switch_to_landlord) {
                 new AlertDialog.Builder(this)
                         .setTitle("Switch to Landlord Profile?")
                         .setMessage("Are you sure you want to switch to a landlord profile?")
-                        .setPositiveButton("OK", (dialog, which) -> logout(Target.user))
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
+                                LocalPrefs.purgePref(p, this);
+                            logout(Target.user);
+                        })
                         .setNegativeButton("Cancel", null)
                         .show();
             }
