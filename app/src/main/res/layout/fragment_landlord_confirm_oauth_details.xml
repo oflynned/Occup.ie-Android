@@ -99,15 +99,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="What's your profession?" />
+                android:text="What's your phone number?" />
 
-            <Spinner
-                android:id="@+id/details_confirmation_profession"
+            <EditText
+                android:id="@+id/details_confirmation_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:drawSelectorOnTop="true"
-                android:entries="@array/professions" />
+                android:digits="0123456789+"
+                android:inputType="phone" />
 
         </LinearLayout>
 
