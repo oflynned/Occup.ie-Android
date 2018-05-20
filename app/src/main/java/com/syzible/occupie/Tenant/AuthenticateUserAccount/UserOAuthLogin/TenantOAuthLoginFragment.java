@@ -26,6 +26,7 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
 
     private CallbackManager callbackManager;
     private TenantOAuthLoginPresenter presenter;
+    private TenantOAuthLoginInteractor interactor;
 
     public TenantOAuthLoginFragment() {
 
@@ -65,13 +66,16 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
         if (presenter == null)
             presenter = new TenantOAuthLoginPresenterImpl();
 
+        if (interactor == null)
+            interactor = new TenantOAuthLoginInteractorImpl(this);
+
         presenter.attach(this);
-        presenter.onFacebookCallback(callbackManager);
+        registerFacebookAccountRequest();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         presenter.detach();
     }
 
@@ -95,5 +99,20 @@ public class TenantOAuthLoginFragment extends Fragment implements TenantOAuthLog
     @Override
     public void onContinueAccountCreation(JSONObject profile) {
         CreateAccountActivity.setFragment(getFragmentManager(), UserDetailsConfirmationFragment.getInstance(profile));
+    }
+
+    @Override
+    public void cacheOAuthIdentity(String provider, String userId, String accessToken, String forename, String surname) {
+        interactor.cacheOAuthIdentity(getActivity(), provider, userId, accessToken, forename, surname);
+    }
+
+    @Override
+    public void requestAccount(JSONObject payload) {
+        interactor.requestAccount(getActivity(), payload);
+    }
+
+    @Override
+    public void registerFacebookAccountRequest() {
+        interactor.requestFacebookData(callbackManager, presenter.onFacebookCallback());
     }
 }

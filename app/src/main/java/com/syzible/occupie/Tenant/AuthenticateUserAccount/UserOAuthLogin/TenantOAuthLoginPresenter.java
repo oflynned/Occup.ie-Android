@@ -1,6 +1,7 @@
 package com.syzible.occupie.Tenant.AuthenticateUserAccount.UserOAuthLogin;
 
 import com.facebook.CallbackManager;
+import com.syzible.occupie.Common.Helpers.CallbackOAuth;
 import com.syzible.occupie.Common.Mvp;
 
 import org.json.JSONException;
@@ -9,7 +10,9 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public interface TenantOAuthLoginPresenter extends Mvp.IPresenter<TenantOAuthLoginView> {
-    void onFacebookCallback(CallbackManager callbackManager);
+    void attach(TenantOAuthLoginView tenantOAuthLoginView);
 
-    void generatePayload(JSONObject o, String facebookAccessToken) throws JSONException, UnsupportedEncodingException;
+    CallbackOAuth onFacebookCallback();
+
+    JSONObject generatePayload(String userId, JSONObject o) throws JSONException, UnsupportedEncodingException;
 }

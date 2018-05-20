@@ -10,4 +10,10 @@ public interface TenantOAuthLoginView extends Mvp.IView {
     void onTosClick();
 
     void onContinueAccountCreation(JSONObject oauthProfile);
+
+    void cacheOAuthIdentity(String provider, String userId, String accessToken, String forename, String surname);
+
+    void requestAccount(JSONObject payload);
+
+    void registerFacebookAccountRequest();
 }
