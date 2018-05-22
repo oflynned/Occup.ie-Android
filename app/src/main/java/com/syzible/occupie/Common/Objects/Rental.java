@@ -106,4 +106,22 @@ public class Rental {
     public List<String> getImages() {
         return images;
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "type='" + type + '\'' +
+                ", landlordUuid='" + landlordUuid + '\'' +
+                ", propertyUuid='" + propertyUuid + '\'' +
+                ", bathrooms=" + bathrooms +
+                ", bedrooms=" + bedrooms +
+                ", address=" + address +
+                ", details=" + details +
+                ", facilities=" + facilities +
+                ", listing=" + listing +
+                ", images=" + images +
+                ", rent=" + rent +
+                ", deposit=" + deposit +
+                '}';
+    }
 }

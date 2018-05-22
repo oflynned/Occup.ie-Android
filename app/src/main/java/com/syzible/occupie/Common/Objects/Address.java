@@ -59,4 +59,10 @@ public class Address {
             return String.format("%s %s, %s, %s", houseNumber, street, area, city);
         return String.format("%s, %s, %s", street, area, city);
     }
+
+    public String getQuickAddress() {
+        return houseNumber.equals("") ?
+                String.format("%s", street) :
+                String.format("%s %s", houseNumber, street);
+    }
 }
