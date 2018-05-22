@@ -23,6 +23,8 @@ import com.syzible.occupie.Common.Authentication.FCMTokenService;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.OAuthUtils;
 import com.syzible.occupie.Common.Persistence.Target;
+import com.syzible.occupie.Landlord.ListingDashboard.CreateNewListing.CreateNewListingFragment;
+import com.syzible.occupie.Landlord.ListingDashboard.Dashboard.ListingDashboardFragment;
 import com.syzible.occupie.Tenant.Applications.ApplicationsFragment;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.Tenant.FindProperty.Results.HouseShareResults.FindHouseShareFragment;
@@ -60,14 +62,11 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView nameNavView = headerView.findViewById(R.id.nav_header_name);
         TextView currentProfile = headerView.findViewById(R.id.nav_header_state);
-
-
-        System.out.println(LocalPrefs.getFullName(this));
         nameNavView.setText(LocalPrefs.getFullName(this));
         currentProfile.setText(LocalPrefs.getCurrentProfile(this));
 
         if (currentUser == Target.landlord) {
-            // TODO set default landlord page to be own property listings manager
+            setFragment(getFragmentManager(), ListingDashboardFragment.getInstance());
         } else {
             setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
         }
@@ -123,9 +122,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.logout_landlord) {
             logout(Target.landlord);
         } else if (id == R.id.clear_prefs) {
-            for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
-                LocalPrefs.purgePref(p, this);
-
             logout(Target.user);
         }
 
@@ -139,18 +135,16 @@ public class MainActivity extends AppCompatActivity
 
         if (currentUser == Target.landlord) {
             if (id == R.id.nav_my_listings) {
-
+                setFragment(getFragmentManager(), ListingDashboardFragment.getInstance());
             } else if (id == R.id.nav_requests) {
 
+            } else if (id == R.id.nav_create_listing) {
+                setFragment(getFragmentManager(), CreateNewListingFragment.getInstance());
             } else if (id == R.id.nav_switch_to_tenant) {
                 new AlertDialog.Builder(this)
                         .setTitle("Switch to Tenant Profile?")
                         .setMessage("Are you sure you want to switch to a tenant profile?")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
-                                LocalPrefs.purgePref(p, this);
-                            logout(Target.landlord);
-                        })
+                        .setPositiveButton("OK", (dialog, which) -> logout(Target.landlord))
                         .setNegativeButton("Cancel", null)
                         .show();
             }
@@ -165,11 +159,7 @@ public class MainActivity extends AppCompatActivity
                 new AlertDialog.Builder(this)
                         .setTitle("Switch to Landlord Profile?")
                         .setMessage("Are you sure you want to switch to a landlord profile?")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
-                                LocalPrefs.purgePref(p, this);
-                            logout(Target.user);
-                        })
+                        .setPositiveButton("OK", (dialog, which) -> logout(Target.user))
                         .setNegativeButton("Cancel", null)
                         .show();
             }
@@ -200,6 +190,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void logout(Target target) {
+        for (LocalPrefs.Pref p : LocalPrefs.Pref.values())
+            LocalPrefs.purgePref(p, this);
+
         LocalPrefs.purgePref(LocalPrefs.Pref.current_account, this);
         OAuthUtils.deleteFacebookToken(this, target);
         finish();
