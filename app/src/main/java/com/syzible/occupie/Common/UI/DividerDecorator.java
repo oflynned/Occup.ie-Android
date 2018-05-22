@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.FindProperty.Common;
+package com.syzible.occupie.Common.UI;
 
 import android.content.Context;
 import android.content.res.Resources;
