@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +22,12 @@ import com.syzible.occupie.R;
 import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class ViewRentalFragment extends Fragment implements ViewRentalView{
+public class ViewRentalFragment extends Fragment implements ViewRentalView {
 
     private ViewRentalPresenter presenter;
     private ApplicationInteractor interactor;
-
-    private FloatingActionButton favouriteFab;
-    private boolean isFavourite = false;
 
     private Rental property;
 
@@ -56,9 +46,6 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listing_rental, container, false);
-
-        favouriteFab = view.findViewById(R.id.view_listing_favourite_fab);
-        favouriteFab.setOnClickListener((v) -> onFavouriteClick());
 
         propertyType = view.findViewById(R.id.property_type);
         bedroomCount = view.findViewById(R.id.property_number_of_bedrooms);
@@ -100,17 +87,6 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView{
     public void onDestroy() {
         presenter.detach();
         super.onDestroy();
-    }
-
-    @Override
-    public void onFavouriteClick() {
-        if (LocalPrefs.isUserLoggedIn(getContext())) {
-            isFavourite = !isFavourite;
-            int icon = isFavourite ? R.drawable.heart_filled : R.drawable.heart_outline;
-            favouriteFab.setImageDrawable(ContextCompat.getDrawable(getContext(), icon));
-        } else {
-            redirectAccountCreation();
-        }
     }
 
     @Override
