@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Objects.HouseShare;
-import com.syzible.occupie.Tenant.FindProperty.Common.DividerDecorator;
+import com.syzible.occupie.Common.UI.DividerDecorator;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 import com.syzible.occupie.R;
 

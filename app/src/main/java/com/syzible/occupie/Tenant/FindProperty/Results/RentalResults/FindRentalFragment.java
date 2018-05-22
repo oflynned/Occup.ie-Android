@@ -7,14 +7,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Objects.Rental;
 import com.syzible.occupie.R;
-import com.syzible.occupie.Tenant.FindProperty.Common.DividerDecorator;
+import com.syzible.occupie.Common.UI.DividerDecorator;
 import com.syzible.occupie.Tenant.FindProperty.Common.PropertyType;
 
 import java.util.List;
