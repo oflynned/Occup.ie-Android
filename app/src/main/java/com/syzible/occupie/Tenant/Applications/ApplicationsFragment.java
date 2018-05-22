@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Objects.Application;
 import com.syzible.occupie.R;
-import com.syzible.occupie.Tenant.FindProperty.Common.DividerDecorator;
+import com.syzible.occupie.Common.UI.DividerDecorator;
 
 import java.util.List;
 
