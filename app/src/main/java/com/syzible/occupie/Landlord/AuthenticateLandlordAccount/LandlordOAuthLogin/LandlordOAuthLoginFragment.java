@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordDetailsConfirmation.LandlordDetailsConfirmationFragment;
 import com.syzible.occupie.MainActivity;
@@ -23,10 +24,10 @@ import java.util.Arrays;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAuthLoginView {
-
-    private CallbackManager callbackManager;
     private LandlordOAuthLoginPresenter presenter;
     private LandlordOAuthLoginInteractor interactor;
+
+    private CallbackManager facebookCallbackManager;
 
     public LandlordOAuthLoginFragment() {
 
@@ -39,7 +40,7 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callbackManager = CallbackManager.Factory.create();
+        facebookCallbackManager = CallbackManager.Factory.create();
     }
 
     @Nullable
@@ -49,6 +50,11 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
 
         TextView continueTextView = view.findViewById(R.id.continue_without_account);
         continueTextView.setOnClickListener((v) -> onContinueToMain());
+
+        FancyButton googleLoginButton = view.findViewById(R.id.google_login_button);
+        googleLoginButton.setOnClickListener(v -> {
+
+        });
 
         FancyButton facebookLoginButton = view.findViewById(R.id.facebook_login_button);
         facebookLoginButton.setOnClickListener(v -> LoginManager.getInstance().logInWithReadPermissions(
@@ -71,6 +77,7 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
 
         presenter.attach(this);
         registerFacebookAccountRequest();
+        registerGoogleAccountRequest();
     }
 
     @Override
@@ -82,7 +89,7 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -113,6 +120,10 @@ public class LandlordOAuthLoginFragment extends Fragment implements LandlordOAut
 
     @Override
     public void registerFacebookAccountRequest() {
-        interactor.requestFacebookData(callbackManager, presenter.onFacebookCallback());
+        interactor.requestFacebookData(facebookCallbackManager, presenter.onFacebookCallback());
+    }
+
+    public void registerGoogleAccountRequest() {
+
     }
 }
