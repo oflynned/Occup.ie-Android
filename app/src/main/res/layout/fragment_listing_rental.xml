@@ -29,19 +29,4 @@
 
     <include layout="@layout/section_tenant_apply_to_listing" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/view_listing_favourite_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="4dp"
-        app:fabSize="normal"
-        app:layout_anchor="@+id/image_pager_holder"
-        app:layout_anchorGravity="end|right|bottom"
-        app:srcCompat="@drawable/heart_outline" />
-
 </android.support.design.widget.CoordinatorLayout>

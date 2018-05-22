@@ -13,6 +13,10 @@
             android:icon="@drawable/request"
             android:title="Requests" />
         <item
+            android:id="@+id/nav_create_listing"
+            android:icon="@drawable/plus"
+            android:title="Create a Listing" />
+        <item
             android:id="@+id/nav_switch_to_tenant"
             android:icon="@drawable/sync"
             android:title="Switch to Tenant" />
