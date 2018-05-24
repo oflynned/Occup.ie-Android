@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Objects.Rental;
@@ -26,6 +27,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
     private ListingDashboardPresenter presenter;
     private ListingDashboardInteractor interactor;
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
 
     public ListingDashboardFragment() {
     }
@@ -39,6 +41,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_landlord_dashboard, container, false);
         recyclerView = view.findViewById(R.id.dashboard_recycler_view);
+        progressBar = view.findViewById(R.id.dashboard_progress_bar);
 
         FloatingActionButton createNewListingFab = view.findViewById(R.id.create_new_listing);
         createNewListingFab.setOnClickListener(v -> onCreateNewListingClick());
@@ -56,6 +59,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
             interactor = new ListingDashboardInteractorImpl();
 
         presenter.attach(this);
+        progressBar.setVisibility(View.VISIBLE);
         fetchRentals();
     }
 
@@ -72,6 +76,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
 
     @Override
     public void showRentalListings(List<Rental> rentals) {
+        progressBar.setVisibility(View.INVISIBLE);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
         ListingDashboardAdapter adapter = new ListingDashboardAdapter(rentals);

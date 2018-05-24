@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.syzible.occupie.Common.Authentication.CreateAccountActivity;
 import com.syzible.occupie.Landlord.AuthenticateLandlordAccount.LandlordDetailsConfirmation.LandlordDetailsConfirmationFragment;
 import com.syzible.occupie.MainActivity;

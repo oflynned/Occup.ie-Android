@@ -31,8 +31,9 @@ public class ListingDashboardAdapter extends RecyclerView.Adapter<ListingDashboa
         Rental rental = rentals.get(position);
         holder.street.setText(rental.getAddress().getQuickAddress());
         holder.area.setText(rental.getAddress().getArea());
+        holder.listingType.setText(rental.getType().toUpperCase());
 
-        int imageIndex = (int) Math.floor(Math.random() * rental.getImages().size());
+        int imageIndex = position % rental.getImages().size();
         Picasso.with(holder.itemView.getContext())
                 .load(rental.getImages().get(imageIndex))
                 .fit()
@@ -46,7 +47,7 @@ public class ListingDashboardAdapter extends RecyclerView.Adapter<ListingDashboa
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView street, area, daysLeft;
+        TextView street, area, daysLeft, listingType;
         ImageView thumbnail;
 
         public ViewHolder(View itemView) {
@@ -55,6 +56,7 @@ public class ListingDashboardAdapter extends RecyclerView.Adapter<ListingDashboa
             area = itemView.findViewById(R.id.area);
             daysLeft = itemView.findViewById(R.id.days_left);
             thumbnail = itemView.findViewById(R.id.property_thumbnail);
+            listingType = itemView.findViewById(R.id.listing_type);
         }
     }
 }
