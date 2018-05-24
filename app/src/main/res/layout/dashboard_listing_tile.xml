@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="156dp"
         android:layout_height="192dp"
+        android:layout_margin="8dp"
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -50,23 +50,38 @@
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_marginTop="4dp"
                     android:id="@+id/days_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/area"
+                    android:layout_marginTop="4dp"
                     android:text="14 days left"
                     android:textSize="11sp" />
 
+
                 <TextView
-                    android:textSize="11sp"
+                    android:id="@+id/listing_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
                     android:clickable="true"
+                    android:focusable="true"
+                    android:text="HOUSE SHARE"
+                    android:textSize="11sp" />
+
+                <TextView
                     android:id="@+id/renew_upgrade_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:text="RENEW"
-                    android:textColor="@color/desire_500" />
+                    android:textColor="@color/desire_500"
+                    android:textSize="11sp" />
 
             </RelativeLayout>
         </LinearLayout>
