@@ -34,7 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FeatureFlagUtils.getRemoteFeatureFlags(this, this::setupActivity);
+        setupActivity();
     }
 
     private void setupActivity() {
