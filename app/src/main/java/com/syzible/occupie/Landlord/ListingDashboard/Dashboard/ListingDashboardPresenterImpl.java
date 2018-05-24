@@ -44,12 +44,15 @@ public class ListingDashboardPresenterImpl implements ListingDashboardPresenter 
                     }
                 }
 
-                getNonNullableView().showRentalListings(rentals);
+                if (rentals.size() > 0)
+                    getNonNullableView().showRentalListings(rentals);
+                else
+                    getNonNullableView().setEmptyLayout();
             }
 
             @Override
             public void onFailure() {
-
+                getNonNullableView().setErrorLayout();
             }
         };
     }

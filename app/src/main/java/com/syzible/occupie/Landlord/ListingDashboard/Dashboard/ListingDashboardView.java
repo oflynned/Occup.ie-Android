@@ -9,4 +9,8 @@ public interface ListingDashboardView extends Mvp.IView {
     void onCreateNewListingClick();
 
     void showRentalListings(List<Rental> rentals);
+
+    void setErrorLayout();
+
+    void setEmptyLayout();
 }
