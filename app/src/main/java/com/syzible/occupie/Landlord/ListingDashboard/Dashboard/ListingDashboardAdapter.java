@@ -1,5 +1,6 @@
 package com.syzible.occupie.Landlord.ListingDashboard.Dashboard;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.Common.Objects.Property;
 import com.syzible.occupie.R;
 
 import java.util.List;
 
 public class ListingDashboardAdapter extends RecyclerView.Adapter<ListingDashboardAdapter.ViewHolder> {
-    private List<Rental> rentals;
+    private List<Property> properties;
 
-    public ListingDashboardAdapter(List<Rental> rentals) {
-        this.rentals = rentals;
+    ListingDashboardAdapter(List<Property> properties) {
+        this.properties = properties;
     }
 
     @Override
@@ -28,22 +29,28 @@ public class ListingDashboardAdapter extends RecyclerView.Adapter<ListingDashboa
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Rental rental = rentals.get(position);
-        holder.street.setText(rental.getAddress().getQuickAddress());
-        holder.area.setText(rental.getAddress().getArea());
-        holder.listingType.setText(rental.getType().toUpperCase());
+        Property property = properties.get(position);
+        holder.street.setText(property.getAddress().getQuickAddress());
+        holder.area.setText(property.getAddress().getArea());
+        holder.listingType.setText(property.getFormattedType().toUpperCase());
 
-        int imageIndex = position % rental.getImages().size();
+        int imageIndex = position % property.getImages().size();
         Picasso.with(holder.itemView.getContext())
-                .load(rental.getImages().get(imageIndex))
+                .load(property.getImages().get(imageIndex))
                 .fit()
                 .centerCrop()
                 .into(holder.thumbnail);
+
+        if (!(property.getListing().getStatus().equals("active"))) {
+            holder.thumbnail.setColorFilter(Color.argb(150,200,200,200));
+        } else {
+            holder.thumbnail.clearColorFilter();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return rentals.size();
+        return properties.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

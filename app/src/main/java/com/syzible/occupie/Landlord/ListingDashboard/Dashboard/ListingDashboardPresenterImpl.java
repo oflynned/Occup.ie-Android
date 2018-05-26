@@ -1,7 +1,7 @@
 package com.syzible.occupie.Landlord.ListingDashboard.Dashboard;
 
 import com.syzible.occupie.Common.Helpers.CallbackParameter;
-import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.Common.Objects.Property;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,26 +28,23 @@ public class ListingDashboardPresenterImpl implements ListingDashboardPresenter 
     }
 
     @Override
-    public CallbackParameter<JSONArray> onRentalCallback() {
-        return new CallbackParameter<JSONArray>() {
+    public CallbackParameter<JSONObject> onListingCallback() {
+        return new CallbackParameter<JSONObject>() {
             @Override
-            public void onSuccess(JSONArray a) {
-                List<Rental> rentals = new ArrayList<>();
-                for (int i = 0; i < a.length(); i++) {
-                    try {
-                        JSONObject o = a.getJSONObject(i);
-                        rentals.add(new Rental(o));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            public void onSuccess(JSONObject o) throws JSONException {
+                JSONArray activeListings = o.getJSONArray("active");
+                JSONArray pausedListings = o.getJSONArray("paused");
+                JSONArray expiredListings = o.getJSONArray("expired");
+
+                if (activeListings.length() + pausedListings.length() + expiredListings.length() == 0) {
+                    getNonNullableView().setEmptyLayout();
+                    return;
                 }
 
-                if (rentals.size() > 0)
-                    getNonNullableView().showRentalListings(rentals);
-                else
-                    getNonNullableView().setEmptyLayout();
+                List<Property> activeProperties = castPropertyObject(activeListings);
+                List<Property> pausedProperties = castPropertyObject(pausedListings);
+                List<Property> expiredProperties = castPropertyObject(expiredListings);
+                getNonNullableView().showPropertyListings(activeProperties, pausedProperties, expiredProperties);
             }
 
             @Override
@@ -60,5 +57,23 @@ public class ListingDashboardPresenterImpl implements ListingDashboardPresenter 
     @Override
     public void detach() {
         this.view = null;
+    }
+
+
+    private List<Property> castPropertyObject(JSONArray a) {
+        List<Property> properties = new ArrayList<>();
+
+        for (int i = 0; i < a.length(); i++) {
+            try {
+                JSONObject property = a.getJSONObject(i);
+                properties.add(new Property(property));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return properties;
     }
 }

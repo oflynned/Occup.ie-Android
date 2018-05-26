@@ -12,20 +12,22 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Network.Endpoints;
-import com.syzible.occupie.Common.Objects.Rental;
+import com.syzible.occupie.Common.Objects.Property;
+import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Landlord.ListingDashboard.CreateNewListing.CreateNewListingFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListingDashboardFragment extends Fragment implements ListingDashboardView {
 
     private ListingDashboardPresenter presenter;
     private ListingDashboardInteractor interactor;
+    private ListingDashboardAdapter adapter;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private View view;
 
     public ListingDashboardFragment() {
     }
@@ -37,7 +39,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_landlord_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_landlord_dashboard, container, false);
         recyclerView = view.findViewById(R.id.dashboard_recycler_view);
         progressBar = view.findViewById(R.id.dashboard_progress_bar);
 
@@ -58,7 +60,8 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
 
         presenter.attach(this);
         progressBar.setVisibility(View.VISIBLE);
-        fetchRentals();
+        adapter = new ListingDashboardAdapter(new ArrayList<>());
+        fetchListings();
     }
 
     @Override
@@ -73,11 +76,16 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
     }
 
     @Override
-    public void showRentalListings(List<Rental> rentals) {
+    public void showPropertyListings(List<Property> active, List<Property> paused, List<Property> expired) {
         progressBar.setVisibility(View.INVISIBLE);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(layoutManager);
-        ListingDashboardAdapter adapter = new ListingDashboardAdapter(rentals);
+        RecyclerView.LayoutManager activeLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(activeLayoutManager);
+
+        List<Property> properties = new ArrayList<>();
+        properties.addAll(active);
+        properties.addAll(paused);
+        properties.addAll(expired);
+        adapter = new ListingDashboardAdapter(properties);
         recyclerView.setAdapter(adapter);
     }
 
@@ -91,7 +99,12 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
         MainActivity.setFragment(getFragmentManager(), ListingDashboardNoListingsFragment.getInstance());
     }
 
-    public void fetchRentals() {
-        interactor.fetchRentals(getActivity(), Endpoints.RENTAL, presenter.onRentalCallback());
+    public void fetchListings() {
+        String endpoint = String.format("%s/%s/listings",
+                Endpoints.LANDLORD,
+                LocalPrefs.getStringPref(getActivity(), LocalPrefs.Pref.landlord_id)
+        );
+        System.out.println(endpoint);
+        interactor.fetchListings(getActivity(), endpoint, presenter.onListingCallback());
     }
 }

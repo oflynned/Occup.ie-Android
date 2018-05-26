@@ -7,9 +7,10 @@ import com.syzible.occupie.Common.Objects.HouseShare;
 import com.syzible.occupie.Common.Objects.Rental;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
 public interface ListingDashboardInteractor {
-    void fetchRentals(Context context, String endpoint, CallbackParameter<JSONArray> callback);
+    void fetchListings(Context context, String endpoint, CallbackParameter<JSONObject> callback);
 }
