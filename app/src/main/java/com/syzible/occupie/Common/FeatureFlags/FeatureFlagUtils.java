@@ -98,7 +98,11 @@ public class FeatureFlagUtils {
                     }
                 }
 
-                callback.onSuccess(featureFlags);
+                try {
+                    callback.onSuccess(featureFlags);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
