@@ -36,7 +36,7 @@ public class LandlordDetailsConfirmationInteractorImpl implements LandlordDetail
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
                 try {
                     String uuid = response.getString("_id");
-                    LocalPrefs.setStringPref(context, LocalPrefs.Pref.user_id, uuid);
+                    LocalPrefs.setStringPref(context, LocalPrefs.Pref.landlord_id, uuid);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
