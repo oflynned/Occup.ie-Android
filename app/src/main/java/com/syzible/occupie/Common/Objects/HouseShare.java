@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HouseShare {
-    private String type, landlordUuid;
-    private List<Bedroom> houseShareBedrooms;
+    private String type, landlordUuid, bedrooms;
     private List<String> bathrooms;
     private Address address;
     private ListingDetails details;
@@ -22,13 +21,7 @@ public class HouseShare {
         this.address = new Address(o.getJSONObject("address"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
         this.listing = new Listing(o.getJSONObject("listing"));
-
-        houseShareBedrooms = new ArrayList<>();
-        JSONArray bedroomList = o.getJSONArray("bedrooms");
-        for (int i = 0; i < bedroomList.length(); i++) {
-            Bedroom bedroom = new Bedroom(bedroomList.getJSONObject(i));
-            houseShareBedrooms.add(bedroom);
-        }
+        this.bedrooms = o.getString("bedrooms");
 
         bathrooms = new ArrayList<>();
         JSONArray bathroomList = o.getJSONArray("bathrooms");
@@ -53,8 +46,8 @@ public class HouseShare {
         }
     }
 
-    public List<Bedroom> getBedrooms() {
-        return houseShareBedrooms;
+    public String getBedrooms() {
+        return bedrooms;
     }
 
     public String getType() {

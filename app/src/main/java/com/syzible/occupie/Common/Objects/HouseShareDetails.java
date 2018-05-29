@@ -8,13 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HouseShareDetails extends ListingDetails {
-    private int minTargetAge, maxTargetAge;
+    private String ber;
     private List<String> targetProfession;
+    private int minTargetAge, maxTargetAge;
+    private boolean isOwnerOccupied, isFurnished;
 
     public HouseShareDetails(JSONObject o) throws JSONException {
         super(o);
         this.minTargetAge = o.getInt("min_target_age");
         this.maxTargetAge = o.getInt("max_target_age");
+        this.ber = o.getString("ber");
+        this.isOwnerOccupied = o.getBoolean("owner_occupied");
+        this.isFurnished = o.getBoolean("furnished");
 
         targetProfession = new ArrayList<>();
         JSONArray professionsSoughtAfter = o.getJSONArray("target_tenant");
@@ -27,6 +32,9 @@ public class HouseShareDetails extends ListingDetails {
         this.minTargetAge = minTargetAge;
         this.maxTargetAge = maxTargetAge;
         this.targetProfession = targetProfession;
+        this.ber = ber;
+        this.isOwnerOccupied = isOwnerOccupied;
+        this.isFurnished = isFurnished;
     }
 
     public int getMinTargetAge() {
@@ -39,5 +47,17 @@ public class HouseShareDetails extends ListingDetails {
 
     public List<String> getTargetProfession() {
         return targetProfession;
+    }
+
+    public String getBer() {
+        return ber;
+    }
+
+    public boolean isOwnerOccupied() {
+        return isOwnerOccupied;
+    }
+
+    public boolean isFurnished() {
+        return isFurnished;
     }
 }
