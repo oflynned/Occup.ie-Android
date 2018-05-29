@@ -35,11 +35,9 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     }
 
     private void formatCard(final ViewHolder holder, HouseShare houseShare) {
-        holder.bedroomCount.setText(String.valueOf(houseShare.getBedrooms().size()));
+        holder.bedroomCount.setText("1");
         holder.address.setText(houseShare.getAddress().getTileAddress());
-
-        // TODO allow for multiple rents to be shown
-        holder.rent.setText(String.format("€%s pm", houseShare.getBedrooms().get(0).getRent()));
+        holder.rent.setText(String.format("€%s pm", houseShare.getListing().getRent()));
 
         ImageAdapter adapter = new ImageAdapter(holder.itemView.getContext(), houseShare.getImages());
         holder.viewPager.setAdapter(adapter);

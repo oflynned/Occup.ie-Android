@@ -3,24 +3,31 @@ package com.syzible.occupie.Tenant.FindProperty.Listings.HouseShareListing;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.syzible.occupie.Common.Objects.HouseShare;
 import com.syzible.occupie.R;
 import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
-public class ViewHouseShareFragment extends Fragment implements ViewHouseShareView {
+public class ViewHouseShareFragment extends Fragment implements ViewHouseShareView, OnMapReadyCallback {
 
     private ViewHouseSharePresenter presenter;
 
     private HouseShare property;
     private TextView address, description, deposit, rent;
+
+    public static final LatLng DUBLIN = new LatLng(53.347254, -6.259105);
+    private static final float ZOOM = 14.0f;
 
     public ViewHouseShareFragment() {
 
@@ -59,6 +66,10 @@ public class ViewHouseShareFragment extends Fragment implements ViewHouseShareVi
 
         presenter.attach(this);
         presenter.displayListingDetails();
+
+        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.listing_map);
+        mapFragment.getMapAsync(this);
+
         super.onStart();
     }
 
@@ -72,12 +83,21 @@ public class ViewHouseShareFragment extends Fragment implements ViewHouseShareVi
     public void setListingDetails() {
         address.setText(property.getAddress().getTileAddress());
         description.setText(property.getDetails().getDescription());
-        rent.setText(String.format("€%s", property.getBedrooms().get(0).getRent()));
-        deposit.setText(String.format("€%s", property.getBedrooms().get(0).getDeposit()));
+        rent.setText(String.format("€%s", property.getListing().getRent()));
+        deposit.setText(String.format("€%s", property.getListing().getDeposit()));
     }
 
     public ViewHouseShareFragment setProperty(HouseShare property) {
         this.property = property;
         return this;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.clear();
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomGesturesEnabled(false);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DUBLIN, ZOOM));
+        googleMap.addCircle(presenter.getUserCircle(DUBLIN));
     }
 }

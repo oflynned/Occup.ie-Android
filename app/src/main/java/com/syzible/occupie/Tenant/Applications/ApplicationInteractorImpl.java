@@ -25,6 +25,7 @@ public class ApplicationInteractorImpl implements ApplicationInteractor {
                     callback.onSuccess(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    callback.onFailure(422, e.getMessage());
                 }
             }
 
