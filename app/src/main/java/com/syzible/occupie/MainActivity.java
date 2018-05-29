@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         if (currentUser == Target.landlord) {
             setFragment(getFragmentManager(), ListingDashboardFragment.getInstance());
         } else {
-            setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
+            setFragment(getFragmentManager(), FindHouseShareFragment.getInstance(PropertyType.house_share));
         }
 
         startService(new Intent(this, FCMTokenService.class));
@@ -149,9 +149,7 @@ public class MainActivity extends AppCompatActivity
                         .show();
             }
         } else {
-            if (id == R.id.nav_find_rental) {
-                setFragment(getFragmentManager(), FindRentalFragment.getInstance(PropertyType.rent));
-            } else if (id == R.id.nav_find_house_share) {
+            if (id == R.id.nav_find_house_share) {
                 setFragment(getFragmentManager(), FindHouseShareFragment.getInstance(PropertyType.house_share));
             } else if (id == R.id.nav_applications) {
                 setFragment(getFragmentManager(), ApplicationsFragment.getInstance());
