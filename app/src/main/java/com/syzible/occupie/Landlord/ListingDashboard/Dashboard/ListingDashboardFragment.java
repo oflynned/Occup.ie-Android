@@ -17,6 +17,7 @@ import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Landlord.ListingDashboard.CreateNewListing.CreateNewListingFragment;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.Applications.ErrorFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
 
     @Override
     public void setErrorLayout() {
-        MainActivity.setFragment(getFragmentManager(), ListingDashboardErrorFragment.getInstance());
+        MainActivity.setFragment(getFragmentManager(), ErrorFragment.getInstance());
     }
 
     @Override
@@ -104,7 +105,6 @@ public class ListingDashboardFragment extends Fragment implements ListingDashboa
                 Endpoints.LANDLORD,
                 LocalPrefs.getStringPref(getActivity(), LocalPrefs.Pref.landlord_id)
         );
-        System.out.println(endpoint);
         interactor.fetchListings(getActivity(), endpoint, presenter.onListingCallback());
     }
 }
