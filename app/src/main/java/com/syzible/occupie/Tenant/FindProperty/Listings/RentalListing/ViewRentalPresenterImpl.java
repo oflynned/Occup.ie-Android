@@ -3,6 +3,8 @@ package com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing;
 import android.support.design.widget.Snackbar;
 
 import com.syzible.occupie.Common.Objects.Application;
+import com.syzible.occupie.Tenant.FindProperty.Common.ApplicationInteractor;
+import com.syzible.occupie.Tenant.FindProperty.Common.ApplicationInteractorImpl;
 
 import org.json.JSONException;
 import org.json.JSONObject;

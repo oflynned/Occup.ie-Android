@@ -18,6 +18,8 @@ import com.syzible.occupie.Common.Objects.Rental;
 import com.syzible.occupie.Common.Persistence.LocalPrefs;
 import com.syzible.occupie.Common.Persistence.Target;
 import com.syzible.occupie.R;
+import com.syzible.occupie.Tenant.FindProperty.Common.ApplicationInteractor;
+import com.syzible.occupie.Tenant.FindProperty.Common.ApplicationInteractorImpl;
 import com.syzible.occupie.Tenant.FindProperty.Common.ImageAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -44,10 +46,10 @@ public class ViewRentalFragment extends Fragment implements ViewRentalView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_listing_rental, container, false);
+        View view = inflater.inflate(R.layout.fragment_listing_house_share, container, false);
 
         propertyType = view.findViewById(R.id.property_type);
-        bedroomCount = view.findViewById(R.id.property_number_of_bedrooms);
+        bedroomCount = view.findViewById(R.id.property_bedroom_type);
 
         address = view.findViewById(R.id.address);
         description = view.findViewById(R.id.property_listing_description);
