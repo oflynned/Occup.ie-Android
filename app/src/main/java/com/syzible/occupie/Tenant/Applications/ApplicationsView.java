@@ -12,5 +12,7 @@ public interface ApplicationsView extends Mvp.IView {
 
     void showApplications(List<Application> results);
 
+    void showEmpty();
+
     void showError(int statusCode, String message);
 }

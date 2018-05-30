@@ -3,7 +3,6 @@ package com.syzible.occupie.Tenant.Applications;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.syzible.occupie.Common.Objects.Application;
-import com.syzible.occupie.R;
 import com.syzible.occupie.Common.UI.DividerDecorator;
+import com.syzible.occupie.MainActivity;
+import com.syzible.occupie.R;
 
 import java.util.List;
 
@@ -71,10 +71,14 @@ public class ApplicationsFragment extends Fragment implements ApplicationsView {
     }
 
     @Override
+    public void showEmpty() {
+        MainActivity.setFragment(getFragmentManager(), NoApplicationsFragment.getInstance());
+    }
+
+    @Override
     public void showError(int statusCode, String message) {
-        String error = String.format("%s: %s", statusCode, message);
-        Snackbar.make(view, error, Snackbar.LENGTH_LONG).show();
-        hideProgressBar();
+        System.err.println(String.format("%s: %s", statusCode, message));
+        MainActivity.setFragment(getFragmentManager(), ErrorFragment.getInstance());
     }
 
     private void setupRecyclerView(View view) {

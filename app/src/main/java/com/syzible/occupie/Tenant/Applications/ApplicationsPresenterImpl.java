@@ -39,6 +39,11 @@ public class ApplicationsPresenterImpl implements ApplicationsPresenter, Applica
 
     @Override
     public void onSuccess(JSONArray results) throws JSONException {
+        if (results.length() == 0) {
+            getNonNullableView().showEmpty();
+            return;
+        }
+
         List<Application> applications = new ArrayList<>();
         for (int i = 0; i < results.length(); i++)
             applications.add(new Application(results.getJSONObject(i)));
