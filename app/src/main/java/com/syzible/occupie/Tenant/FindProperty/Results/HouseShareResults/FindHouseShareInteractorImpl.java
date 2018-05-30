@@ -10,6 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import cz.msebera.android.httpclient.Header;
 
 public class FindHouseShareInteractorImpl implements FindHouseShareInteractor {
@@ -38,8 +42,9 @@ public class FindHouseShareInteractorImpl implements FindHouseShareInteractor {
     }
 
     @Override
-    public void fetchResults(Context context, final OnFetchCompleted<JSONArray> onFetchCompleted) {
-        RestClient.get(context, Endpoints.HOUSE_SHARE, new BaseJsonHttpResponseHandler<JSONArray>() {
+    public void fetchResults(Context context, HashMap<String, String> query, final OnFetchCompleted<JSONArray> onFetchCompleted) {
+        String endpoint = getUrl(query);
+        RestClient.get(context, endpoint, new BaseJsonHttpResponseHandler<JSONArray>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONArray response) {
                 try {
@@ -59,5 +64,17 @@ public class FindHouseShareInteractorImpl implements FindHouseShareInteractor {
                 return new JSONArray(rawJsonData);
             }
         });
+    }
+
+    private String getUrl(HashMap<String, String> query) {
+        StringBuilder endpoint = new StringBuilder(String.format("%s/filter?status=active", Endpoints.HOUSE_SHARE));
+
+        for (Map.Entry<String, String> param : query.entrySet()) {
+            String key = param.getKey();
+            String value = param.getValue();
+            endpoint.append(String.format("&%s=%s", key, value));
+        }
+
+        return endpoint.toString();
     }
 }

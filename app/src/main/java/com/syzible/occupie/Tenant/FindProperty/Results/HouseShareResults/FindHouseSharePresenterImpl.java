@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FindHouseSharePresenterImpl implements FindHouseSharePresenter {
@@ -37,6 +38,7 @@ public class FindHouseSharePresenterImpl implements FindHouseSharePresenter {
     @Override
     public void getProperties() {
         findHouseShareInteractor.fetchResults(getNonNullableView().getContext(),
+                new HashMap<>(), // TODO feed in params from screen for filtering
                 new FindHouseShareInteractor.OnFetchCompleted<JSONArray>() {
                     @Override
                     public void onFailure(int statusCode, String message) {

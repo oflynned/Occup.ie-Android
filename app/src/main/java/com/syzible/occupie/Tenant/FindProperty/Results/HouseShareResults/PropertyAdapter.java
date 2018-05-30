@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.syzible.occupie.Common.Helpers.StringHelper;
 import com.syzible.occupie.Common.Objects.HouseShare;
 import com.syzible.occupie.MainActivity;
 import com.syzible.occupie.R;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by ed on 30/10/2016
  */
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
-    private List<HouseShare> houseShares = new ArrayList<>();
+    private List<HouseShare> houseShares;
 
     PropertyAdapter(List<HouseShare> houseShares) {
         this.houseShares = houseShares;
@@ -35,7 +36,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     }
 
     private void formatCard(final ViewHolder holder, HouseShare houseShare) {
-        holder.bedroomCount.setText("1");
+        holder.dwellingType.setText(StringHelper.capitalise(houseShare.getDetails().getDwelling()));
+        holder.bedroomCount.setText(String.format("%s bedroom", StringHelper.capitalise(houseShare.getBedrooms())));
         holder.address.setText(houseShare.getAddress().getTileAddress());
         holder.rent.setText(String.format("€%s pm", houseShare.getListing().getRent()));
 
@@ -65,11 +67,12 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ViewPager viewPager;
-        TextView bedroomCount, address, rent;
+        TextView dwellingType, bedroomCount, address, rent;
 
         ViewHolder(View itemView) {
             super(itemView);
 
+            dwellingType = itemView.findViewById(R.id.property_tile_dwelling_type);
             viewPager = itemView.findViewById(R.id.property_image);
             rent = itemView.findViewById(R.id.property_tile_rent);
             bedroomCount = itemView.findViewById(R.id.property_tile_bedroom_count);
