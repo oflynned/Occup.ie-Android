@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing;
+package com.syzible.occupie.Tenant.FindProperty.Common;
 
 import android.content.Context;
 
@@ -7,7 +7,6 @@ import com.syzible.occupie.Common.Network.Endpoints;
 import com.syzible.occupie.Common.Network.RestClient;
 import com.syzible.occupie.Common.Objects.Application;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

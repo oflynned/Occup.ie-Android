@@ -1,4 +1,4 @@
-package com.syzible.occupie.Tenant.FindProperty.Listings.RentalListing;
+package com.syzible.occupie.Tenant.FindProperty.Common;
 
 import android.content.Context;
 
