@@ -54,7 +54,11 @@ public class RestClient {
         String oauthId = LocalPrefs.getStringPref(context, isUser ? LocalPrefs.Pref.user_oauth_id : LocalPrefs.Pref.landlord_oauth_id);
         String oauthToken = LocalPrefs.getStringPref(context, isUser ? LocalPrefs.Pref.user_oauth_token : LocalPrefs.Pref.landlord_oauth_token);
         String oauthProvider = LocalPrefs.getStringPref(context, isUser ? LocalPrefs.Pref.user_oauth_provider : LocalPrefs.Pref.landlord_oauth_provider);
+        String uuid = LocalPrefs.getStringPref(context, isUser ? LocalPrefs.Pref.user_id : LocalPrefs.Pref.landlord_id);
+        String accountType = LocalPrefs.getCurrentProfile(context).toLowerCase();
 
+        client.addHeader("uuid", uuid);
+        client.addHeader("account_type", accountType);
         client.addHeader("oauth_id", oauthId);
         client.addHeader("oauth_provider", oauthProvider);
         client.addHeader("Authorization", String.format("Bearer %s", oauthToken));

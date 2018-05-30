@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HouseShare {
-    private String type, landlordUuid, bedrooms;
+    private String type, landlordUuid, bedrooms, propertyUuid;
     private List<String> bathrooms;
     private Address address;
     private ListingDetails details;
@@ -17,6 +17,7 @@ public class HouseShare {
 
     public HouseShare(JSONObject o) throws Exception {
         this.type = o.getString("type");
+        this.propertyUuid = o.getString("_id");
         this.landlordUuid = o.getString("landlord_uuid");
         this.address = new Address(o.getJSONObject("address"));
         this.facilities = new Facilities(o.getJSONObject("facilities"));
@@ -44,6 +45,10 @@ public class HouseShare {
         for (int i = 0; i < urls.length(); i++) {
             images.add(urls.getString(i));
         }
+    }
+
+    public String getPropertyUuid() {
+        return propertyUuid;
     }
 
     public String getBedrooms() {
